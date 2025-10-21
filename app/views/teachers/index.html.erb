@@ -1,0 +1,33 @@
+ 
+
+<% content_for :title, "Teachers" %>
+
+<h1>List Teachers</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Specialication</th>
+      <th>Status</th>
+      <th>Units</th>
+      <th>Monthly Salary</th>
+      <th>Show</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @teachers.each do |teacher| %>
+      <tr>
+        <td><%= teacher.name %></td>
+        <td><%= teacher.email %></td>
+        <td><%= teacher.specialization %></td>
+        <td><%= teacher.status %></td>
+        <td><%= teacher.number_of_units %></td>
+        <td><%= teacher.monthly_salary %></td>
+        <td><%= link_to "Show this teacher", teacher %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "New teacher", new_teacher_path %>

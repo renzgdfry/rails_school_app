@@ -1,0 +1,32 @@
+
+
+<%= render @staff %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Monthly Salary</th>
+      <th>Status</th>
+      <th>Department</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @staff.name %></td>
+      <td><%= @staff.email %></td>
+      <td><%= @staff.monthly_salary %></td>
+      <td><%= @staff.status %></td>
+      <td><%= @staff.department.name %></td>
+    </tr>
+  </tbody>
+</table>
+
+
+<div>
+  <%= link_to "Edit this staff", edit_staff_path(@staff) %> |
+  <%= link_to "Back to staffs", staffs_path %>
+
+  <%= button_to "Destroy this staff", @staff, method: :delete %>
+</div>
