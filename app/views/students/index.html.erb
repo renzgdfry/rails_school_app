@@ -6,8 +6,9 @@
     <h2 class="fw-bold m-0">List of Students</h2>
   </div>
 
-  <%= link_to new_student_path, class: "btn btn-success rounded-pill" do %>
-    <span class="fw-semibold text-white">+ New Student</span>
+   <%= link_to new_student_path, class: "btn btn-success rounded-pill d-flex align-items-center gap-2" do %>
+    <i class="bi bi-person-fill-add"></i>
+    <span class="fw-semibold text-white">New Student</span>
   <% end %>
 </div>
 

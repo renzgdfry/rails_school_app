@@ -35,13 +35,13 @@
       <div class="d-flex justify-content-between">
         <div>
           <%= link_to students_path, class: "btn btn-secondary d-flex align-items-center gap-2" do %>
-            <i class="bi bi-box-arrow-in-left"></i>
+            <i class="bi bi-box-arrow-left"></i>
             Back to students
           <% end %>
         </div>
         <div>
           <%= form.button class: "btn btn-success d-flex align-items-center gap-2" do %>
-            <i class="bi bi-person-fill-up"></i>
+            <i class="bi bi-plus-circle-fill"></i>
             Create Student
           <% end %>
         </div>
@@ -52,18 +52,18 @@
           <%= link_to "#",
               class: "btn btn-danger d-flex align-items-center gap-2",
               data: { bs_toggle: "modal", bs_target: "#confirmDeleteModal", student_id: student.id } do %>
-            <i class="bi bi-person-fill-x"></i>
+            <i class="bi bi-trash-fill"></i>
             Destroy this student
           <% end %>
 
           <%= form.button class: "btn btn-success d-flex align-items-center gap-2" do %>
-            <i class="bi bi-person-fill-up"></i>
+            <i class="bi bi-arrow-repeat"></i>
             Update Student
           <% end %>
         </div>
 
         <%= link_to students_path, class: "btn btn-secondary d-flex align-items-center gap-2" do %>
-          <i class="bi bi-box-arrow-in-left"></i>
+          <i class="bi bi-box-arrow-left"></i>
           Back to students
         <% end %>
       </div>

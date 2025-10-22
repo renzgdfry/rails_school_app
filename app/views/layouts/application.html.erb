@@ -44,6 +44,11 @@
     color: white !important;
   }
 
+  .nav-link.active i {
+  color: #efbf04 !important;
+}
+
+
   .top-navbar {
     background-color: #004a99;
     color: white;
@@ -101,35 +106,70 @@
 
       <hr class="text-white opacity-90 my-3 mx-auto" style="height: 1px; width: 85%;">
 
-      <ul class="nav nav-pills flex-column mb-auto">
-        <li class="nav-item">
-          <%= link_to students_path, class: "d-flex align-items-center nav-link link-light #{'active' if controller_name == 'students'}" do %>
-            <i class="bi bi-mortarboard me-2"></i>
-            <span>Students</span>
-          <% end %>
-        </li>
+          <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <%= link_to students_path, class: "d-flex align-items-center nav-link link-light #{'active' if controller_name == 'students'}" do %>
+          <i class="bi bi-mortarboard-fill me-2"></i>
+          <span>Students</span>
+        <% end %>
+      </li>
 
-        <li>
-          <%= link_to teachers_path, class: "d-flex align-items-center nav-link link-light #{'active' if controller_name == 'teachers'}" do %>
-            <i class="bi bi-person-video3 me-2"></i>
-            <span>Teachers</span>
-          <% end %>
-        </li>
+      <li>
+        <%= link_to subjects_path, class: "d-flex align-items-center nav-link link-light #{'active' if controller_name == 'subjects'}" do %>
+          <i class="bi bi-book-half me-2"></i>
+          <span>Subjects</span>
+        <% end %>
+      </li>
 
-        <li>
-          <%= link_to sections_path, class: "d-flex align-items-center nav-link link-light #{'active' if controller_name == 'sections'}" do %>
-            <i class="bi bi-diagram-3 me-2"></i>
-            <span>Sections</span>
-          <% end %>
-        </li>
+      <li>
+        <%= link_to sections_path, class: "d-flex align-items-center nav-link link-light #{'active' if controller_name == 'sections'}" do %>
+          <i class="bi bi-diagram-3 me-2"></i>
+          <span>Sections</span>
+        <% end %>
+      </li>
 
-        <li>
-          <%= link_to departments_path, class: "d-flex align-items-center nav-link link-light #{'active' if controller_name == 'departments'}" do %>
-            <i class="bi bi-bank2 me-2"></i> 
-            <span>Departments</span>
-          <% end %>
-        </li>
-      </ul>
+      <li>
+        <%= link_to classlists_path, class: "d-flex align-items-center nav-link link-light #{'active' if controller_name == 'classlists'}" do %>
+          <i class="bi bi-list-check me-2"></i>
+          <span>Classlists</span>
+        <% end %>
+      </li>
+
+      <li>
+        <%= link_to teachers_path, class: "d-flex align-items-center nav-link link-light #{'active' if controller_name == 'teachers'}" do %>
+          <i class="bi bi-person-video3 me-2"></i>
+          <span>Teachers</span>
+        <% end %>
+      </li>
+
+      <li>
+        <%= link_to staffs_path, class: "d-flex align-items-center nav-link link-light #{'active' if controller_name == 'staffs'}" do %>
+          <i class="bi bi-person-badge-fill me-2"></i>
+          <span>Staffs</span>
+        <% end %>
+      </li>
+
+      <li>
+        <%= link_to departments_path, class: "d-flex align-items-center nav-link link-light #{'active' if controller_name == 'departments'}" do %>
+          <i class="bi bi-bank2 me-2"></i> 
+          <span>Departments</span>
+        <% end %>
+      </li>
+
+      <li>
+        <%= link_to guardians_path, class: "d-flex align-items-center nav-link link-light #{'active' if controller_name == 'guardians'}" do %>
+          <i class="bi bi-person-heart me-2"></i>
+          <span>Guardians</span>
+        <% end %>
+      </li>
+
+      <li>
+        <%= link_to student_guardians_path, class: "d-flex align-items-center nav-link link-light #{'active' if controller_name == 'student_guardians'}" do %>
+          <i class="bi bi-link-45deg me-2"></i>
+          <span>Student-Guardians</span>
+        <% end %>
+      </li>
+    </ul>
     </nav>
 
     <div class="main-content">
@@ -155,23 +195,30 @@
 
 
 <!-- Delete Confirmation Modal -->
-
 <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="false">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content shadow-lg border border-danger-subtle">
-      <div class="modal-header border-0">
+    <div class="modal-content shadow-sm border border-danger-subtle p-2">
+      <div class="modal-header border-0 py-1">
         <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
-      <div class="modal-body text-center">
-        Are you sure you want to delete this student?
+      <div class="modal-body text-center py-2">
+        <div class="d-flex align-items-center justify-content-center gap-3">
+          <i class="bi bi-exclamation-triangle-fill text-danger fs-2"></i>
+          <div class="text-start">
+            <p class="mb-1 fw-semibold">Are you sure you want to delete this student?</p>
+            <p class="text-secondary small mb-0">
+              This student will be deleted immediately. You can't undo this action.
+            </p>
+          </div>
+        </div>
       </div>
 
-      <div class="modal-footer justify-content-center border-0">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <form id="deleteStudentForm" method="post" data-turbo="false">
+      <div class="modal-footer justify-content-center border-0 pt-1 pb-2">
+        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+        <form id="deleteStudentForm" method="post" data-turbo="false" class="d-inline">
           <input type="hidden" name="_method" value="delete">
-          <button type="submit" class="btn btn-danger">Delete</button>
+          <button type="submit" class="btn btn-danger btn-sm">Delete</button>
         </form>
       </div>
     </div>
