@@ -1,42 +1,76 @@
-<%= form_with(model: teacher) do |form| %>
-  <% if teacher.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(teacher.errors.count, "error") %> prohibited this teacher from being saved:</h2>
+<div class="border rounded-4 p-4 shadow-sm">
+  <%= form_with(model: teacher) do |form| %>
+    <% if teacher.errors.any? %>
+      <div class="alert alert-danger">
+        <h4><%= pluralize(teacher.errors.count, "error") %> prohibited this teacher from being saved:</h4>
+        <ul>
+          <% teacher.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-      <ul>
-        <% teacher.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+    <div class="mb-3">
+      <%= form.label :name, class: "form-label fw-bold" %>
+      <%= form.text_field :name, class: "form-control" %>
     </div>
+
+    <div class="mb-3">
+      <%= form.label :email, class: "form-label fw-bold" %>
+      <%= form.text_field :email, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :specialization, class: "form-label fw-bold" %>
+      <%= form.text_field :specialization, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :status, class: "form-label fw-bold" %>
+      <%= form.text_field :status, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :department_id, "Department", class: "form-label fw-bold" %>
+      <%= form.collection_select :department_id, Department.all, :id, :name,
+            { prompt: "Select a department" },
+            { class: "form-select" } %>
+    </div>
+
+    <% if teacher.new_record? %>
+      <div class="d-flex justify-content-between">
+        <%= link_to teachers_path, class: "btn btn-secondary d-flex align-items-center gap-2" do %>
+          <i class="bi bi-box-arrow-left"></i>
+          Back to teachers
+        <% end %>
+
+        <%= form.button class: "btn btn-success d-flex align-items-center gap-2" do %>
+          <i class="bi bi-person-fill-add"></i>
+          Create Teacher
+        <% end %>
+      </div>
+    <% else %>
+      <div class="d-flex justify-content-between align-items-center mt-3">
+        <div class="d-flex gap-2">
+          <%= link_to "#",
+              class: "btn btn-danger d-flex align-items-center gap-2",
+              data: { bs_toggle: "modal", bs_target: "#confirmDeleteModal", teacher_id: teacher.id } do %>
+            <i class="bi bi-trash-fill"></i>
+            Delete Teacher
+          <% end %>
+
+          <%= form.button class: "btn btn-success d-flex align-items-center gap-2" do %>
+            <i class="bi bi-arrow-repeat"></i>
+            Update Teacher
+          <% end %>
+        </div>
+
+        <%= link_to teachers_path, class: "btn btn-secondary d-flex align-items-center gap-2" do %>
+          <i class="bi bi-box-arrow-left"></i>
+          Back to teachers
+        <% end %>
+      </div>
+    <% end %>
   <% end %>
-
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div>
-    <%= form.label :email, style: "display: block" %>
-    <%= form.text_field :email %>
-  </div>
-
-  <div>
-    <%= form.label :specialization, style: "display: block" %>
-    <%= form.text_field :specialization %>
-  </div>
-
-  <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.text_field :status %>
-  </div>
-
-  <div>
-    <%= form.label :department_id, "Department", style: "display: block" %>
-    <%= form.collection_select :department_id, Department.all, :id, :name, prompt: "Select a department" %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
