@@ -1,27 +1,59 @@
-<%= form_with(model: department) do |form| %>
-  <% if department.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(department.errors.count, "error") %> prohibited this department from being saved:</h2>
+<div class="border rounded-4 p-4 shadow-sm">
+  <%= form_with(model: department) do |form| %>
+    <% if department.errors.any? %>
+      <div class="alert alert-danger">
+        <h4><%= pluralize(department.errors.count, "error") %> prohibited this department from being saved:</h4>
+        <ul>
+          <% department.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-      <ul>
-        <% department.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+    <div class="mb-3">
+      <%= form.label :name, class: "form-label fw-bold" %>
+      <%= form.text_field :name, class: "form-control", placeholder: "Enter department name" %>
     </div>
+
+    <div class="mb-3">
+      <%= form.label :location, class: "form-label fw-bold" %>
+      <%= form.text_field :location, class: "form-control", placeholder: "Enter department location" %>
+    </div>
+
+    <% if department.new_record? %>
+      <div class="d-flex justify-content-between">
+        <%= link_to departments_path, class: "btn btn-secondary d-flex align-items-center gap-2" do %>
+          <i class="bi bi-box-arrow-left"></i>
+          Back to departments
+        <% end %>
+
+        <%= form.button class: "btn btn-success d-flex align-items-center gap-2" do %>
+          <i class="bi bi-building-add"></i>
+          Create Department
+        <% end %>
+      </div>
+    <% else %>
+      <div class="d-flex justify-content-between align-items-center mt-3">
+        <div class="d-flex gap-2">
+          <%= link_to "#",
+              class: "btn btn-danger d-flex align-items-center gap-2",
+              data: { bs_toggle: "modal", bs_target: "#confirmDeleteModal", department_id: department.id } do %>
+            <i class="bi bi-trash-fill"></i>
+            Delete Department
+          <% end %>
+
+          <%= form.button class: "btn btn-success d-flex align-items-center gap-2" do %>
+            <i class="bi bi-arrow-repeat"></i>
+            Update Department
+          <% end %>
+        </div>
+
+        <%= link_to departments_path, class: "btn btn-secondary d-flex align-items-center gap-2" do %>
+          <i class="bi bi-box-arrow-left"></i>
+          Back to departments
+        <% end %>
+      </div>
+    <% end %>
   <% end %>
-
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div>
-    <%= form.label :location, style: "display: block" %>
-    <%= form.text_field :location %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

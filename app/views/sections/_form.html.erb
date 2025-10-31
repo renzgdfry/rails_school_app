@@ -1,37 +1,72 @@
-<%= form_with(model: section) do |form| %>
-  <% if section.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(section.errors.count, "error") %> prohibited this section from being saved:</h2>
+<div class="border rounded-4 p-4 shadow-sm">
+  <%= form_with(model: section) do |form| %>
+    <% if section.errors.any? %>
+      <div class="alert alert-danger">
+        <h4><%= pluralize(section.errors.count, "error") %> prohibited this section from being saved:</h4>
+        <ul>
+          <% section.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-      <ul>
-        <% section.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+    <div class="mb-3">
+      <%= form.label :name, class: "form-label fw-bold" %>
+      <%= form.text_field :name, class: "form-control", placeholder: "Enter section name" %>
     </div>
+
+    <div class="mb-3">
+      <%= form.label :room, class: "form-label fw-bold" %>
+      <%= form.text_field :room, class: "form-control", placeholder: "Enter room" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :time_slot, class: "form-label fw-bold" %>
+      <%= form.text_field :time_slot, class: "form-control", placeholder: "Enter time slot" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :subject_id, "Subject", class: "form-label fw-bold" %>
+      <%= form.collection_select :subject_id, Subject.all, :id, :name, { prompt: "Select a subject" }, { class: "form-select" } %>
+    </div>
+
+    <% if section.new_record? %>
+      <div class="d-flex justify-content-between">
+        <div>
+          <%= link_to sections_path, class: "btn btn-secondary d-flex align-items-center gap-2" do %>
+            <i class="bi bi-box-arrow-left"></i>
+            Back to sections
+          <% end %>
+        </div>
+        <div>
+          <%= form.button class: "btn btn-success d-flex align-items-center gap-2" do %>
+            <i class="bi bi-plus-circle-fill"></i>
+            Create Section
+          <% end %>
+        </div>
+      </div>
+    <% else %>
+      <div class="d-flex justify-content-between align-items-center mt-3">
+        <div class="d-flex gap-2">
+          <%= link_to "#",
+              class: "btn btn-danger d-flex align-items-center gap-2",
+              data: { bs_toggle: "modal", bs_target: "#confirmDeleteModal", section_id: section.id } do %>
+            <i class="bi bi-trash-fill"></i>
+            Destroy this section
+          <% end %>
+
+          <%= form.button class: "btn btn-success d-flex align-items-center gap-2" do %>
+            <i class="bi bi-arrow-repeat"></i>
+            Update Section
+          <% end %>
+        </div>
+
+        <%= link_to sections_path, class: "btn btn-secondary d-flex align-items-center gap-2" do %>
+          <i class="bi bi-box-arrow-left"></i>
+          Back to sections
+        <% end %>
+      </div>
+    <% end %>
   <% end %>
-
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div>
-    <%= form.label :room, style: "display: block" %>
-    <%= form.text_field :room %>
-  </div>
-
-  <div>
-    <%= form.label :time_slot, style: "display: block" %>
-    <%= form.text_field :time_slot %>
-  </div>
-
-  <div>
-    <%= form.label :subject_id, "Subject", style: "display: block" %>
-    <%= form.collection_select :subject_id, Subject.all, :id, :name, prompt: "Select a subject" %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

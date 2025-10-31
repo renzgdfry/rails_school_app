@@ -1,32 +1,68 @@
-<%= form_with(model: student_guardian) do |form| %>
-  <% if student_guardian.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(student_guardian.errors.count, "error") %> prohibited this student_guardian from being saved:</h2>
+<div class="border rounded-4 p-4 shadow-sm">
+  <%= form_with(model: student_guardian) do |form| %>
+    <% if student_guardian.errors.any? %>
+      <div class="alert alert-danger">
+        <h4><%= pluralize(student_guardian.errors.count, "error") %> prohibited this student guardian from being saved:</h4>
+        <ul>
+          <% student_guardian.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-      <ul>
-        <% student_guardian.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+    <div class="mb-3">
+      <%= form.label :relationship, class: "form-label fw-bold" %>
+      <%= form.text_field :relationship, class: "form-control", placeholder: "Enter relationship (e.g. Father, Aunt, etc.)" %>
     </div>
+
+    <div class="mb-3">
+      <%= form.label :student_id, "Student", class: "form-label fw-bold" %>
+      <%= form.collection_select :student_id, Student.all, :id, :name,
+            { prompt: "Select a student" },
+            { class: "form-select" } %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :guardian_id, "Guardian", class: "form-label fw-bold" %>
+      <%= form.collection_select :guardian_id, Guardian.all, :id, :name,
+            { prompt: "Select a guardian" },
+            { class: "form-select" } %>
+    </div>
+
+    <% if student_guardian.new_record? %>
+      <div class="d-flex justify-content-between">
+        <%= link_to student_guardians_path, class: "btn btn-secondary d-flex align-items-center gap-2" do %>
+          <i class="bi bi-box-arrow-left"></i>
+          Back to student guardians
+        <% end %>
+
+        <%= form.button class: "btn btn-success d-flex align-items-center gap-2" do %>
+          <i class="bi bi-people-fill"></i>
+          Create Student Guardian
+        <% end %>
+      </div>
+    <% else %>
+      <div class="d-flex justify-content-between align-items-center mt-3">
+        <div class="d-flex gap-2">
+          <%= link_to "#",
+              class: "btn btn-danger d-flex align-items-center gap-2",
+              data: { bs_toggle: "modal", bs_target: "#confirmDeleteModal", student_guardian_id: student_guardian.id } do %>
+            <i class="bi bi-trash-fill"></i>
+            Delete Student Guardian
+          <% end %>
+
+          <%= form.button class: "btn btn-success d-flex align-items-center gap-2" do %>
+            <i class="bi bi-arrow-repeat"></i>
+            Update Student Guardian
+          <% end %>
+        </div>
+
+        <%= link_to student_guardians_path, class: "btn btn-secondary d-flex align-items-center gap-2" do %>
+          <i class="bi bi-box-arrow-left"></i>
+          Back to student guardians
+        <% end %>
+      </div>
+    <% end %>
   <% end %>
-
-  <div>
-    <%= form.label :relationship, style: "display: block" %>
-    <%= form.text_field :relationship %>
-  </div>
-
-  <div>
-    <%= form.label :student_id, "Student", style: "display: block" %>
-    <%= form.collection_select :student_id, Student.all, :id, :name, prompt: "Select a student" %>
-  </div>
-
-  <div>
-    <%= form.label :guardian_id, "Guardian", style: "display: block" %>
-    <%= form.collection_select :guardian_id, Guardian.all, :id, :name, prompt: "Select a guardian" %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
