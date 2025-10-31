@@ -3,173 +3,177 @@
   <head>
     <title><%= content_for(:title) || "Helloworldapplication" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= yield :head %>
-
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-
-    <!-- Bootstrap CSS CDN -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    >
-
-    <!-- Bootstrap Icons CDN -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
-      rel="stylesheet"
-    >
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
 <style>
-  .nav-link.active {
-    background-color: #6c757d !important;
-    color: white !important;
-    border-top-right-radius: 0 !important;
-    border-bottom-right-radius: 0 !important;
-    border-top-left-radius: 7px !important;
-    border-bottom-left-radius: 7px !important;
-  }
+  
+    body {
+      margin: 0;
+      padding-top: 56px;
+      background-color: #f8f9fa;
+    }
 
-  .nav-link:hover {
-    background-color: #5a6268 !important;
-    color: white !important;
-  }
+    .top-navbar {
+      background-color: #004a99;
+      color: white;
+      font-weight: 600;
+      font-size: 1.25rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      padding-left: 25px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1030;
+    }
 
-  .nav-link.active i {
-  color: #efbf04 !important;
-}
+    .sidebar {
+      position: fixed;
+      top: 56px;
+      left: 0;
+      bottom: 0;
+      width: 250px;
+      background: linear-gradient(to bottom, #052659, #5483B3, #7DA0CA);
+      color: white;
+      overflow-x: hidden;
+      z-index: 1000;
+    }
 
+    .sidebar .nav-link {
+      display: flex;
+      align-items: center;
+      color: #ffffff;
+      padding: 10px 15px;
+      border-radius: 7px;
+      transition: background 0.2s, color 0.2s;
+    }
 
-  .top-navbar {
-    background-color: #004a99;
-    color: white;
-    font-weight: 600;
-    font-size: 1.2rem;
-    height: 56px;
-    display: flex;
-    align-items: center;
-    padding-left: 25px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1030;
-  }
+    .sidebar .nav-link i {
+      font-size: 1.3rem;
+      margin-right: 15px;
+      min-width: 30px;
+      text-align: center;
+    }
 
-  body {
-    padding-top: 56px;
-  }
+    .sidebar .nav-link i:hover {
+      color: #ffd700;
+      text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700, 0 0 30px #ffd700;
+    }
 
-  .sidebar {
-    width: 250px;
-    background-color: #343a40;
-    color: white;
-    position: fixed;
-    top: 56px; 
-    left: 0;
-    bottom: 0;
-    overflow-y: auto;
-    z-index: 1000;
-  }
+    .sidebar .nav-link span {
+      opacity: 1;
+      visibility: visible;
+      white-space: nowrap;
+    }
 
-  .main-content {
-    margin-left: 250px;
-    height: calc(100vh - 56px);
-    overflow-y: auto;
-    background-color: #f8f9fa;
-    padding: 1.5rem;
-  }
+    .sidebar .nav-link:hover {
+      background-color: #5483b3;
+      color: white;
+    }
+
+    .sidebar .nav-link.active {
+      background-color: #5483b3;
+      color: white;
+    }
+
+    .sidebar .nav-link.active i {
+      color: #efbf04;
+    }
+
+    .sidebar .school-section {
+      text-align: center;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .sidebar .school-section img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+    }
+
+    .sidebar .school-section span {
+      display: block;
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      opacity: 1;
+    }
+
+    .main-content {
+      margin-left: 250px;
+      padding: 1.5rem;
+    }
 </style>
-
   </head>
 
   <body>
-    <nav class="top-navbar fs-4">
-       mySchoolManager
+    <nav class="top-navbar">
+      mySchoolManager
     </nav>
 
-    <nav class="sidebar d-flex flex-column py-3 text-white">
-      <a class="d-flex flex-column justify-content-center align-items-center mt-3 text-white text-decoration-none" href="#">
-        <%= image_tag "Ateneo_de_Naga_University_logo.png", width: 140, height: 140, class: "mb-2 rounded-circle" %>
-        <span class="fw-semibold text-center" style="font-size: 1.05rem;">Ateneo de Naga University</span>
-      </a>
+    <nav class="sidebar d-flex flex-column py-3">
+      <div class="school-section">
+        <%= image_tag "carekoneklogo.png", alt: "School Logo" %>
+        <span>CareKonek University</span>
+      </div>
 
-      <hr class="text-white opacity-90 my-3 mx-auto" style="height: 1px; width: 85%;">
-
-          <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item">
-        <%= link_to students_path, class: "d-flex align-items-center nav-link link-light #{'active' if controller_name == 'students'}" do %>
-          <i class="bi bi-mortarboard-fill me-2"></i>
-          <span>Students</span>
-        <% end %>
-      </li>
-
-      <li>
-        <%= link_to subjects_path, class: "d-flex align-items-center nav-link link-light #{'active' if controller_name == 'subjects'}" do %>
-          <i class="bi bi-book-half me-2"></i>
-          <span>Subjects</span>
-        <% end %>
-      </li>
-
-      <li>
-        <%= link_to sections_path, class: "d-flex align-items-center nav-link link-light #{'active' if controller_name == 'sections'}" do %>
-          <i class="bi bi-diagram-3 me-2"></i>
-          <span>Sections</span>
-        <% end %>
-      </li>
-
-      <li>
-        <%= link_to classlists_path, class: "d-flex align-items-center nav-link link-light #{'active' if controller_name == 'classlists'}" do %>
-          <i class="bi bi-list-check me-2"></i>
-          <span>Classlists</span>
-        <% end %>
-      </li>
-
-      <li>
-        <%= link_to teachers_path, class: "d-flex align-items-center nav-link link-light #{'active' if controller_name == 'teachers'}" do %>
-          <i class="bi bi-person-video3 me-2"></i>
-          <span>Teachers</span>
-        <% end %>
-      </li>
-
-      <li>
-        <%= link_to staffs_path, class: "d-flex align-items-center nav-link link-light #{'active' if controller_name == 'staffs'}" do %>
-          <i class="bi bi-person-badge-fill me-2"></i>
-          <span>Staffs</span>
-        <% end %>
-      </li>
-
-      <li>
-        <%= link_to departments_path, class: "d-flex align-items-center nav-link link-light #{'active' if controller_name == 'departments'}" do %>
-          <i class="bi bi-bank2 me-2"></i> 
-          <span>Departments</span>
-        <% end %>
-      </li>
-
-      <li>
-        <%= link_to guardians_path, class: "d-flex align-items-center nav-link link-light #{'active' if controller_name == 'guardians'}" do %>
-          <i class="bi bi-person-heart me-2"></i>
-          <span>Guardians</span>
-        <% end %>
-      </li>
-
-      <li>
-        <%= link_to student_guardians_path, class: "d-flex align-items-center nav-link link-light #{'active' if controller_name == 'student_guardians'}" do %>
-          <i class="bi bi-link-45deg me-2"></i>
-          <span>Student-Guardians</span>
-        <% end %>
-      </li>
-    </ul>
+      <ul class="nav flex-column mt-3">
+        <li>
+          <%= link_to students_path, class: "nav-link #{'active' if controller_name == 'students'}" do %>
+            <i class="bi bi-mortarboard-fill"></i>
+            <span>Students</span>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to subjects_path, class: "nav-link #{'active' if controller_name == 'subjects'}" do %>
+            <i class="bi bi-book-half"></i>
+            <span>Subjects</span>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to sections_path, class: "nav-link #{'active' if controller_name == 'sections'}" do %>
+            <i class="bi bi-diagram-3"></i>
+            <span>Sections</span>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to classlists_path, class: "nav-link #{'active' if controller_name == 'classlists'}" do %>
+            <i class="bi bi-list-check"></i>
+            <span>Classlists</span>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to teachers_path, class: "nav-link #{'active' if controller_name == 'teachers'}" do %>
+            <i class="bi bi-person-video3"></i>
+            <span>Teachers</span>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to staffs_path, class: "nav-link #{'active' if controller_name == 'staffs'}" do %>
+            <i class="bi bi-person-badge-fill"></i>
+            <span>Staffs</span>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to departments_path, class: "nav-link #{'active' if controller_name == 'departments'}" do %>
+            <i class="bi bi-bank2"></i>
+            <span>Departments</span>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to guardians_path, class: "nav-link #{'active' if controller_name == 'guardians'}" do %>
+            <i class="bi bi-person-heart"></i>
+            <span>Guardians</span>
+          <% end %>
+        </li>
+      </ul>
     </nav>
 
     <div class="main-content">
@@ -180,17 +184,16 @@
         </div>
       <% end %>
 
-      <div class="bg-light p-4 rounded-4">
+      <div class="bg-white p-4 rounded-4 shadow-sm">
         <%= yield %>
       </div>
     </div>
 
-    <!-- Bootstrap JS CDN -->
-    <script 
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
-    </script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
+
 
 
 
