@@ -1,11 +1,10 @@
-<% content_for :title, "New classlist" %>
+<% content_for :title, "New Classlist" %>
 
-<h1>New classlist</h1>
+<div class="d-flex align-items-center mb-3">
+  <h2 class="fw-bold m-0 d-flex align-items-center gap-2" style="font-size: 1.6rem;">
+    <i class="bi bi-card-list"></i>
+    New Classlist
+  </h2>
+</div>
 
 <%= render "form", classlist: @classlist %>
-
-<br>
-
-<div>
-  <%= link_to "Back to classlists", classlists_path %>
-</div>

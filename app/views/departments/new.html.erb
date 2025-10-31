@@ -1,11 +1,10 @@
-<% content_for :title, "New department" %>
+<% content_for :title, "New Department" %>
 
-<h1>New department</h1>
+<div class="d-flex align-items-center mb-3">
+  <h2 class="fw-bold m-0 d-flex align-items-center gap-2" style="font-size: 1.6rem;">
+    <i class="bi bi-building"></i>
+    New Department
+  </h2>
+</div>
 
 <%= render "form", department: @department %>
-
-<br>
-
-<div>
-  <%= link_to "Back to departments", departments_path %>
-</div>

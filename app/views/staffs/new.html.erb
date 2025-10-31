@@ -1,11 +1,10 @@
-<% content_for :title, "New staff" %>
+<% content_for :title, "New Staff" %>
 
-<h1>New staff</h1>
+<div class="d-flex align-items-center mb-3">
+  <h2 class="fw-bold m-0 d-flex align-items-center gap-2" style="font-size: 1.6rem;">
+    <i class="bi bi-person-badge-fill"></i>
+    New Staff
+  </h2>
+</div>
 
 <%= render "form", staff: @staff %>
-
-<br>
-
-<div>
-  <%= link_to "Back to staffs", staffs_path %>
-</div>
