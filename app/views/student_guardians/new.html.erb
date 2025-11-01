@@ -1,11 +1,10 @@
-<% content_for :title, "New student guardian" %>
+<% content_for :title, "New Student Guardian" %>
 
-<h1>New student guardian</h1>
+<div class="d-flex align-items-center mb-3">
+  <h2 class="fw-bold m-0 d-flex align-items-center gap-2" style="font-size: 1.6rem;">
+    <i class="bi bi-people-fill"></i>
+    New Student Guardian
+  </h2>
+</div>
 
 <%= render "form", student_guardian: @student_guardian %>
-
-<br>
-
-<div>
-  <%= link_to "Back to student guardians", student_guardians_path %>
-</div>

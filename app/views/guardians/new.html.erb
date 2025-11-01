@@ -1,11 +1,10 @@
-<% content_for :title, "New guardian" %>
+<% content_for :title, "New Guardian" %>
 
-<h1>New guardian</h1>
+<div class="d-flex align-items-center mb-3">
+  <h2 class="fw-bold m-0 d-flex align-items-center gap-2" style="font-size: 1.6rem;">
+    <i class="bi bi-person-heart"></i>
+    New Guardian
+  </h2>
+</div>
 
 <%= render "form", guardian: @guardian %>
-
-<br>
-
-<div>
-  <%= link_to "Back to guardians", guardians_path %>
-</div>

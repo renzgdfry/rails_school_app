@@ -1,11 +1,10 @@
-<% content_for :title, "New subject" %>
+<% content_for :title, "New Subject" %>
 
-<h1>New subject</h1>
+<div class="d-flex align-items-center mb-3">
+  <h2 class="fw-bold m-0 d-flex align-items-center gap-2" style="font-size: 1.6rem;">
+    <i class="bi bi-journal-bookmark-fill"></i>
+    New Subject
+  </h2>
+</div>
 
 <%= render "form", subject: @subject %>
-
-<br>
-
-<div>
-  <%= link_to "Back to subjects", subjects_path %>
-</div>
