@@ -1,29 +1,45 @@
- 
-
 <% content_for :title, "Departments" %>
 
-<h1>List of Departments</h1>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Location</th>
-      <th>Number of Employees</th>
-      <th>Number of Students</th>
-      <th>Show</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @departments.each do |department| %>
-      <tr>
-        <td><%= department.name %></td>
-        <td><%= department.location %></td>
-        <td><%= department.employee_count %></td>
-        <td><%= department.student_count %></td>
-        <td><%= link_to "Show this department", department %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <div class="d-flex align-items-center gap-2">
+    <i class="bi bi-building fs-3"></i>
+    <h2 class="fw-bold m-0">List of Departments</h2>
+  </div>
 
-<%= link_to "New department", new_department_path %>
+  <%= link_to new_department_path, class: "btn btn-success rounded-pill d-flex align-items-center gap-2" do %>
+    <i class="bi bi-plus-circle"></i>
+    <span class="fw-semibold text-white">New Department</span>
+  <% end %>
+</div>
+
+<div class="border shadow-sm p-4 rounded-4 table-responsive bg-white">
+  <table class="table table-striped table-hover w-100">
+    <thead>
+      <tr>
+        <th class="text-secondary fw-normal" style="width: 25%;">Name</th>
+        <th class="text-secondary fw-normal" style="width: 25%;">Location</th>
+        <th class="text-secondary fw-normal" style="width: 20%;">Number of Employees</th>
+        <th class="text-secondary fw-normal" style="width: 20%;">Number of Students</th>
+        <th class="text-secondary fw-normal text-center" style="width: 10%;">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @departments.each do |department| %>
+        <tr class="fw-medium">
+          <td><%= department.name %></td>
+          <td><%= department.location %></td>
+          <td><%= department.employee_count %></td>
+          <td><%= department.student_count %></td>
+          <td class="d-flex justify-content-center gap-2">
+            <%= link_to "Show", department, class: "btn btn-sm btn-primary" %>
+            <%= link_to "Edit", edit_department_path(department), class: "btn btn-sm btn-secondary" %>
+            <%= button_tag "Delete",
+              type: "button",
+              class: "btn btn-sm btn-danger",
+              data: { bs_toggle: "modal", bs_target: "#confirmDeleteModal", department_id: department.id } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

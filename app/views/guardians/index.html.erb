@@ -1,27 +1,43 @@
- 
-
 <% content_for :title, "Guardians" %>
 
-<h1>List of Guardians</h1>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email Address</th>
-      <th>Contact Number</th>
-      <th>Show</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @guardians.each do |guardian| %>
-      <tr>
-        <td><%= guardian.name %></td>
-        <td><%= guardian.email_address %></td>
-        <td><%= guardian.contact_number %></td>
-        <td><%= link_to "Show this guardian", guardian %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <div class="d-flex align-items-center gap-2">
+    <i class="bi bi-shield-person fs-3"></i>
+    <h2 class="fw-bold m-0">List of Guardians</h2>
+  </div>
 
-<%= link_to "New guardian", new_guardian_path %>
+  <%= link_to new_guardian_path, class: "btn btn-success rounded-pill d-flex align-items-center gap-2" do %>
+    <i class="bi bi-person-fill-add"></i>
+    <span class="fw-semibold text-white">New Guardian</span>
+  <% end %>
+</div>
+
+<div class="border shadow-sm p-4 rounded-4 table-responsive bg-white">
+  <table class="table table-striped table-hover w-100">
+    <thead>
+      <tr>
+        <th class="text-secondary fw-normal" style="width: 30%;">Name</th>
+        <th class="text-secondary fw-normal" style="width: 30%;">Email Address</th>
+        <th class="text-secondary fw-normal" style="width: 30%;">Contact Number</th>
+        <th class="text-secondary fw-normal text-center" style="width: 10%;">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @guardians.each do |guardian| %>
+        <tr class="fw-medium">
+          <td><%= guardian.name %></td>
+          <td><%= guardian.email_address %></td>
+          <td><%= guardian.contact_number %></td>
+          <td class="d-flex justify-content-center gap-2">
+            <%= link_to "Show", guardian, class: "btn btn-sm btn-primary" %>
+            <%= link_to "Edit", edit_guardian_path(guardian), class: "btn btn-sm btn-secondary" %>
+            <%= button_tag "Delete",
+              type: "button",
+              class: "btn btn-sm btn-danger",
+              data: { bs_toggle: "modal", bs_target: "#confirmDeleteModal", guardian_id: guardian.id } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
