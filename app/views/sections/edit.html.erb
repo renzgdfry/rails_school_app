@@ -1,12 +1,15 @@
 <% content_for :title, "Editing section" %>
 
-<h1>Editing section</h1>
+<div class="d-flex align-items-center mb-3 gap-2">
+  <h2 class="fw-bold m-0 d-flex align-items-center gap-2" style="font-size: 1.6rem;">
+    <i class="bi bi-pencil-square"></i>
+    Edit Section
+  </h2>
+</div>
 
 <%= render "form", section: @section %>
 
 <br>
 
 <div>
-  <%= link_to "Show this section", @section %> |
-  <%= link_to "Back to sections", sections_path %>
 </div>
