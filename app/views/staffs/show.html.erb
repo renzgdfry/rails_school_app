@@ -1,32 +1,64 @@
+<div id="<%= dom_id @staff %>" class="border shadow-sm rounded-3 overflow-hidden mb-3">
+  <div class="p-4 d-flex align-items-center gap-3 text-white"
+       style="
+         background: linear-gradient(135deg, rgba(0, 82, 155, 0.9), rgba(80, 160, 210, 0.8));
+         backdrop-filter: blur(8px);
+         -webkit-backdrop-filter: blur(8px);
+         border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+       ">
+    <i class="bi bi-person-video fs-1" style="text-shadow: 0 0 6px rgba(173, 216, 230, 0.8);"></i>
+    <div class="d-flex flex-column justify-content-center">
+      <h3 class="mb-0 fw-bold"><%= @staff.name %></h3>
+      <p class="mb-0 opacity-75"><%= @staff.email %></p>
+    </div>
+  </div>
 
+  <div class="p-4 border-bottom">
+    <div class="row text-center g-3 justify-content-center">
+      <div class="col-6 col-md-2">
+        <p class="text-secondary small mb-1">Name</p>
+        <h5><%= @staff.name %></h5>
+      </div>
+      <div class="col-6 col-md-3">
+        <p class="text-secondary small mb-1">Email</p>
+        <h5><%= @staff.email %></h5>
+      </div>
+      <div class="col-6 col-md-2">
+        <p class="text-secondary small mb-1">Monthly Salary</p>
+        <h5>₱<%= number_with_delimiter(@staff.monthly_salary) %></h5>
+      </div>
+      <div class="col-6 col-md-2">
+        <p class="text-secondary small mb-1">Status</p>
+        <h5><%= @staff.status %></h5>
+      </div>
+      <div class="col-6 col-md-2">
+        <p class="text-secondary small mb-1">Department</p>
+        <h5><%= @staff.department&.name || "—" %></h5>
+      </div>
+    </div>
+  </div>
+</div>
 
-<%= render @staff %>
+<div class="d-flex justify-content-between mt-3">
+  <div class="d-flex gap-2">
+    <%= link_to "#",
+      class: "btn btn-danger d-flex align-items-center gap-2",
+      data: { bs_toggle: "modal", bs_target: "#confirmDeleteModal", staff_id: @staff.id } do %>
+      <i class="bi bi-trash-fill"></i>
+      Destroy this staff
+    <% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Monthly Salary</th>
-      <th>Status</th>
-      <th>Department</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><%= @staff.name %></td>
-      <td><%= @staff.email %></td>
-      <td><%= @staff.monthly_salary %></td>
-      <td><%= @staff.status %></td>
-      <td><%= @staff.department.name %></td>
-    </tr>
-  </tbody>
-</table>
+    <%= link_to edit_staff_path(@staff), class: "btn btn-success d-flex align-items-center gap-2" do %>
+      <i class="bi bi-gear-fill"></i>
+      Edit this staff
+    <% end %>
+  </div>
 
-
-<div>
-  <%= link_to "Edit this staff", edit_staff_path(@staff) %> |
-  <%= link_to "Back to staffs", staffs_path %>
-
-  <%= button_to "Destroy this staff", @staff, method: :delete %>
+  <div>
+    <%= link_to staffs_path, class: "btn btn-secondary d-flex align-items-center gap-2" do %>
+      <i class="bi bi-box-arrow-left"></i>
+      Back to staffs
+    <% end %>
+  </div>
 </div>

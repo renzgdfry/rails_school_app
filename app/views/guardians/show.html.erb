@@ -1,28 +1,76 @@
- 
+<div id="<%= dom_id @guardian %>" class="border shadow-sm rounded-3 overflow-hidden mb-3">
+  <div class="p-4 d-flex align-items-center gap-3 text-white"
+       style="
+         background: linear-gradient(135deg, rgba(13, 60, 150, 0.9), rgba(70, 130, 180, 0.8));
+         backdrop-filter: blur(8px);
+         -webkit-backdrop-filter: blur(8px);
+         border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+       ">
+    <i class="bi bi-person-badge fs-1" style="text-shadow: 0 0 6px rgba(173, 216, 230, 0.8);"></i>
+    <div class="d-flex flex-column justify-content-center">
+      <h3 class="mb-0 fw-bold"><%= @guardian.name %></h3>
+      <p class="mb-0 opacity-75">Guardian</p>
+    </div>
+  </div>
 
-<%= render @guardian %>
+  <div class="card shadow-sm rounded-3 mb-4">
+    <div class="card-body">
+      <div class="row text-center g-3 justify-content-center align-items-center">
+        <div class="col-12 col-md-3">
+          <p class="text-secondary small mb-1">Email Address</p>
+          <h5 class="mb-0"><%= @guardian.email_address %></h5>
+        </div>
+        <div class="col-12 col-md-3">
+          <p class="text-secondary small mb-1">Contact Number</p>
+          <h5 class="mb-0"><%= @guardian.contact_number %></h5>
+        </div>
+        <div class="col-12 col-md-3">
+          <p class="text-secondary small mb-1">Number of Students</p>
+          <h5 class="mb-0"><%= @guardian.number_of_students %></h5>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<h2>List of Students</h2>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Relationship</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @guardian.student_guardians.each do |student_guardian|%>
-      <tr>
-        <td><%= student_guardian.student.name %></td>
-        <td><%= student_guardian.relationship %></td>
-      </tr>
-    <% end %>
-  </tbody>
-<table>
+  <div class="border rounded p-3 shadow-sm mb-4 table-responsive">
+    <h4 class="fw-bold mb-3">List of Students</h4>
+    <table class="table table-striped table-hover align-middle">
+      <thead class="table-light">
+        <tr>
+          <th>Name</th>
+          <th>Relationship</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @guardian.student_guardians.each do |student_guardian| %>
+          <tr>
+            <td><%= student_guardian.student.name %></td>
+            <td><%= student_guardian.relationship %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
-<div>
-  <%= link_to "Edit this guardian", edit_guardian_path(@guardian) %> |
-  <%= link_to "Back to guardians", guardians_path %>
+  <div class="d-flex justify-content-between mt-3">
+    <div class="d-flex gap-2">
+      <%= link_to @guardian, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger d-flex align-items-center gap-2" do %>
+        <i class="bi bi-trash-fill"></i>
+        Destroy this guardian
+      <% end %>
 
-  <%= button_to "Destroy this guardian", @guardian, method: :delete %>
+      <%= link_to edit_guardian_path(@guardian), class: "btn btn-success d-flex align-items-center gap-2" do %>
+        <i class="bi bi-gear-fill"></i>
+        Edit this guardian
+      <% end %>
+    </div>
+
+    <div>
+      <%= link_to guardians_path, class: "btn btn-secondary d-flex align-items-center gap-2" do %>
+        <i class="bi bi-box-arrow-left"></i>
+        Back to guardians
+      <% end %>
+    </div>
+  </div>
 </div>

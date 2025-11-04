@@ -1,20 +1,61 @@
- 
+<div id="<%= dom_id @teacher %>" class="border shadow-sm rounded-3 overflow-hidden mb-3">
+  <div class="p-4 d-flex align-items-center gap-3 text-white"
+       style="
+         background: linear-gradient(135deg, rgba(13, 60, 150, 0.9), rgba(70, 130, 180, 0.8));
+         backdrop-filter: blur(8px);
+         -webkit-backdrop-filter: blur(8px);
+         border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+       ">
+    <i class="bi bi-person-badge-fill fs-1" style="text-shadow: 0 0 6px rgba(173, 216, 230, 0.8);"></i>
 
-<%= render @teacher %>
+    <div class="d-flex flex-column justify-content-center">
+      <h3 class="mb-0 fw-bold"><%= @teacher.name %></h3>
+      <p class="mb-0 opacity-75"><%= @teacher.email %></p>
+    </div>
+  </div>
 
-  <table>
+  <div class="p-4 border-bottom">
+    <div class="row text-center g-3 justify-content-center">
+      <div class="col-6 col-md-2">
+        <p class="text-secondary small mb-1">Specialization</p>
+        <h5><%= @teacher.specialization %></h5>
+      </div>
+      <div class="col-6 col-md-2">
+        <p class="text-secondary small mb-1">Status</p>
+        <h5><%= @teacher.status %></h5>
+      </div>
+      <div class="col-6 col-md-2">
+        <p class="text-secondary small mb-1">Department</p>
+        <h5><%= @teacher.department&.name || "—" %></h5>
+      </div>
+      <div class="col-6 col-md-2">
+        <p class="text-secondary small mb-1">Total Units</p>
+        <h5><%= @teacher.number_of_units %></h5>
+      </div>
+      <div class="col-6 col-md-2">
+        <p class="text-secondary small mb-1">Monthly Salary</p>
+        <h5>₱<%= number_with_delimiter(@teacher.monthly_salary) %></h5>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="border rounded p-3 shadow-sm mb-3 table-responsive">
+  <h3>Handled Sections</h3>
+  <table class="table table-striped table-hover align-middle">
     <thead>
       <tr>
-        <th>Section</th>
-        <th>Subject</th>
-        <th>Room</th>
-        <th>Time Slot</th>
+        <th class="text-secondary fw-normal">Section</th>
+        <th class="text-secondary fw-normal">Subject</th>
+        <th class="text-secondary fw-normal">Room</th>
+        <th class="text-secondary fw-normal">Time Slot</th>
       </tr>
     </thead>
     <tbody>
       <% @teacher.subjects.each do |subject| %>
         <% subject.sections.each do |section| %>
-          <tr>
+          <tr class="fw-medium">
             <td><%= section.name %></td>
             <td><%= section.subject.name %></td>
             <td><%= section.room %></td>
@@ -23,11 +64,28 @@
         <% end %>
       <% end %>
     </tbody>
-  <table>
+  </table>
+</div>
 
-<div>
-  <%= link_to "Edit this teacher", edit_teacher_path(@teacher) %> |
-  <%= link_to "Back to teachers", teachers_path %>
+<div class="d-flex justify-content-between mt-3">
+  <div class="d-flex gap-2">
+    <%= link_to "#",
+      class: "btn btn-danger d-flex align-items-center gap-2",
+      data: { bs_toggle: "modal", bs_target: "#confirmDeleteModal", teacher_id: @teacher.id } do %>
+      <i class="bi bi-trash-fill"></i>
+      Destroy this teacher
+    <% end %>
 
-  <%= button_to "Destroy this teacher", @teacher, method: :delete %>
+    <%= link_to edit_teacher_path(@teacher), class: "btn btn-success d-flex align-items-center gap-2" do %>
+      <i class="bi bi-gear-fill"></i>
+      Edit this teacher
+    <% end %>
+  </div>
+
+  <div>
+    <%= link_to teachers_path, class: "btn btn-secondary d-flex align-items-center gap-2" do %>
+      <i class="bi bi-box-arrow-left"></i>
+      Back to teachers
+    <% end %>
+  </div>
 </div>
