@@ -1,83 +1,129 @@
- 
+<div id="<%= dom_id @department %>" class="border shadow-sm rounded-3 overflow-hidden mb-3">
+  <div class="p-4 d-flex align-items-center gap-3 text-white"
+       style="
+         background: linear-gradient(135deg, rgba(13, 60, 150, 0.9), rgba(70, 130, 180, 0.8));
+         backdrop-filter: blur(8px);
+         -webkit-backdrop-filter: blur(8px);
+         border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+       ">
+    <i class="bi bi-building fs-1" style="text-shadow: 0 0 6px rgba(173, 216, 230, 0.8);"></i>
+    <div class="d-flex flex-column justify-content-center">
+      <h3 class="mb-0 fw-bold"><%= @department.name %></h3>
+      <p class="mb-0 opacity-75"><%= "Department" %></p>
+    </div>
+  </div>
 
-<%= render @department %>
+<div class="card shadow-sm rounded-3 mb-4">
+  <div class="card-body">
+    <div class="row text-center g-3 justify-content-center align-items-center">
+      <div class="col-12 col-md-3">
+        <p class="text-secondary small mb-1">Location</p>
+        <h5 class="mb-0"><%= @department.location %></h5>
+      </div>
+      <div class="col-12 col-md-3">
+        <p class="text-secondary small mb-1">Number of Students</p>
+        <h5 class="mb-0"><%= @department.student_count %></h5>
+      </div>
+      <div class="col-12 col-md-3">
+        <p class="text-secondary small mb-1">Number of Employees</p>
+        <h5 class="mb-0"><%= @department.employee_count %></h5>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p> <strong> Number of Students: </strong> <%= @department.student_count %> </p>
-<p> <strong> Number of Employees: </strong> <%= @department.employee_count %> </p>
-
-<h3> List of Students</h3>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Program</th>
-      <th>Year Level</th>
-      <th>Total Assessment</th>
+<div class="border rounded p-3 shadow-sm mb-4 table-responsive">
+  <h4 class="fw-bold mb-3">List of Students</h4>
+  <table class="table table-striped table-hover align-middle">
+    <thead class="table-light">
+      <tr>
+        <th>Name</th>
+        <th>Program</th>
+        <th>Year Level</th>
+        <th>Total Assessment</th>
       </tr>
-  </thead>
-  <tbody>
-  <% @department.students.each do |student| %>
-    <tr>
-      <td> <%= student.name %> </td>
-      <td> <%= student.program %> </td>
-      <td> <%= student.year_level %> </td>
-      <td> <%= student.total_assessment %> </td>
-    </tr>
+    </thead>
+    <tbody>
+      <% @department.students.each do |student| %>
+        <tr>
+          <td><%= student.name %></td>
+          <td><%= student.program %></td>
+          <td><%= student.year_level %></td>
+          <td>₱<%= number_with_delimiter(student.total_assessment) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="border rounded p-3 shadow-sm mb-4 table-responsive">
+  <h4 class="fw-bold mb-3">List of Teachers</h4>
+  <table class="table table-striped table-hover align-middle">
+    <thead class="table-light">
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Specialization</th>
+        <th>Status</th>
+        <th>Monthly Salary</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @department.teachers.each do |teacher| %>
+        <tr>
+          <td><%= teacher.name %></td>
+          <td><%= teacher.email %></td>
+          <td><%= teacher.specialization %></td>
+          <td><%= teacher.status %></td>
+          <td>₱<%= number_with_delimiter(teacher.monthly_salary) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="border rounded p-3 shadow-sm mb-4 table-responsive">
+  <h4 class="fw-bold mb-3">List of Staff</h4>
+  <table class="table table-striped table-hover align-middle">
+    <thead class="table-light">
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Status</th>
+        <th>Monthly Salary</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @department.staffs.each do |staff| %>
+        <tr>
+          <td><%= staff.name %></td>
+          <td><%= staff.email %></td>
+          <td><%= staff.status %></td>
+          <td>₱<%= number_with_delimiter(staff.monthly_salary) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="d-flex justify-content-between mt-3">
+  <div class="d-flex gap-2">
+    <%= link_to @department, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger d-flex align-items-center gap-2" do %>
+      <i class="bi bi-trash-fill"></i>
+      Destroy this department
     <% end %>
-  </tbody>
-</table>
-    
-<h3> List of Teachers </h3>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Specialization</th>
-      <th>Status</th>
-      <th>Monthly Salary</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @department.teachers.each do |teacher| %>
-    <tr>
-      <td> <%= teacher.name %> </td>
-      <td> <%= teacher.email %> </td>
-      <td> <%= teacher.specialization %> </td>
-      <td> <%= teacher.status %> </td>
-      <td> <%= teacher.monthly_salary %> </td>
-    </tr>
-    <% end %>  
-  </tbody>
-</table>
 
-<h3> List of Staff </h3>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Status</th>
-      <th>Monthly Salary</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @department.staffs.each do |staff| %>
-    <tr>
-      <td> <%= staff.name %> </td>
-      <td> <%= staff.email %> </td>
-      <td> <%= staff.status %> </td>
-      <td> <%= staff.monthly_salary %> </td>
-    </tr>
-    <% end %>  
-  </tbody>
-</table>
+    <%= link_to edit_department_path(@department), class: "btn btn-success d-flex align-items-center gap-2" do %>
+      <i class="bi bi-gear-fill"></i>
+      Edit this department
+    <% end %>
+  </div>
 
-<hr>
-
-<div>
-  <%= link_to "Edit this department", edit_department_path(@department) %> |
-  <%= link_to "Back to departments", departments_path %>
-
-  <%= button_to "Destroy this department", @department, method: :delete %>
+  <div>
+    <%= link_to departments_path, class: "btn btn-secondary d-flex align-items-center gap-2" do %>
+      <i class="bi bi-box-arrow-left"></i>
+      Back to departments
+    <% end %>
+  </div>
 </div>
