@@ -1,41 +1,170 @@
 <% content_for :title, "Classlists" %>
 
-<div class="d-flex justify-content-between align-items-center mb-3">
+<style>
+  .glass-container {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    padding: 2rem;
+  }
+
+  .table {
+    background: transparent;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+  }
+
+  .table thead th {
+    background: transparent;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    border-bottom: none;
+  }
+
+  .table tbody tr {
+    background: rgba(255, 255, 255, 0.75);
+    border-radius: 16px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  }
+
+  .table tbody tr td {
+    vertical-align: middle;
+    border: none;
+    padding: 1rem;
+  }
+
+  .table th.actions-col,
+  .table td.actions-col {
+    width: 170px;
+    text-align: center;
+  }
+
+  .btn-glass {
+    backdrop-filter: blur(8px);
+    font-weight: 600;
+    transition: all 0.2s ease;
+  }
+
+  .btn-glass:hover {
+    transform: translateY(-2px);
+  }
+
+  .btn-new {
+    background: #198754;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.4rem;
+    font-weight: 600;
+    border-radius: 50px;
+    box-shadow: 0 3px 10px rgba(13, 110, 253, 0.4);
+  }
+
+  .btn-new:hover {
+    background: #157347;
+    color: white;
+    transform: scale(1.03);
+  }
+
+  .btn-outline-primary,
+  .btn-outline-secondary,
+  .btn-outline-danger {
+    border-width: 1.5px;
+    border-radius: 10px;
+  }
+
+  .btn-outline-primary {
+    color: #0d6efd;
+    border-color: #0d6efd;
+    background: rgba(13, 110, 253, 0.05);
+  }
+
+  .btn-outline-secondary {
+    color: #6c757d;
+    border-color: #6c757d;
+    background: rgba(108, 117, 125, 0.05);
+  }
+
+  .btn-outline-danger {
+    color: #dc3545;
+    border-color: #dc3545;
+    background: rgba(220, 53, 69, 0.05);
+  }
+
+  .btn-outline-primary:hover,
+  .btn-outline-secondary:hover,
+  .btn-outline-danger:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+</style>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
   <div class="d-flex align-items-center gap-2">
-    <i class="bi bi-card-checklist fs-3"></i>
-    <h2 class="fw-bold m-0">List of Classlists</h2>
+    <i class="bi bi-list-check fs-3"></i>
+    <h2 class="fw-bold m-0">Class List</h2>
   </div>
 
-  <%= link_to new_classlist_path, class: "btn btn-success rounded-pill d-flex align-items-center gap-2" do %>
+  <%= link_to new_classlist_path, class: "btn btn-new d-flex align-items-center gap-2" do %>
     <i class="bi bi-plus-circle"></i>
-    <span class="fw-semibold text-white">New Classlist</span>
+    <span>New Classlist</span>
   <% end %>
 </div>
 
-<div class="border shadow-sm p-4 rounded-4 table-responsive bg-white">
-  <table class="table table-striped table-hover w-100">
+<div class="glass-container table-responsive">
+  <table class="table w-100 align-middle">
     <thead>
       <tr>
-        <th class="text-secondary fw-normal" >Student</th>
-        <th class="text-secondary fw-normal" >Section</th>
-        <th class="text-secondary fw-normal text-center" >Actions</th>
+        <th>Student</th>
+        <th>Section</th>
+        <th class="actions-col">Actions</th>
       </tr>
     </thead>
     <tbody>
       <% @classlists.each do |classlist| %>
-        <tr class="fw-medium">
+        <tr>
           <td><%= classlist.student.name %></td>
           <td><%= classlist.section.name %></td>
-          <td class="d-flex justify-content-center gap-2">
-            <%= link_to "Show", classlist, class: "btn btn-sm btn-primary" %>
-            <%= link_to "Edit", edit_classlist_path(classlist), class: "btn btn-sm btn-secondary" %>
-            <%= button_tag "Delete",
-              type: "button",
-              class: "btn btn-sm btn-danger",
-              data: { bs_toggle: "modal", bs_target: "#confirmDeleteModal", classlist_id: classlist.id } %>
+          <td class="actions-col">
+            <div class="d-flex justify-content-center gap-2">
+              <%= link_to classlist, class: "btn btn-sm btn-outline-primary btn-glass d-flex align-items-center gap-1" do %>
+                <i class="bi bi-eye-fill"></i> Show
+              <% end %>
+
+              <%= link_to edit_classlist_path(classlist), class: "btn btn-sm btn-outline-secondary btn-glass d-flex align-items-center gap-1" do %>
+                <i class="bi bi-pencil-fill"></i> Edit
+              <% end %>
+
+              <%= link_to "#",
+                class: "btn btn-sm btn-outline-danger btn-glass d-flex align-items-center gap-1",
+                data: { bs_toggle: "modal", bs_target: "#confirmDeleteModal", classlist_url: classlist_path(classlist) } do %>
+                <i class="bi bi-trash-fill"></i> Delete
+              <% end %>
+            </div>
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title">Confirm Delete</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete this classlist?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <a href="#" id="confirmDeleteBtn" class="btn btn-danger">Delete</a>
+      </div>
+    </div>
+  </div>
 </div>

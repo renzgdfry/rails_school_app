@@ -3,25 +3,27 @@ import "@hotwired/turbo-rails"
 import "controllers"
 
 document.addEventListener("turbo:load", () => {
-  const deleteModal = document.getElementById("confirmDeleteModal");
-  const deleteForm = document.getElementById("deleteStudentForm");
+  const modal = document.getElementById("confirmDeleteModal");
+  const confirmBtn = document.getElementById("confirmDeleteBtn");
 
-  if (!deleteModal || !deleteForm) return;
-
-  deleteModal.addEventListener("show.bs.modal", event => {
+  modal.addEventListener("show.bs.modal", event => {
     const button = event.relatedTarget;
-    const studentId = button.getAttribute("data-student-id");
-    deleteForm.action = `/students/${studentId}`;
-    
-    // Add CSRF token manually (fixes ActionController::InvalidAuthenticityToken)
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
-    let csrfInput = deleteForm.querySelector('input[name="authenticity_token"]');
-    if (!csrfInput) {
-      csrfInput = document.createElement('input');
-      csrfInput.type = 'hidden';
-      csrfInput.name = 'authenticity_token';
-      deleteForm.appendChild(csrfInput);
-    }
-    csrfInput.value = csrfToken;
+    const url = button.getAttribute("data-student-url");
+    confirmBtn.setAttribute("href", url);
+    confirmBtn.setAttribute("data-turbo-method", "delete");
+  });
+});
+
+document.addEventListener("turbo:load", () => {
+  const modal = document.getElementById("confirmDeleteModal");
+  const confirmBtn = document.getElementById("confirmDeleteBtn");
+
+  if (!modal) return;
+
+  modal.addEventListener("show.bs.modal", event => {
+    const button = event.relatedTarget;
+    const url = button.getAttribute("data-student-url");
+    confirmBtn.setAttribute("href", url);
+    confirmBtn.setAttribute("data-turbo-method", "delete");
   });
 });
