@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "CareKonek University" %></title>
+    <title><%= content_for(:title) || "Helloworldapplication" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -10,107 +10,102 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
-<style>
-  
-    body {
-      margin: 0;
-      padding-top: 56px;
-      background-color: #f8f9fa;
-    }
+    <style>
+      body {
+        margin: 0;
+        padding-top: 56px;
+        background-color: #f8f9fa;
+      }
 
-    .top-navbar {
-      background-color: #004a99;
-      color: white;
-      font-weight: 600;
-      font-size: 1.25rem;
-      height: 56px;
-      display: flex;
-      align-items: center;
-      padding-left: 25px;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1030;
-    }
+      .top-navbar {
+        background-color: #004a99;
+        color: white;
+        font-weight: 600;
+        font-size: 1.25rem;
+        height: 56px;
+        display: flex;
+        align-items: center;
+        padding-left: 25px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1030;
+      }
 
-    .sidebar {
-      position: fixed;
-      top: 56px;
-      left: 0;
-      bottom: 0;
-      width: 250px;
-      background: linear-gradient(to bottom, #052659, #5483B3, #7DA0CA);
-      color: white;
-      overflow-x: hidden;
-      z-index: 1000;
-    }
+      .sidebar {
+        position: fixed;
+        top: 56px;
+        left: 0;
+        bottom: 0;
+        width: 250px;
+        background: linear-gradient(to bottom, #052659, #5483B3, #7DA0CA);
+        color: white;
+        overflow-x: hidden;
+        z-index: 1000;
+      }
 
-    .sidebar .nav-link {
-      display: flex;
-      align-items: center;
-      color: #ffffff;
-      padding: 10px 15px;
-      border-radius: 7px;
-      transition: background 0.2s, color 0.2s;
-    }
+      .sidebar .nav-link {
+        display: flex;
+        align-items: center;
+        color: #ffffff;
+        padding: 10px 15px;
+        border-radius: 7px;
+        transition: background 0.2s, color 0.2s;
+      }
 
-    .sidebar .nav-link i {
-      font-size: 1.3rem;
-      margin-right: 15px;
-      min-width: 30px;
-      text-align: center;
-    }
+      .sidebar .nav-link i {
+        font-size: 1.3rem;
+        margin-right: 15px;
+        min-width: 30px;
+        text-align: center;
+      }
 
-    .sidebar .nav-link i:hover {
-      color: #ffd700;
-      text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700, 0 0 30px #ffd700;
-    }
+      .sidebar .nav-link i:hover {
+        color: #ffd700;
+        text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700, 0 0 30px #ffd700;
+      }
 
-    .sidebar .nav-link span {
-      opacity: 1;
-      visibility: visible;
-      white-space: nowrap;
-    }
+      .sidebar .nav-link span {
+        opacity: 1;
+        visibility: visible;
+        white-space: nowrap;
+      }
 
-    .sidebar .nav-link:hover {
-      background-color: #5483b3;
-      color: white;
-    }
+      .sidebar .nav-link:hover,
+      .sidebar .nav-link.active {
+        background-color: #5483b3;
+        color: white;
+      }
 
-    .sidebar .nav-link.active {
-      background-color: #5483b3;
-      color: white;
-    }
+      .sidebar .nav-link.active i {
+        color: #efbf04;
+      }
 
-    .sidebar .nav-link.active i {
-      color: #efbf04;
-    }
+      .sidebar .school-section {
+        text-align: center;
+        padding: 1rem 0;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+      }
 
-    .sidebar .school-section {
-      text-align: center;
-      padding: 1rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.2);
-    }
+      .sidebar .school-section img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+      }
 
-    .sidebar .school-section img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-    }
+      .sidebar .school-section span {
+        display: block;
+        margin-top: 0.5rem;
+        font-size: 0.8rem;
+        opacity: 1;
+      }
 
-    .sidebar .school-section span {
-      display: block;
-      margin-top: 0.5rem;
-      font-size: 0.8rem;
-      opacity: 1;
-    }
-
-    .main-content {
-      margin-left: 250px;
-      padding: 1.5rem;
-    }
-</style>
+      .main-content {
+        margin-left: 250px;
+        padding: 1.5rem;
+      }
+    </style>
   </head>
 
   <body>
@@ -146,7 +141,7 @@
         <li>
           <%= link_to classlists_path, class: "nav-link #{'active' if controller_name == 'classlists'}" do %>
             <i class="bi bi-list-check"></i>
-            <span>Classlists</span>
+            <span>Class List</span>
           <% end %>
         </li>
         <li>
@@ -173,6 +168,12 @@
             <span>Guardians</span>
           <% end %>
         </li>
+        <li>
+          <%= link_to student_guardians_path, class: "nav-link #{'active' if controller_name == 'student_guardians'}" do %>
+            <i class="bi bi-link-45deg"></i>
+            <span>Student-Guardians</span>
+          <% end %>
+        </li>
       </ul>
     </nav>
 
@@ -193,9 +194,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
-
-
-
 
 <!-- Delete Confirmation Modal -->
 <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="false">
