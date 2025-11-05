@@ -1,4 +1,4 @@
-<% content_for :title, "Classlists" %>
+<% content_for :title, "Classlist" %>
 
 <style>
   .glass-container {
@@ -34,6 +34,16 @@
     vertical-align: middle;
     border: none;
     padding: 1rem;
+  }
+
+  .icon-col {
+    width: 70px;
+    text-align: center;
+  }
+
+  .icon-col i {
+    font-size: 2.5rem;
+    color: #052659;
   }
 
   .table th.actions-col,
@@ -108,7 +118,7 @@
   </div>
 
   <%= link_to new_classlist_path, class: "btn btn-new d-flex align-items-center gap-2" do %>
-    <i class="bi bi-plus-circle"></i>
+    <i class="bi bi-person-fill-add"></i>
     <span>New Classlist</span>
   <% end %>
 </div>
@@ -117,16 +127,18 @@
   <table class="table w-100 align-middle">
     <thead>
       <tr>
-        <th>Student</th>
-        <th>Section</th>
+        <th class="icon-col"></th>
+        <th>Student Name</th>
         <th class="actions-col">Actions</th>
       </tr>
     </thead>
     <tbody>
       <% @classlists.each do |classlist| %>
         <tr>
+          <td class="icon-col">
+            <i class="bi bi-person-circle"></i>
+          </td>
           <td><%= classlist.student.name %></td>
-          <td><%= classlist.section.name %></td>
           <td class="actions-col">
             <div class="d-flex justify-content-center gap-2">
               <%= link_to classlist, class: "btn btn-sm btn-outline-primary btn-glass d-flex align-items-center gap-1" do %>
@@ -155,7 +167,7 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header bg-danger text-white">
-        <h5 class="modal-title">Confirm Delete</h5>
+        <h5 class="modal-title" id="confirmDeleteLabel">Confirm Delete</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
