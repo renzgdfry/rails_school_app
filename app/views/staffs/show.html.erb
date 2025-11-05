@@ -16,23 +16,15 @@
 
   <div class="p-4 border-bottom">
     <div class="row text-center g-3 justify-content-center">
-      <div class="col-6 col-md-2">
-        <p class="text-secondary small mb-1">Name</p>
-        <h5><%= @staff.name %></h5>
-      </div>
       <div class="col-6 col-md-3">
-        <p class="text-secondary small mb-1">Email</p>
-        <h5><%= @staff.email %></h5>
-      </div>
-      <div class="col-6 col-md-2">
         <p class="text-secondary small mb-1">Monthly Salary</p>
         <h5>₱<%= number_with_delimiter(@staff.monthly_salary) %></h5>
       </div>
-      <div class="col-6 col-md-2">
+      <div class="col-6 col-md-3">
         <p class="text-secondary small mb-1">Status</p>
         <h5><%= @staff.status %></h5>
       </div>
-      <div class="col-6 col-md-2">
+      <div class="col-6 col-md-3">
         <p class="text-secondary small mb-1">Department</p>
         <h5><%= @staff.department&.name || "—" %></h5>
       </div>
