@@ -1,10 +1,58 @@
- 
+<div id="<%= dom_id @student_guardian %>" class="border shadow-sm rounded-3 overflow-hidden mb-3">
+  <div class="p-4 d-flex align-items-center gap-3 text-white"
+       style="
+         background: linear-gradient(135deg, rgba(13, 60, 150, 0.9), rgba(70, 130, 180, 0.8));
+         backdrop-filter: blur(8px);
+         -webkit-backdrop-filter: blur(8px);
+         border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+       ">
+    <i class="bi bi-people-fill fs-1" style="text-shadow: 0 0 6px rgba(173, 216, 230, 0.8);"></i>
 
-<%= render @student_guardian %>
+    <div class="d-flex flex-column justify-content-center">
+      <h3 class="mb-0 fw-bold">Student Guardian Details</h3>
+    </div>
+  </div>
 
-<div>
-  <%= link_to "Edit this student guardian", edit_student_guardian_path(@student_guardian) %> |
-  <%= link_to "Back to student guardians", student_guardians_path %>
+  <div class="p-4 border-bottom">
+    <div class="row text-center g-3 justify-content-center">
+      <div class="col-12 col-md-4">
+        <p class="text-secondary small mb-1">Student</p>
+        <h5><%= @student_guardian.student.name %></h5>
+      </div>
 
-  <%= button_to "Destroy this student guardian", @student_guardian, method: :delete %>
+      <div class="col-12 col-md-4">
+        <p class="text-secondary small mb-1">Guardian</p>
+        <h5><%= @student_guardian.guardian.name %></h5>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <p class="text-secondary small mb-1">Relationship</p>
+        <h5><%= @student_guardian.relationship %></h5>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-between mt-3">
+  <div class="d-flex gap-2">
+    <%= link_to "#",
+      class: "btn btn-danger d-flex align-items-center gap-2",
+      data: { bs_toggle: "modal", bs_target: "#confirmDeleteModal", student_guardian_id: @student_guardian.id } do %>
+      <i class="bi bi-trash-fill"></i>
+      Destroy this student guardian
+    <% end %>
+
+    <%= link_to edit_student_guardian_path(@student_guardian), class: "btn btn-success d-flex align-items-center gap-2" do %>
+      <i class="bi bi-gear-fill"></i>
+      Edit this student guardian
+    <% end %>
+  </div>
+
+  <div>
+    <%= link_to student_guardians_path, class: "btn btn-secondary d-flex align-items-center gap-2" do %>
+      <i class="bi bi-box-arrow-left"></i>
+      Back to student guardians
+    <% end %>
+  </div>
 </div>
