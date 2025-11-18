@@ -1,3 +1,176 @@
 <% content_for :no_container, true %>
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<section class="events-section container py-5">
+  <h1 class="display-4 mb-4" style="font-family: 'Helvetica', Arial, sans-serif; font-weight: 700;">
+    Featured Events
+  </h1>
+
+  <div id="eventsCarousel" class="carousel slide position-relative" data-bs-ride="carousel" data-bs-interval="3000">
+    <div class="carousel-inner">
+
+      <!-- Carousel Item 1 -->
+      <div class="carousel-item active">
+        <div class="row g-4">
+
+          <!-- Event Card 1 -->
+          <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+              <div class="card-body">
+                <p class="text-muted small" style="font-family: 'Helvetica', Arial, sans-serif;">Seminar / Talk</p>
+                <h5 class="card-title fw-bold" style="font-family: 'Helvetica', Arial, sans-serif;">
+                  AI for Social Good: Innovating Solutions for Urban Challenges
+                </h5>
+                <p class="text-muted small mb-1" style="font-family: 'Helvetica', Arial, sans-serif;">November 20, 2025 | 3:00 - 5:00pm</p>
+                <p class="text-muted small" style="font-family: 'Helvetica', Arial, sans-serif;">Speaker: Dr. Lina Torres, AI Ethics Lab</p>
+                <p class="text-muted small" style="font-family: 'Helvetica', Arial, sans-serif;">Location: CIT Innovation Hall, Tech District, Manila</p>
+                <p class="mt-2" style="font-family: 'Helvetica', Arial, sans-serif;">
+                  Explore how AI can solve real-world urban problems while promoting ethical technology use.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Event Card 2 -->
+          <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+              <div class="card-body">
+                <p class="text-muted small" style="font-family: 'Helvetica', Arial, sans-serif;">Workshop</p>
+                <h5 class="card-title fw-bold" style="font-family: 'Helvetica', Arial, sans-serif;">
+                  Robotics Engineering Bootcamp: From Concept to Prototype
+                </h5>
+                <p class="text-muted small mb-1" style="font-family: 'Helvetica', Arial, sans-serif;">November 26, 2025 | 1:00 - 4:00pm</p>
+                <p class="text-muted small" style="font-family: 'Helvetica', Arial, sans-serif;">Instructor: Prof. Marco Villanueva</p>
+                <p class="text-muted small" style="font-family: 'Helvetica', Arial, sans-serif;">Location: Robotics Lab, CIT Campus</p>
+                <p class="mt-2" style="font-family: 'Helvetica', Arial, sans-serif;">
+                  Hands-on workshop on building functional robotic prototypes using AI and sensors.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Event Card 3 -->
+          <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+              <div class="card-body">
+                <p class="text-muted small" style="font-family: 'Helvetica', Arial, sans-serif;">Lecture</p>
+                <h5 class="card-title fw-bold" style="font-family: 'Helvetica', Arial, sans-serif;">
+                  Cybersecurity Trends 2025: Protecting the Next Generation of Tech
+                </h5>
+                <p class="text-muted small mb-1" style="font-family: 'Helvetica', Arial, sans-serif;">November 27, 2025 | 2:00 - 4:00pm</p>
+                <p class="text-muted small" style="font-family: 'Helvetica', Arial, sans-serif;">Speaker: Ms. Ruby Jane Bandola, Cybersecurity Analyst</p>
+                <p class="text-muted small" style="font-family: 'Helvetica', Arial, sans-serif;">Location: CIT Tech Hall, Manila</p>
+                <p class="mt-2" style="font-family: 'Helvetica', Arial, sans-serif;">
+                  Learn how to safeguard digital assets in an era of AI and IoT technologies.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Carousel Item 2 -->
+      <div class="carousel-item">
+        <div class="row g-4">
+
+          <!-- Event Card 4 -->
+          <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+              <div class="card-body">
+                <p class="text-muted small" style="font-family: 'Helvetica', Arial, sans-serif;">Hackathon</p>
+                <h5 class="card-title fw-bold" style="font-family: 'Helvetica', Arial, sans-serif;">
+                  CIT Innovation Hackathon 2025: AI & Robotics Challenge
+                </h5>
+                <p class="text-muted small mb-1" style="font-family: 'Helvetica', Arial, sans-serif;">December 2, 2025 | 9:00am - 6:00pm</p>
+                <p class="text-muted small" style="font-family: 'Helvetica', Arial, sans-serif;">Organizers: CIT Student Council</p>
+                <p class="text-muted small" style="font-family: 'Helvetica', Arial, sans-serif;">Location: CIT Innovation Hub, Tech District</p>
+                <p class="mt-2" style="font-family: 'Helvetica', Arial, sans-serif;">
+                  Compete in teams to create AI-powered solutions and robotic prototypes for real-world problems.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Event Card 5 -->
+          <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+              <div class="card-body">
+                <p class="text-muted small" style="font-family: 'Helvetica', Arial, sans-serif;">Seminar</p>
+                <h5 class="card-title fw-bold" style="font-family: 'Helvetica', Arial, sans-serif;">
+                  Mindfulness in Tech: Boosting Productivity & Innovation
+                </h5>
+                <p class="text-muted small mb-1" style="font-family: 'Helvetica', Arial, sans-serif;">December 5, 2025 | 10:00am - 12:00pm</p>
+                <p class="text-muted small" style="font-family: 'Helvetica', Arial, sans-serif;">Speaker: Dr. Katrina Villanueva</p>
+                <p class="text-muted small" style="font-family: 'Helvetica', Arial, sans-serif;">Location: CIT Lecture Hall 3</p>
+                <p class="mt-2" style="font-family: 'Helvetica', Arial, sans-serif;">
+                  Learn strategies for maintaining focus and creativity in a fast-paced tech environment.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Event Card 6 -->
+          <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+              <div class="card-body">
+                <p class="text-muted small" style="font-family: 'Helvetica', Arial, sans-serif;">Workshop</p>
+                <h5 class="card-title fw-bold" style="font-family: 'Helvetica', Arial, sans-serif;">
+                  Creative Coding for Beginners: Interactive AI Projects
+                </h5>
+                <p class="text-muted small mb-1" style="font-family: 'Helvetica', Arial, sans-serif;">December 10, 2025 | 1:00 - 4:00pm</p>
+                <p class="text-muted small" style="font-family: 'Helvetica', Arial, sans-serif;">Instructor: Prof. Marco Villanueva</p>
+                <p class="text-muted small" style="font-family: 'Helvetica', Arial, sans-serif;">Location: CIT Computer Lab 2</p>
+                <p class="mt-2" style="font-family: 'Helvetica', Arial, sans-serif;">
+                  Hands-on workshop introducing coding and AI projects for beginners at CIT.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Carousel Controls -->
+    <button class="carousel-control-prev custom-carousel-control" type="button" data-bs-target="#eventsCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next custom-carousel-control" type="button" data-bs-target="#eventsCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+
+  </div>
+</section>
+
+<style>
+.events-section {
+  border-top: 5px solid #dee2e6;
+  border-bottom: 5px solid #dee2e6;
+}
+
+.custom-carousel-control .carousel-control-prev-icon,
+.custom-carousel-control .carousel-control-next-icon {
+  filter: invert(60%) sepia(10%) saturate(0%) hue-rotate(0deg) brightness(80%) contrast(90%);
+  width: 40px;
+  height: 40px;
+}
+
+.custom-carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  z-index: 10;
+}
+
+.carousel-control-prev.custom-carousel-control {
+  left: -100px;
+}
+
+.carousel-control-next.custom-carousel-control {
+  right: -100px;
+}
+</style>
