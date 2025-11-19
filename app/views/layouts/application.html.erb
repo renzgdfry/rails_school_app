@@ -11,10 +11,17 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
   <style>
+
+    html, body {
+      height: 100%;
+    }
+
     body {
       margin: 0;
       padding-top: 56px;
       background-color: #f8f9fa;
+      display: flex;
+      flex-direction: column;
     }
 
     /* Top Navbar */
@@ -79,7 +86,7 @@
 
     #sidebar .school-section {
       text-align: center;
-      padding: 1rem 0 0.5rem 0;   
+      padding: 1rem 0 0.5rem 0;
       border-bottom: 2px solid rgba(255,255,255,0.4);
     }
 
@@ -96,110 +103,114 @@
       color: white;
     }
 
-    /* Make close button visible on gradient */
     #sidebar .btn-close {
       filter: brightness(0) invert(1);
     }
+
+    .footer-link {
+      position: relative;
+      text-decoration: none !important;
+      color: #052659;
+    }
+
+    .footer-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0%;
+      height: 2px;
+      background-color: black;
+      transition: width 0.25s ease-in-out;
+    }
+
+    .footer-link:hover::after {
+      width: 100%;
+    }
+
+    .footer-gradient {
+      background: linear-gradient(to right, #052659, #5483B3, #7DA0CA); 
+      opacity: 0.8;
+      padding: 1rem 0;       
+      text-align: center;
+      font-weight: bold;
+      color: white;
+      margin-top: auto;          
+    }
+
   </style>
 </head>
 
 <body>
   <!-- Top Navbar -->
   <nav class="top-navbar">
-    <!-- Hamburger -->
-    <button class="btn btn-outline-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
+    <button class="btn btn-outline-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
       <i class="bi bi-list" id="sidebarToggleIcon"></i>
     </button>
 
-    <!-- School Name -->
     <%= link_to root_path, class: "school-name text-white text-decoration-none" do %>
       Cognitech Institute of Technology
     <% end %>
 
-    <!-- Search Bar -->
     <form class="d-flex" role="search">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <input class="form-control me-2" type="search" placeholder="Search">
       <button class="btn btn-outline-light" type="submit">Search</button>
     </form>
   </nav>
 
-  <!-- Sidebar Offcanvas -->
-  <div class="offcanvas offcanvas-start text-bg-primary" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel">
+  <!-- Sidebar -->
+  <div class="offcanvas offcanvas-start text-bg-primary" id="sidebar">
     <div class="offcanvas-header">
-      <!-- Close button on left -->
-      <button type="button" class="btn-close btn-close-white me-2" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      <button type="button" class="btn-close btn-close-white me-2" data-bs-dismiss="offcanvas"></button>
     </div>
     <div class="offcanvas-body">
       <div class="school-section">
         <%= link_to root_path do %>
-          <%= image_tag "tech.png", alt: "School Logo", style: "cursor: pointer;" %>
+          <%= image_tag "tech.png", alt: "School Logo" %>
         <% end %>
         <span>Cognitech Institute of Technology</span>
       </div>
 
       <ul class="nav flex-column mt-3">
+        <li><%= link_to root_path, class: "nav-link #{'active' if controller_name == 'home'}" do %>
+          <i class="bi bi-house-fill"></i> <span>Home</span>
+        <% end %></li>
 
-        <li>
-          <%= link_to root_path, class: "nav-link #{'active' if controller_name == 'home'}" do %>
-          <i class="bi bi-house-fill"></i>
-          <span>Home</span>
-        <% end %>
-        </li>
+        <li><%= link_to students_path, class: "nav-link #{'active' if controller_name == 'students'}" do %>
+          <i class="bi bi-mortarboard-fill"></i> <span>Students</span>
+        <% end %></li>
 
-        <li>
-          <%= link_to students_path, class: "nav-link #{'active' if controller_name == 'students'}" do %>
-            <i class="bi bi-mortarboard-fill"></i>
-            <span>Students</span>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to subjects_path, class: "nav-link #{'active' if controller_name == 'subjects'}" do %>
-            <i class="bi bi-book-half"></i>
-            <span>Subjects</span>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to sections_path, class: "nav-link #{'active' if controller_name == 'sections'}" do %>
-            <i class="bi bi-diagram-3-fill"></i>
-            <span>Sections</span>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to classlists_path, class: "nav-link #{'active' if controller_name == 'classlists'}" do %>
-            <i class="bi bi-list-check"></i>
-            <span>Class List</span>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to teachers_path, class: "nav-link #{'active' if controller_name == 'teachers'}" do %>
-            <i class="bi bi-person-video3"></i>
-            <span>Teachers</span>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to staffs_path, class: "nav-link #{'active' if controller_name == 'staffs'}" do %>
-            <i class="bi bi-person-badge-fill"></i>
-            <span>Staffs</span>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to departments_path, class: "nav-link #{'active' if controller_name == 'departments'}" do %>
-            <i class="bi bi-bank2"></i>
-            <span>Departments</span>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to guardians_path, class: "nav-link #{'active' if controller_name == 'guardians'}" do %>
-            <i class="bi bi-person-heart"></i>
-            <span>Guardians</span>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to student_guardians_path, class: "nav-link #{'active' if controller_name == 'student_guardians'}" do %>
-            <i class="bi bi-people-fill"></i>
-            <span>Student-Guardians</span>
-          <% end %>
-        </li>
+        <li><%= link_to subjects_path, class: "nav-link #{'active' if controller_name == 'subjects'}" do %>
+          <i class="bi bi-book-half"></i> <span>Subjects</span>
+        <% end %></li>
+
+        <li><%= link_to sections_path, class: "nav-link #{'active' if controller_name == 'sections'}" do %>
+          <i class="bi bi-diagram-3-fill"></i> <span>Sections</span>
+        <% end %></li>
+
+        <li><%= link_to classlists_path, class: "nav-link #{'active' if controller_name == 'classlists'}" do %>
+          <i class="bi bi-list-check"></i> <span>Class List</span>
+        <% end %></li>
+
+        <li><%= link_to teachers_path, class: "nav-link #{'active' if controller_name == 'teachers'}" do %>
+          <i class="bi bi-person-video3"></i> <span>Teachers</span>
+        <% end %></li>
+
+        <li><%= link_to staffs_path, class: "nav-link #{'active' if controller_name == 'staffs'}" do %>
+          <i class="bi bi-person-badge-fill"></i> <span>Staffs</span>
+        <% end %></li>
+
+        <li><%= link_to departments_path, class: "nav-link #{'active' if controller_name == 'departments'}" do %>
+          <i class="bi bi-bank2"></i> <span>Departments</span>
+        <% end %></li>
+
+        <li><%= link_to guardians_path, class: "nav-link #{'active' if controller_name == 'guardians'}" do %>
+          <i class="bi bi-person-heart"></i> <span>Guardians</span>
+        <% end %></li>
+
+        <li><%= link_to student_guardians_path, class: "nav-link #{'active' if controller_name == 'student_guardians'}" do %>
+          <i class="bi bi-people-fill"></i> <span>Student-Guardians</span>
+        <% end %></li>
       </ul>
     </div>
   </div>
@@ -207,9 +218,9 @@
   <!-- Main Content -->
   <div class="main-content">
     <% flash.each do |key, message| %>
-      <div class="alert alert-<%= key == "notice" ? "success" : "danger" %> alert-dismissible fade show" role="alert">
+      <div class="alert alert-<%= key == "notice" ? "success" : "danger" %> alert-dismissible fade show">
         <%= message %>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
       </div>
     <% end %>
 
@@ -217,16 +228,14 @@
       <%= yield %>
     <% else %>
       <div class="bg-white p-4 rounded-4 shadow-sm">
-      <%= yield %>
-    </div>
+        <%= yield %>
+      </div>
     <% end %>
-    
   </div>
 
-  <!-- Bootstrap JS -->
+  <!-- JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Toggle Hamburger to X -->
   <script>
     const sidebar = document.getElementById('sidebar');
     const toggleIcon = document.getElementById('sidebarToggleIcon');
@@ -241,5 +250,84 @@
       toggleIcon.classList.add('bi-list');
     });
   </script>
+
+
+<footer class="pt-5 pb-4 mt-5" style="background-color: #f2f2f2;">
+  <div class="container">
+    <div class="row">
+
+      <!-- Left side: School logo + description -->
+      <div class="col-md-6 mb-4">
+        
+        <!-- LOGO HERE -->
+        <%= image_tag "tech.png", alt: "School Logo", class: "mb-3", style: "width: 80px; height: 80px; border-radius: 80%;" %>
+
+        <h5 class="fw-bold">Cognitech Institute of Technology</h5>
+        <p class="fst-italic small">Per Cognitionem Excellentia - Excellence Through Knowledge</p>
+        <p class="small">
+          A modern institution dedicated to excellence in computer science,
+          engineering, and artificial intelligence.
+        </p>
+
+        <div class="d-flex gap-3 mt-3">
+          <a href="#" class="text-light"><i class="bi bi-facebook fs-5"></i></a>
+          <a href="#" class="text-light"><i class="bi bi-instagram fs-5"></i></a>
+          <a href="#" class="text-light"><i class="bi bi-twitter-x fs-5"></i></a>
+        </div>
+      </div>
+
+      <!-- Right side: Links -->
+      <div class="col-md-2 mb-4">
+        <h6 class="fw-semibold" style="text-decoration: underline;">School Manager</h6>
+        <ul class="list-unstyled small">
+          <li><%= link_to "Home", root_path, class: "text-decoration-none footer-link" %></li>
+          <li><%= link_to "Students", students_path, class: "text-decoration-none footer-link" %></li>
+          <li><%= link_to "Subjects", subjects_path, class: "text-decoration-none footer-link" %></li>
+          <li><%= link_to "Sections", sections_path, class: "text-decoration-none footer-link" %></li>
+          <li><%= link_to "Classlists", classlists_path, class: "text-decoration-none footer-link" %></li>
+          <li><%= link_to "Teachers", teachers_path, class: "text-decoration-none footer-link" %></li>
+          <li><%= link_to "Staffs", staffs_path, class: "text-decoration-none footer-link" %></li>
+          <li><%= link_to "Departments", departments_path, class: "text-decoration-none footer-link" %></li>
+          <li><%= link_to "Guardians", guardians_path, class: "text-decoration-none footer-link" %></li>
+          <li><%= link_to "Student Guardian", student_guardians_path, class: "text-decoration-none footer-link" %></li>
+        </ul>
+      </div>
+
+      <div class="col-md-2  mb-4">
+        <h6 class="fw-semibold" style="text-decoration: underline;">Information for</h6>
+        <ul class="list-unstyled small">
+          <li><a href="#" class="text-decoration-none footer-link">Current Students</a></li>
+          <li><a href="#" class="text-decoration-none footer-link">Prospective Students</a></li>
+          <li><a href="#" class="text-decoration-none footer-link">International Students</a></li>
+          <li><a href="#" class="text-decoration-none footer-link">Faculty & Staffs</a></li>
+          <li><a href="#" class="text-decoration-none footer-link">Alumni</a></li>
+          <li><a href="#" class="text-decoration-none footer-link">Researcher</a></li>
+          <li><a href="#" class="text-decoration-none footer-link">Visiting Academics</a></li>
+          <li><a href="#" class="text-decoration-none footer-link">Parents</a></li>
+        </ul>
+      </div>
+
+      <div class="col-md-2 mb-4">
+        <h6 class="fw-semibold" style="text-decoration: underline;">Legal</h6>
+        <ul class="list-unstyled small">
+          <li><a href="#" class="text-decoration-none footer-link">Privacy Policy</a></li>
+          <li><a href="#" class="text-decoration-none footer-link">Terms of Service</a></li>
+        </ul>
+        <h6 class="fw-semibold" style="text-decoration: underline;">FAQs</h6>
+        <h6 class="fw-semibold" style="text-decoration: underline;">About Us</h6>
+        <h6 class="fw-semibold" style="text-decoration: underline;">Contact Us</h6>
+      </div>
+    </div>
+  </div>
+  
+  
+  <div class="container-fluid footer-gradient w-100">
+    © <%= Time.current.year %> Cognitech Institute of Technology — All Rights Reserved.
+  </div>
+
+
+  </footer>
+
+
 </body>
 </html>
