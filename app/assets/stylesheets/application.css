@@ -16,3 +16,62 @@
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 4px;
 }
+
+
+.hidden {
+  opacity: 0;
+  transition: all 0.9s ease-out;
+}
+
+/* LEFT → CENTER */
+.fade-left {
+  transform: translateX(-60px);
+}
+.fade-left.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* RIGHT → CENTER */
+.fade-right {
+  transform: translateX(60px);
+}
+.fade-right.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ABOUT US – solid blue */
+.btn-about {
+  background-color: #2563eb; /* Bright tech blue */
+  color: white;
+  border-radius: 50px;
+  padding: 10px 25px;
+  font-weight: 600;
+  border: none;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btn-about:hover {
+  background-color: #1d4ed8; /* darker blue on hover */
+  color: white;
+  transition: all 0.3 ease;
+}
+
+/* JOIN NOW – outline blue */
+.btn-join {
+  background-color: white;
+  border: 2px solid #2563eb;
+  color: #2563eb;
+  border-radius: 50px;
+  padding: 10px 25px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btn-join:hover {
+  background-color: #2563eb;
+  color: white;
+}
