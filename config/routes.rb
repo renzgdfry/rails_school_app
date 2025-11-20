@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :subjects
   resources :teachers
   resources :students
+  get "about", to: "home#about_us"
   resources :departments
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
