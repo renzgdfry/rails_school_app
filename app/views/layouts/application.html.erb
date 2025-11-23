@@ -5,9 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
-  <%= javascript_importmap_tags %>
-  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-  
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -20,12 +17,12 @@
       background-color: #f8f9fa;
     }
 
-    /* Top Navbar */
+    
     .top-navbar {
       background-color: #004a99;
       color: white;
       font-weight: 600;
-      font-size: 1.25rem;
+      font-size: 2rem;
       height: 56px;
       display: flex;
       align-items: center;
@@ -38,10 +35,24 @@
       z-index: 1030;
     }
 
+    .top-navbar .form-control::placeholder {
+      color: #6a6a6a;
+    }
+
+    .top-navbar .btn-outline-light {
+      border-color: white;
+    }
+
     .top-navbar .school-name {
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
+    }
+
+    .top-navbar.form-control {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: black;
     }
 
     .main-content {
@@ -49,7 +60,91 @@
       margin-top: 56px;
     }
 
-    /* Offcanvas Sidebar */
+    
+    .home-navbar {
+      height: 250px;
+      background: linear-gradient(
+        to bottom,
+        #004e99 10%,
+        rgba(0, 78, 153, 0.5) 70%,
+        rgba(0, 78, 153, 0) 100%
+      );
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.5s ease;
+    }
+
+
+    .home-logo {
+      width: 120px;
+      height: 120px;
+      transition: all 0.5s ease, opacity 0.3s ease;
+    }
+
+    .home-school-name {
+      font-size: 2rem;
+      margin-top: 0.5rem;
+      transition: all 0.5s ease;
+    }
+
+    
+    .home-navbar.collapsed {
+      height: 56px;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 0 1rem;
+      background-color: #004a99;
+    }
+
+    .home-navbar.collapsed .home-logo {
+      opacity: 0 !important;
+      pointer-events: none;
+      width: 0 !important;
+      height: 0 !important;   
+      margin: 0 !important;
+    }
+
+    .home-navbar.collapsed .home-school-name {
+      opacity: 1 !important;
+      font-size: 2rem;
+      margin-top: 0.5rem;
+      display: block !important;
+    }
+
+    
+    .transparent-topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 56px;
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1rem;
+      background: rgba(0, 0, 0, 0); 
+    }
+
+    .transparent-topbar .form-control {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: white;
+    }
+
+    .transparent-topbar .form-control::placeholder {
+      color: #eee;
+    }
+
+    .transparent-topbar .btn-outline-light {
+      border-color: white;
+    }
+
+
+    
     #sidebar {
       width: 280px;
       background: linear-gradient(to bottom, #052659, #5483B3, #7DA0CA);
@@ -125,143 +220,280 @@
     }
 
     .footer-gradient {
-      background: linear-gradient(to right, #052659, #5483B3, #7DA0CA); 
+      background: linear-gradient(to right, #052659, #5483B3, #7DA0CA);
       opacity: 0.8;
-      padding: 1rem 0;       
+      padding: 1rem 0;
       text-align: center;
       font-weight: bold;
-      color: white;     
+      color: white;
     }
+
+.footer-image {
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+    url('<%= asset_path("footer.png") %>') no-repeat center center; 
+  background-size: 100% auto;     
+  background-position: center; 
+  background-attachment: no-repeat; 
+  color: white;              
+  position: relative;
+  z-index: 1;
+}
+
+.footer-image a {
+  color: #ffffff;             
+  text-decoration: none !important;
+  position: relative;
+}
+
+.footer-image a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0%;
+  height: 2px;
+  background-color: white;     /* underline color
+  transition: width 0.25s ease-in-out;
+}
+
+.footer-image a:hover::after {
+  width: 100%;
+}
 
   </style>
 </head>
 
 <body>
-  <!-- Top Navbar -->
-  <nav class="top-navbar">
-    <button class="btn btn-outline-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
-      <i class="bi bi-list" id="sidebarToggleIcon"></i>
-    </button>
 
-    <%= link_to root_path, class: "school-name text-white text-decoration-none" do %>
-      Cognitech Institute of Technology
-    <% end %>
+<% if current_page?(root_path) %>
+  <nav class="top-navbar home-navbar" id="homeNavbar">
+    <div class="container d-flex flex-column align-items-center justify-content-center">
 
-    <form class="d-flex" role="search">
-      <input class="form-control me-2" type="search" placeholder="Search">
-      <button class="btn btn-outline-light" type="submit">Search</button>
-    </form>
+      <%= image_tag "tech.png", alt: "School Logo", class: "home-logo mb-2" %>
+
+      <span class="home-school-name text-white fw-bold">
+        Cognitech Institute of Technology
+      </span>
+
+    </div>
   </nav>
 
-  <!-- Sidebar -->
-  <div class="offcanvas offcanvas-start text-bg-primary" id="sidebar">
-    <div class="offcanvas-header">
-      <button type="button" class="btn-close btn-close-white me-2" data-bs-dismiss="offcanvas"></button>
+<nav class="transparent-topbar">
+  <button class="btn btn-outline-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
+    <i class="bi bi-list" id="sidebarToggleIconDefault"></i>
+  </button>
+
+  <form class="d-flex" role="search">
+    <input class="form-control me-2" type="search" placeholder="Search">
+    <button class="btn btn-outline-light" type="submit">
+      <i class="bi bi-search"></i>
+    </button>
+  </form>
+</nav>
+
+<% end %>
+
+
+
+
+
+<nav class="top-navbar" id="defaultNavbar" style="<%= current_page?(root_path) ? 'display:none;' : '' %>">
+  <button class="btn btn-outline-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
+    <i class="bi bi-list" id="sidebarToggleIconDefault"></i>
+  </button>
+
+  <%= link_to root_path, class: "school-name text-white text-decoration-none" do %>
+    Cognitech Institute of Technology
+  <% end %>
+
+  <form class="d-flex" role="search">
+    <input class="form-control me-2" type="search" placeholder="Search">
+    <button class="btn btn-outline-light" type="submit">
+      <i class="bi bi-search"></i>
+    </button>
+  </form>
+</nav>
+
+
+
+
+<div class="offcanvas offcanvas-start text-bg-primary" id="sidebar">
+  <div class="offcanvas-header">
+    <button type="button" class="btn-close btn-close-white me-2" data-bs-dismiss="offcanvas"></button>
+  </div>
+
+  <div class="offcanvas-body d-flex flex-column">
+
+    <div class="school-section mb-3">
+      <%= link_to root_path do %>
+        <%= image_tag "tech.png", alt: "School Logo" %>
+      <% end %>
+      <span>Cognitech Institute of Technology</span>
     </div>
-    <div class="offcanvas-body">
-      <div class="school-section">
-        <%= link_to root_path do %>
-          <%= image_tag "tech.png", alt: "School Logo" %>
+
+    
+    <ul class="nav flex-column">
+
+      <li><%= link_to root_path, class: "nav-link #{'active' if controller_name == 'index'}" do %>
+        <i class="bi bi-house-fill"></i><span>Home</span>
+      <% end %></li>
+
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="collapse" href="#schoolManagerMenu">
+          <i class="bi bi-grid-fill"></i>
+          <span>School Manager</span>
+        </a>
+
+        <ul class="collapse ms-3" id="schoolManagerMenu">
+
+          <li><%= link_to students_path, class: "nav-link #{'active' if controller_name == 'students'}" do %>
+            <i class="bi bi-mortarboard-fill"></i><span>Students</span>
+          <% end %></li>
+
+          <li><%= link_to subjects_path, class: "nav-link #{'active' if controller_name == 'subjects'}" do %>
+            <i class="bi bi-book-half"></i><span>Subjects</span>
+          <% end %></li>
+
+          <li><%= link_to sections_path, class: "nav-link #{'active' if controller_name == 'sections'}" do %>
+            <i class="bi bi-diagram-3-fill"></i><span>Sections</span>
+          <% end %></li>
+
+          <li><%= link_to classlists_path, class: "nav-link #{'active' if controller_name == 'classlists'}" do %>
+            <i class="bi bi-list-check"></i><span>Class List</span>
+          <% end %></li>
+
+          <li><%= link_to teachers_path, class: "nav-link #{'active' if controller_name == 'teachers'}" do %>
+            <i class="bi bi-person-video3"></i><span>Teachers</span>
+          <% end %></li>
+
+          <li><%= link_to staffs_path, class: "nav-link #{'active' if controller_name == 'staffs'}" do %>
+            <i class="bi bi-person-badge-fill"></i><span>Staffs</span>
+          <% end %></li>
+
+          <li><%= link_to departments_path, class: "nav-link #{'active' if controller_name == 'departments'}" do %>
+            <i class="bi bi-bank2"></i><span>Departments</span>
+          <% end %></li>
+
+          <li><%= link_to guardians_path, class: "nav-link #{'active' if controller_name == 'guardians'}" do %>
+            <i class="bi bi-person-heart"></i><span>Guardians</span>
+          <% end %></li>
+
+          <li><%= link_to student_guardians_path, class: "nav-link #{'active' if controller_name == 'student_guardians'}" do %>
+            <i class="bi bi-people-fill"></i><span>Student-Guardians</span>
+          <% end %></li>
+
+        </ul>
+      </li>
+
+      <li>
+        <%= link_to root_path(anchor: 'overview'), class: "nav-link #{'active' if controller_name == 'about_school'}" do %>
+          <i class="bi bi-building-fill"></i><span>About the School</span>
         <% end %>
-        <span>Cognitech Institute of Technology</span>
-      </div>
+      </li>
 
-      <ul class="nav flex-column mt-3">
-        <li><%= link_to root_path, class: "nav-link #{'active' if controller_name == 'home'}" do %>
-          <i class="bi bi-house-fill"></i> <span>Home</span>
-        <% end %></li>
+      <li><%= link_to root_path, class: "nav-link #{'active' if controller_name == 'admissions'}" do %>
+        <i class="bi bi-file-earmark-check-fill"></i><span>Admission</span>
+      <% end %></li>
 
-        <li><%= link_to students_path, class: "nav-link #{'active' if controller_name == 'students'}" do %>
-          <i class="bi bi-mortarboard-fill"></i> <span>Students</span>
-        <% end %></li>
+      <li><%= link_to root_path, class: "nav-link #{'active' if controller_name == 'academics'}" do %>
+        <i class="bi bi-journal-bookmark-fill"></i><span>Academics</span>
+      <% end %></li>
 
-        <li><%= link_to subjects_path, class: "nav-link #{'active' if controller_name == 'subjects'}" do %>
-          <i class="bi bi-book-half"></i> <span>Subjects</span>
-        <% end %></li>
+      <li><%= link_to root_path, class: "nav-link #{'active' if controller_name == 'stats'}" do %>
+        <i class="bi bi-bar-chart-fill"></i><span>Stats</span>
+      <% end %></li>
 
-        <li><%= link_to sections_path, class: "nav-link #{'active' if controller_name == 'sections'}" do %>
-          <i class="bi bi-diagram-3-fill"></i> <span>Sections</span>
-        <% end %></li>
+    </ul>
 
-        <li><%= link_to classlists_path, class: "nav-link #{'active' if controller_name == 'classlists'}" do %>
-          <i class="bi bi-list-check"></i> <span>Class List</span>
-        <% end %></li>
-
-        <li><%= link_to teachers_path, class: "nav-link #{'active' if controller_name == 'teachers'}" do %>
-          <i class="bi bi-person-video3"></i> <span>Teachers</span>
-        <% end %></li>
-
-        <li><%= link_to staffs_path, class: "nav-link #{'active' if controller_name == 'staffs'}" do %>
-          <i class="bi bi-person-badge-fill"></i> <span>Staffs</span>
-        <% end %></li>
-
-        <li><%= link_to departments_path, class: "nav-link #{'active' if controller_name == 'departments'}" do %>
-          <i class="bi bi-bank2"></i> <span>Departments</span>
-        <% end %></li>
-
-        <li><%= link_to guardians_path, class: "nav-link #{'active' if controller_name == 'guardians'}" do %>
-          <i class="bi bi-person-heart"></i> <span>Guardians</span>
-        <% end %></li>
-
-        <li><%= link_to student_guardians_path, class: "nav-link #{'active' if controller_name == 'student_guardians'}" do %>
-          <i class="bi bi-people-fill"></i> <span>Student-Guardians</span>
-        <% end %></li>
-      </ul>
+    <div class="mt-auto pt-4">
+      <%= link_to about_path, class: "nav-link small text-white-50 #{'active' if controller_name == 'about_us'}" do %>
+        <i class="bi bi-info-circle-fill"></i>
+        <span>About Us</span>
+      <% end %>
+    </div>
     </div>
   </div>
+</div>
 
-  <!-- Main Content -->
-  <div class="main-content">
-    <% flash.each do |key, message| %>
-      <div class="alert alert-<%= key == "notice" ? "success" : "danger" %> alert-dismissible fade show">
-        <%= message %>
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-      </div>
-    <% end %>
 
-    <% if content_for?(:no_container) %>
+
+<div class="main-content">
+  <% flash.each do |key, message| %>
+    <div class="alert alert-<%= key == "notice" ? "success" : "danger" %> alert-dismissible fade show">
+      <%= message %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+  <% end %>
+
+  <% if content_for?(:no_container) %>
+    <%= yield %>
+  <% else %>
+    <div class="bg-white p-4 rounded-4 shadow-sm">
       <%= yield %>
-    <% else %>
-      <div class="bg-white p-4 rounded-4 shadow-sm">
-        <%= yield %>
-      </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
+</div>
 
-  <!-- JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-  <script>
-    const sidebar = document.getElementById('sidebar');
-    const toggleIcon = document.getElementById('sidebarToggleIcon');
+<script>
+  const sidebar = document.getElementById('sidebar');
+  const toggleIcon = document.getElementById('sidebarToggleIcon');
 
-    sidebar.addEventListener('show.bs.offcanvas', () => {
-      toggleIcon.classList.remove('bi-list');
-      toggleIcon.classList.add('bi-x');
-    });
+  sidebar.addEventListener('show.bs.offcanvas', () => {
+    toggleIcon.classList.remove('bi-list');
+    toggleIcon.classList.add('bi-x');
+  });
 
-    sidebar.addEventListener('hide.bs.offcanvas', () => {
-      toggleIcon.classList.remove('bi-x');
-      toggleIcon.classList.add('bi-list');
-    });
-  </script>
+  sidebar.addEventListener('hide.bs.offcanvas', () => {
+    toggleIcon.classList.remove('bi-x');
+    toggleIcon.classList.add('bi-list');
+  });
 
 
-<footer class="pt-5 pb-4 mt-5" style="background-color: #f2f2f2;">
+  const sidebartrans = document.getElementById('sidebar');
+  const toggleIconTrans = document.getElementById('sidebarToggleIconDefault');
+
+  sidebartrans.addEventListener('show.bs.offcanvas', () => {
+    toggleIconTrans.classList.remove('bi-list');
+    toggleIconTrans.classList.add('bi-x');
+  });
+
+  sidebartrans.addEventListener('hide.bs.offcanvas', () => {
+    toggleIconTrans.classList.remove('bi-x');
+    toggleIconTrans.classList.add('bi-list');
+  });
+
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const homeNavbar = document.getElementById("homeNavbar");
+    if (homeNavbar) {
+      const controls = homeNavbar.querySelector(".home-controls");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 150) {
+          homeNavbar.classList.add("collapsed");
+        } else {
+          homeNavbar.classList.remove("collapsed");
+        }
+      });
+    }
+  });
+</script>
+
+<footer class="footer-image pt-5 pb-4 mt-5">
   <div class="container">
     <div class="row">
 
-      <!-- Left side: School logo + description -->
+      <!-- Left -->
       <div class="col-md-6 mb-4">
-        
-        <!-- LOGO HERE -->
         <%= image_tag "tech.png", alt: "School Logo", class: "mb-3", style: "width: 80px; height: 80px; border-radius: 80%;" %>
 
         <h5 class="fw-bold">Cognitech Institute of Technology</h5>
         <p class="fst-italic small">Per Cognitionem Excellentia - Excellence Through Knowledge</p>
         <p class="small">
-          A modern institution dedicated to excellence in computer science,
-          engineering, and artificial intelligence.
+          A modern institution dedicated to excellence in computer science, engineering, and artificial intelligence.
         </p>
 
         <div class="d-flex gap-3 mt-3">
@@ -271,7 +503,7 @@
         </div>
       </div>
 
-      <!-- Right side: Links -->
+      <!-- Middle -->
       <div class="col-md-2 mb-4">
         <h6 class="fw-semibold" style="text-decoration: underline;">School Manager</h6>
         <ul class="list-unstyled small">
@@ -288,7 +520,8 @@
         </ul>
       </div>
 
-      <div class="col-md-2  mb-4">
+      <!-- Right -->
+      <div class="col-md-2 mb-4">
         <h6 class="fw-semibold" style="text-decoration: underline;">Information for</h6>
         <ul class="list-unstyled small">
           <li><a href="#" class="text-decoration-none footer-link">Current Students</a></li>
@@ -308,23 +541,21 @@
           <li><a href="#" class="text-decoration-none footer-link">Privacy Policy</a></li>
           <li><a href="#" class="text-decoration-none footer-link">Terms of Service</a></li>
         </ul>
-        <h6 class="fw-semibold" style="text-decoration: underline;">FAQs</h6>
+
         <h6 class="fw-semibold" style="text-decoration: underline;">
-          <%= link_to "About Us", about_path, class: "text-decoration-none text-dark" %>
+          <%= link_to "About Us", about_path, class: "text-decoration-none" %>
         </h6>
+
         <h6 class="fw-semibold" style="text-decoration: underline;">Contact Us</h6>
       </div>
+
     </div>
   </div>
-  
-  
+
   <div class="container-fluid footer-gradient w-100">
     © <%= Time.current.year %> Cognitech Institute of Technology — All Rights Reserved.
   </div>
-
-
-  </footer>
-
+</footer>
 
 </body>
 </html>
