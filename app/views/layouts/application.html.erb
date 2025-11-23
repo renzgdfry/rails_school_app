@@ -261,7 +261,7 @@
   width: 100%;
 }
 
-  </style>
+</style>
 </head>
 
 <body>
@@ -400,7 +400,7 @@
         <i class="bi bi-journal-bookmark-fill"></i><span>Academics</span>
       <% end %></li>
 
-      <li><%= link_to root_path, class: "nav-link #{'active' if controller_name == 'stats'}" do %>
+      <li><%= link_to root_path(anchor: 'stats'), class: "nav-link #{'active' if controller_name == 'stats'}" do %>
         <i class="bi bi-bar-chart-fill"></i><span>Stats</span>
       <% end %></li>
 
