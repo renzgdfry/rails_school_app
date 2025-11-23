@@ -106,6 +106,8 @@ body {
 }
 </style>
 
+
+
 <!--------------------------------------------------------------------------------------------------------------->
 
 <section id="overview" class="py-5 fade-in-section">
@@ -156,6 +158,241 @@ body {
 </section>
 
 <!--------------------------------------------------------------------------------------------------------------->
+
+
+<!--------------------------------------------------------------------------------------------------------------->
+
+<style>
+/* Stats Section Wrapper */
+.stats-section-wrapper {
+    width: 100%;
+    background: linear-gradient(to bottom, #052659, #004e99, #3A76C0);
+    padding: 60px 0;
+}
+
+/* Stats Section Container */
+.stats-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Section Title */
+.stats-section .section-title {
+    font-family: Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #ffffff;
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 30px;
+}
+
+/* Tabs */
+.stats-section .tabs {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.stats-section .tab {
+    padding: 12px 30px;
+    background: rgba(4, 78, 153, 0.2);
+    border-radius: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+    backdrop-filter: blur(10px);
+    transition: 0.3s;
+    border: 1px solid rgba(4, 78, 153, 0.3);
+    color: #ffffff;
+}
+
+.stats-section .tab.active {
+    background: rgba(4, 78, 153, 0.6);
+    color: #ffffff;
+}
+
+/* Glass Box */
+.stats-section .glass-box {
+    padding: 50px;
+    border-radius: 24px;
+    background: rgba(4, 78, 153, 0.25);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(84, 131, 179, 0.4);
+    margin: 0 auto;
+}
+
+/* Stats Grid */
+.stats-section .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    text-align: center;
+}
+
+.stats-section .stat-value {
+    font-size: 48px;
+    font-weight: 800;
+    color: white; 
+    margin: 10px 0;
+}
+
+.stats-section .stat-desc {
+    color: #fefefe; 
+    font-size: 17px;
+    line-height: 1.4;
+}
+
+/* Responsive */
+@media(max-width: 900px){
+    .stats-section .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    .stats-section .tab {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+    .stats-section .glass-box {
+        padding: 30px;
+    }
+}
+</style>
+
+<section class="stats-section-wrapper">
+    <div class="stats-section">
+        <!-- Section Title -->
+        <h2 class="section-title">Stats That Set Us Apart</h2>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('academics', event)">Academics</div>
+            <div class="tab" onclick="switchTab('innovation', event)">Innovation & Research</div>
+            <div class="tab" onclick="switchTab('global', event)">Global Recognition</div>
+        </div>
+
+        <!-- Glass Box -->
+        <div class="glass-box">
+            <!-- Academics -->
+            <div id="academics" class="tab-content">
+                <div class="stats-grid">
+                    <div>
+                        <div class="stat-value"><span class="count" data-target="98"></span>%</div>
+                        <div class="stat-desc">98% of CIT graduates secure employment or pursue further studies within 6 months.</div>
+                    </div>
+                    <div>
+                        <div class="stat-value"><span class="count" data-target="12"></span>:1</div>
+                        <div class="stat-desc">Student-to-faculty ratio, giving students strong academic support.</div>
+                    </div>
+                    <div>
+                        <div class="stat-value"><span class="count" data-target="150"></span>+</div>
+                        <div class="stat-desc">Over 150 specialized tech courses, including AI, cybersecurity, robotics, and more.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Innovation -->
+            <div id="innovation" class="tab-content" style="display:none;">
+                <div class="stats-grid">
+                    <div>
+                        <div class="stat-value"><span class="count" data-target="20"></span>+</div>
+                        <div class="stat-desc">State-of-the-art AI, engineering, robotics, and digital sciences laboratories.</div>
+                    </div>
+                    <div>
+                        <div class="stat-value"><span class="count" data-target="50"></span>+</div>
+                        <div class="stat-desc">Annual student-led innovation projects with industry partners.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Global -->
+            <div id="global" class="tab-content" style="display:none;">
+                <div class="stats-grid">
+                    <div>
+                        <div class="stat-value"><span class="count" data-target="30"></span>+</div>
+                        <div class="stat-desc">More than 30 partners and collaborations with global tech companies.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  <script>
+    function switchTab(tabId, event){
+        const section = event.target.closest('.stats-section');
+
+        // Switch active tab
+        section.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+        event.target.classList.add("active");
+
+        // Show only active tab content
+        section.querySelectorAll(".tab-content").forEach(c => c.style.display = "none");
+        const activeContent = section.querySelector("#" + tabId);
+        activeContent.style.display = "block";
+
+        // Start counters for the newly active tab
+        startCounters(activeContent);
+    }
+
+    // Counter animation
+    function startCounters(container){
+        const counters = container.querySelectorAll(".count");
+        counters.forEach(counter => {
+            const target = Number(counter.dataset.target);
+            let current = 0;
+            const step = target / 60;
+
+            function update(){
+                current += step;
+                if(current < target){
+                    counter.textContent = Math.ceil(current);
+                    requestAnimationFrame(update);
+                } else {
+                    counter.textContent = target;
+                }
+            }
+
+            counter.textContent = "0";
+            update();
+        });
+    }
+
+    // Check if element is in viewport
+    function isElementInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        return (
+            rect.top < (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.bottom > 0
+        );
+    }
+
+    // Scroll listener to restart counters when section scrolls into view
+    document.addEventListener("DOMContentLoaded", () => {
+        const section = document.querySelector('.stats-section');
+        
+        // Start counters immediately for first tab
+        const firstTab = section.querySelector(".tab.active");
+        if(firstTab){
+            const tabId = firstTab.getAttribute("onclick").match(/'(.+?)'/)[1];
+            const activeContent = section.querySelector("#" + tabId);
+            startCounters(activeContent);
+        }
+
+        // Re-run counters when section is scrolled into view
+        window.addEventListener("scroll", () => {
+            if(isElementInViewport(section)){
+                const activeTab = section.querySelector(".tab.active");
+                const tabId = activeTab.getAttribute("onclick").match(/'(.+?)'/)[1];
+                const activeContent = section.querySelector("#" + tabId);
+                startCounters(activeContent);
+            }
+        });
+    });
+  </script>
+</section>
+
 
 <section class="events-section py-5">
   <div class="container">
