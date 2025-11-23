@@ -1,0 +1,19 @@
+# Ignore Rails log files
+/log/*
+
+# Ignore Rails temp files
+/tmp/*
+!/tmp/.keep  # keep folder if needed
+
+# Ignore Bootsnap cache
+tmp/cache/
+
+# Ignore pid files
+tmp/pids/
+
+# Ignore system files
+.DS_Store
+
+# Ignore other common unnecessary files
+*.swp
+*.bak
