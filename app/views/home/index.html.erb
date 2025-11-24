@@ -261,7 +261,7 @@ body {
 }
 </style>
 
-<section class="stats-section-wrapper">
+<section id="stats" class="stats-section-wrapper">
     <div class="stats-section">
         <!-- Section Title -->
         <h2 class="section-title">Stats That Set Us Apart</h2>
@@ -633,3 +633,284 @@ filter: invert(50%) sepia(10%) saturate(0%) brightness(70%);
 }
 
 </style>
+
+
+
+
+
+
+<style>
+  /* CARD BASE */
+  .news-card {
+    position: relative;
+    height: 260px;
+    border-radius: 12px;
+    overflow: hidden;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  /* HOVER LIFT */
+  .news-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+  }
+
+  /* IMAGE */
+  .news-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(55%);
+  }
+
+  /* OVERLAY */
+  .news-overlay {
+    position: absolute;
+    bottom: 0;
+    padding: 20px;
+    width: 100%;
+  }
+
+
+  /* PAGINATION ICONS */
+  .pagination-arrows i {
+    font-size: 2.5rem;      
+    color: #004a99;
+  ;         
+    cursor: pointer;        
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+
+  .pagination-arrows i:hover {
+    transform: scale(1.2);  
+    color: #ADD8E6;         
+
+    
+    /* Hide all cards by default */
+    .news-card-wrapper {
+      display: none;
+    }
+
+    /* Show only active cards */
+    .news-card-wrapper.active {
+      display: block;
+    }
+</style>
+
+<section class="events-section py-5">
+<div class="container py-5">
+  <h1 class="display-4 text-center fw-bold mb-5">Latest News</h1>
+
+  <div class="row g-4" id="newsContainer">
+    <!-- CARD 1 -->
+    <div class="col-md-4 news-card-wrapper active">
+      <div class="news-card">
+        <img src="https://hessian.ai/wp-content/uploads/2023/10/Design-ohne-Titel-1-1024x576.jpg">
+        <div class="news-overlay">
+          <small>Innovation</small>
+          <h3 class="fw-bold">CIT Launches AI Campus Assistant</h3>
+          <small>November 18, 2025</small>
+          <p>CIT unveiled CITizen, an AI-powered assistant helping students navigate campus services and manage schedules effortlessly.</p>
+          <a class="fw-bold" href="#" style="color: gold;">Read More</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="col-md-4 news-card-wrapper active">
+      <div class="news-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWqsFB4kYJHxEZHymvjg_P2rvTnSO9Q7f5lg&s">
+        <div class="news-overlay">
+          <small>Research</small>
+          <h3 class="fw-bold">Emotion-Aware AI Research Published</h3>
+          <small>July 22, 2025</small>
+          <p>PhD candidates published groundbreaking research on human-centered AI systems in the Journal of Artificial Intelligence Research.</p>
+          <a class="fw-bold" href="#" style="color: gold;">Read More</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="col-md-4 news-card-wrapper active">
+      <div class="news-card">
+        <img src="https://www.innovationweek.ai/inno/homepage/wide-1.jpeg">
+        <div class="news-overlay">
+          <small>Campus Life</small>
+          <h3 class="fw-bold">First Annual Innovation Week</h3>
+          <small>August 10, 2025</small>
+          <p>Over 1,000 participants explored emerging technologies through hackathons, guest lectures, and student-led tech exhibitions.</p>
+          <a class="fw-bold" href="#" style="color: gold;">Read More</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 4 -->
+    <div class="col-md-4 news-card-wrapper">
+      <div class="news-card">
+        <img src="https://media.licdn.com/dms/image/v2/D4D12AQFmnw9buxVdvA/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1721179186310?e=2147483647&v=beta&t=3_DbUl9nYcXfRnGSX8pGF5be2aw3iG2IjMN9R03xJ84">
+        <div class="news-overlay">
+          <small>Achievements</small>
+          <h3 class="fw-bold">Robotics Team Wins National Challenge</h3>
+          <small>October 30, 2025</small>
+          <p>CIT’s Robotics Engineering team won first place at the Philippine National Robotics Challenge with their autonomous environmental drone.</p>
+          <a class="fw-bold" href="#" style="color: gold;">Read More</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 5 -->
+    <div class="col-md-4 news-card-wrapper">
+      <div class="news-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwt1Kbb0Q-cvgSI3JZTlg2HC3DsZeRQwWMSQ&s">
+        <div class="news-overlay">
+          <small>Partnerships</small>
+          <h3 class="fw-bold">Global Cybersecurity Collaboration</h3>
+          <small>September 15, 2025</small>
+          <p>CIT partners with TechNova Global to develop next-gen AI-driven cybersecurity protocols.</p>
+          <a class="fw-bold" href="#" style="color: gold;">Read More</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 6 -->
+    <div class="col-md-4 news-card-wrapper">
+      <div class="news-card">
+        <img src="https://protomech.in/wp-content/uploads/2024/12/ai-lab-setup-schools-colleges.jpg.jpeg">
+        <div class="news-overlay">
+          <small>Campus Expansion</small>
+          <h3 class="fw-bold">Future Labs Wing Opens</h3>
+          <small>June 5, 2025</small>
+          <p>The new high-tech building dedicated to advanced robotics, AI simulations, and collaborative research spaces is now operational.</p>
+          <a class="fw-bold" href="#" style="color: gold;">Read More</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 7 -->
+    <div class="col-md-4 news-card-wrapper">
+      <div class="news-card">
+        <img src="https://s41721.pcdn.co/wp-content/uploads/2024/03/Compressed_-Updated_Firefly-A-photorealistic-image-of-five-diverse-scholars-holding-a-transparent-glass-globe-together.-.jpg">
+        <div class="news-overlay">
+          <small>Programs</small>
+          <h3 class="fw-bold">Launch of Global Scholars Program</h3>
+          <small>May 1, 2025</small>
+          <p>Students can now participate in international research projects and internships with leading tech firms.</p>
+          <a class="fw-bold" href="#" style="color: gold;">Read More</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 8 -->
+    <div class="col-md-4 news-card-wrapper">
+      <div class="news-card">
+        <img src="https://cloudfront-us-east-1.images.arcpublishing.com/crain/LG7KCWZ6ZQGJGOFRAF5357GUVY.png">
+        <div class="news-overlay">
+          <small>Awards</small>
+          <h3 class="fw-bold">AI Innovation Award for Undergraduate Team</h3>
+          <small>April 18, 2025</small>
+          <p>CIT undergraduate team received the national AI Innovation Award for developing an intelligent traffic management system.</p>
+          <a class="fw-bold" href="#" style="color: gold;">Read More</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 9 -->
+    <div class="col-md-4 news-card-wrapper">
+      <div class="news-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIdMXBJlMGcHgrX5Zmxf41pKMhT9kusCjbfQ&s">
+        <div class="news-overlay">
+          <small>Events</small>
+          <h3 class="fw-bold">Tech & Sustainability Forum</h3>
+          <small>March 12, 2025</small>
+          <p>CIT hosted its annual forum focusing on sustainable technology, renewable energy, and smart city solutions.</p>
+          <a class="fw-bold" href="#" style="color: gold;">Read More</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 10 -->
+    <div class="col-md-4 news-card-wrapper">
+      <div class="news-card">
+        <img src="https://img.freepik.com/free-vector/hackathon-doodle-hand-drawing-team-programmers-web-developers-managers-graphic-designers-deve_88138-1348.jpg?semt=ais_hybrid&w=740&q=80">
+        <div class="news-overlay">
+          <small>Community</small>
+          <h3 class="fw-bold">CIT Hackathon for Social Good</h3>
+          <small>February 20, 2025</small>
+          <p>Students developed AI solutions addressing social challenges, from education access to healthcare support.</p>
+          <a class="fw-bold" href="#" style="color: gold;">Read More</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 11 -->
+    <div class="col-md-4 news-card-wrapper">
+      <div class="news-card">
+        <img src="https://www.shutterstock.com/image-photo/blurred-background-capturing-vibrant-atmosphere-600nw-2626675947.jpg">
+        <div class="news-overlay">
+          <small>Campus Life</small>
+          <h3 class="fw-bold">Welcome Ceremony for New Students</h3>
+          <small>January 15, 2025</small>
+          <p>CIT warmly welcomed its incoming cohort, highlighting the institute’s mission and futuristic campus facilities.</p>
+          <a class="fw-bold" href="#" style="color: gold;">Read More</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 12 -->
+    <div class="col-md-4 news-card-wrapper">
+      <div class="news-card">
+        <img src="https://images.template.net/28471/simple-academic-Calendar-1.jpg">
+        <div class="news-overlay">
+          <small>Announcements</small>
+          <h3 class="fw-bold">Academic Calendar 2025 Released</h3>
+          <small>January 5, 2025</small>
+          <p>The official 2025 academic calendar is now available, including exam schedules, holidays, and innovation week dates.</p>
+          <a class="fw-bold" href="#" style="color: gold;">Read More</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PAGINATION -->
+  <div class="d-flex justify-content-center align-items-center mt-5 gap-3 pagination-arrows">
+    <i id="prevBtn" class="bi bi-arrow-left-circle-fill"></i>
+    <i id="nextBtn" class="bi bi-arrow-right-circle-fill"></i>
+  </div>
+</div>
+
+<script>
+const cards = document.querySelectorAll('.news-card-wrapper');
+const cardsPerPage = 6;
+let currentPage = 1;
+const totalPages = Math.ceil(cards.length / cardsPerPage);
+
+function showPage(page) {
+  cards.forEach((card, index) => {
+    card.style.display = 'none';
+    const start = (page - 1) * cardsPerPage;
+    const end = start + cardsPerPage;
+    if(index >= start && index < end) card.style.display = 'block';
+  });
+}
+
+// Initial page
+showPage(currentPage);
+
+// Pagination buttons
+document.getElementById('prevBtn').addEventListener('click', () => {
+  if(currentPage > 1) {
+    currentPage--;
+    showPage(currentPage);
+  }
+});
+document.getElementById('nextBtn').addEventListener('click', () => {
+  if(currentPage < totalPages) {
+    currentPage++;
+    showPage(currentPage);
+  }
+});
+</script>
+</section>
