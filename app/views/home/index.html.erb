@@ -1,96 +1,105 @@
 <% content_for :no_container, true %>
 
-<!-- Top Header with Logo -->
-<div class="top-header d-flex flex-column justify-content-center align-items-center">
-  <%= image_tag "tech.png", alt: "School Logo", class: "school-logo" %>
-</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css">
 
-<!-- Hero Section -->
+<!-- Top Header -->
+<div class="top-header d-flex flex-column justify-content-center align-items-center"></div>
+
+<!-- HERO SECTION -->
 <section class="hero-section position-relative">
 
   <!-- Background Image -->
-  <img src="<%= asset_path("home_bg1.jpg") %>" class="hero-bg" alt="Hero Background">
+  <img src="<%= asset_path('mainhomebg.png') %>" class="hero-bg" alt="Hero Background">
 
-  <!-- Top fade -->
+  <!-- Blue Fade -->
   <div class="hero-blue-fade"></div>
 
-  <!-- Bottom fade -->
-  <div class="hero-white-fade"></div>
+  <!-- Subtitle -->
+  <div class="hero-subtitle text-center">
+    A UNIVERSITY FOR THE 21ST CENTURY
+  </div>
+
+  <!-- Title -->
+  <div class="hero-title text-center">
+    Per Cognitionem Excellentia
+  </div>
+
 </section>
 
 <style>
 .top-header {
   background-color: #004a99;
   padding: 35px 0;
-  margin-top: 50px;
-  text-align: center;
-}
-
-.school-logo {
-  height: 100px;
-  object-fit: contain;
-}
-
-.hero-univ-name {
-  font-family: serif;
-  font-weight: 700;
-  font-size: 2rem;
-  color: white;
-  margin: 0;
-}
-
-.hero-tagline {
-  font-family: serif;
-  font-weight: 400;
-  font-size: 1.1rem;
-  color: white;
-  margin: 0;
+  height: 250px;
 }
 
 .hero-section {
-  height: 80vh;
-  width: 100%;
-  overflow: hidden;
   position: relative;
+  width: 100%;
+  height: 129vh;          
+  overflow: visible;      
+  background-color: linear-gradient(to bottom, #052659, #004e99, #3A76C0);
 }
 
 .hero-bg {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 100%;
+  height: 95vh;           
   object-fit: cover;
-  filter: brightness(0.9);
+  filter: brightness(0.82);
   z-index: 1;
 }
 
 .hero-blue-fade {
   position: absolute;
   top: 0;
-  left: 0;
-  height: 180px;
   width: 100%;
-  background: linear-gradient(to bottom, #004a99 0%, rgba(0,0,0,0) 100%);
-  z-index: 2;
+  height: 230px;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 74, 153, 1),
+    rgba(0, 74, 153, 0.75),
+    rgba(0, 74, 153, 0.3),
+    rgba(0, 74, 153, 0)
+  );
+  z-index: 3;
+}
+
+.hero-btn {
+  position: absolute;
+  bottom: 150px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 26px;        
+  font-size: 16px;           
+  font-weight: 500;
+  color: white;                
+  text-decoration: none;
+  border-radius: 10px;
+  
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+  z-index: 4;
+  transition: 0.25s ease;
+}
+
+.hero-btn:hover {
+  background: rgba(255, 255, 255, 0.75);  
+  transform: translateX(-50%) scale(1.08);
 }
 
 .hero-white-fade {
   position: absolute;
   bottom: 0;
-  left: 0;
-  height: 150px;
   width: 100%;
-  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, white 100%);
-  z-index: 2;
-}
-
-.hero-content {
+  height: 180px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0), white);
   z-index: 3;
-}
-
-.hero-content p {
-  font-family: serif;
-  text-shadow: 0 3px 12px rgba(0,0,0,0.55);
 }
 
 body {
@@ -100,6 +109,223 @@ body {
 .main-content {
   padding: 0 !important;
   margin-top: 0 !important;
+}
+
+.hero-subtitle {
+  position: absolute;
+  top: 310px;              
+  width: 100%;
+  font-family: 'Calibri', sans-serif;
+  font-size: 25px;        
+  color: white;
+  text-align: center;
+  font-weight: 500;
+  z-index: 5;
+}
+
+.hero-title {
+  position: absolute;
+  top: 140px;             
+  width: 100%;
+  font-family: 'Times New Roman', serif;
+  font-size: 140px;        
+  font-weight: 100;
+  color: white;
+  text-align: center;
+  z-index: 5;
+}
+</style>
+
+
+<!--------------------------------------------------------------------------------------------------------------->
+
+
+<!-- HEAD BOTTOM SECTION (Over HERO)-->
+<div class="head-bottom-section">
+
+  <div class="head-bottom-container">
+
+    <!-- LEFT BLUE BOX -->
+    <div class="blue-box">
+      <h2>Excellence<br>Through <br>Knowledge</h2>
+    </div>
+
+   <!-- WHITE BOXES as buttons -->
+<button class="head-bottom-box" onclick="document.getElementById('programsSection').scrollIntoView({ behavior: 'smooth' })">
+  <i class="bi bi-book-fill head-bottom-icon"></i>
+  <h3>Academics</h3>
+  <div class="head-bottom-plus"><i class="bi bi-amd"></i></div>
+</button>
+
+<button class="head-bottom-box">
+  <i class="bi bi-file-earmark-plus-fill head-bottom-icon"></i>
+  <h3>Admission</h3>
+  <div class="head-bottom-plus"><i class="bi bi-amd"></i></div>
+</button>
+
+<button class="head-bottom-box" onclick="document.getElementById('overview').scrollIntoView({ behavior: 'smooth' })">
+  <i class="bi bi-arrow-right-circle-fill head-bottom-icon"></i>
+  <h3>Learn More</h3>
+  <div class="head-bottom-plus"><i class="bi bi-amd"></i></div>
+</button>
+
+
+  </div>
+
+  <!-- BLUE STRIPES DESIGN -->
+  <div class="head-bottom-stripes">
+    <div class="stripe"></div>
+    <div class="stripe"></div>
+    <div class="stripe"></div>
+  </div>
+
+</div>
+
+<style>
+
+.head-bottom-section {
+  width: 100%;
+  position: absolute;
+  top: 100%;  
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 60px; 
+}
+
+.head-bottom-container {
+  width: 100%;
+  max-width: 1300px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 30px;
+}
+
+.blue-box {
+  background: #004a99;  
+  color: white;          
+  padding: 50px 40px;
+  width: 300px;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.2;
+  min-height: 230px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  border: 1px solid white;
+}
+
+.head-bottom-box {
+  background: white; 
+  width: 260px;
+  padding: 40px 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+  text-align: center;
+  border-radius: 2px;
+  position: relative;
+  border-top: 4px solid #004a99; 
+  cursor: pointer;       
+  transition: all 0.3s ease;
+  outline: none;         
+  border: none;          
+}
+
+.head-bottom-box:hover {
+  background-color: #e0e0e0;
+}
+
+.head-bottom-box:hover .head-bottom-icon,
+.head-bottom-box:hover h3,
+.head-bottom-box:hover .head-bottom-plus {
+  color: #004a99; 
+  border-color: #004a99; 
+}
+
+.head-bottom-icon {
+  font-size: 48px;
+  color: #004a99; 
+}
+
+.head-bottom-box h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 15px;
+  color: #004a99; 
+}
+
+.head-bottom-plus {
+  position: absolute;
+  bottom: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 36px;
+  height: 36px;
+  background: white;
+  border-radius: 50%;
+  border: 2px solid #004a99; 
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  font-weight: 700;
+  color: #004a99;           
+}
+
+.head-bottom-stripes {
+  width: 100%;
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.head-bottom-stripes .stripe {
+  background: #004a99;
+  height: 40px;      
+  width: 70%;       
+  max-width: 1000px; 
+  border-radius: 3px;
+}
+
+
+.head-bottom-stripes .stripe:nth-child(1) {
+  align-self: flex-end;
+  width: 30%;  
+  clip-path: polygon(
+    10% 0,   
+    100% 0, 
+    100% 100%, 
+    0 100%   
+  );
+}
+
+.head-bottom-stripes .stripe:nth-child(2) {
+  align-self: flex-end;
+  width: 40%;   
+  clip-path: polygon(
+    15% 0,   
+    100% 0,  
+    100% 100%,
+    7% 100%  
+  );
+}
+
+.head-bottom-stripes .stripe:nth-child(3) {
+  position: relative;       
+  align-self: flex-start;   
+  width: 110%;             
+  max-width: none;          
+  margin-left: -20%;       
+  
+  clip-path: polygon(
+    0 0,        
+    95% 0,      
+    100% 100%,  
+    0 100%     
+  );
 }
 </style>
 
@@ -246,7 +472,9 @@ body {
 }
 </style>
 
+
 <!--------------------------------------------------------------------------------------------------------------->
+
 
 <hr class="mv-separator">
 <div class="mv-wrapper">
@@ -319,6 +547,12 @@ body {
 
 </div>
 <hr class="mv-separator">
+
+<style>
+.mv-wrapper {
+  margin-bottom: 80px; 
+}
+</style>
 
 
 <!--------------------------------------------------------------------------------------------------------------->
@@ -455,7 +689,11 @@ body {
     });
   </script>
 </section>
+
+
 <!--------------------------------------------------------------------------------------------------------------->
+
+
 <section id="campus-tour" class="py-5 fade-in-section">
   <div class="container">
     <div class="section-header text-center mb-5">
@@ -734,27 +972,24 @@ body {
 </section>
 
 <style>
-/* Position Previous Button */
 #eventsCarousel .carousel-control-prev {
   position: absolute;
-  left: -150px; /* moves button outside carousel */
+  left: -150px; 
   top: 50%;
   transform: translateY(-50%);
   width: 50px;
   height: 50px;
 }
 
-/* Position Next Button */
 #eventsCarousel .carousel-control-next {
   position: absolute;
-  right: -150px; /* moves button outside carousel */
+  right: -150px; 
   top: 50%;
   transform: translateY(-50%);
   width: 50px;
   height: 50px;
 }
 
-/* Customize arrow icons */
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
   background-size: 50% 50%;
@@ -817,7 +1052,7 @@ body {
 }
 
 .carousel-control-next {
-  right: 10px;  /* distance from carousel edge */
+  right: 10px;  
   top: 50%;
   transform: translateY(-50%);
   z-index: 5;
