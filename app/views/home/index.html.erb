@@ -246,6 +246,79 @@ body {
 }
 </style>
 
+<!--------------------------------------------------------------------------------------------------------------->
+
+<hr class="mv-separator">
+<div class="mv-wrapper">
+
+  <!-- MISSION -->
+  <section class="mv-section mv-mission">
+    <div class="mv-pattern"></div>
+    <div class="mv-gradient-overlay"></div>
+    <div class="mv-border-trace"></div>
+    <div class="mv-corner-glow mv-corner-glow-tl"></div>
+    <div class="mv-corner-glow mv-corner-glow-br"></div>
+    <div class="mv-decoration mv-square"></div>
+    <div class="mv-decoration mv-circle"></div>
+    <div class="mv-particle mv-particle-1"></div>
+    <div class="mv-particle mv-particle-2"></div>
+    <div class="mv-particle mv-particle-3"></div>
+
+    <svg class="mv-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M2 17L12 22L22 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M2 12L12 17L22 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+
+    <div class="mv-title">MISSION</div>
+    <div class="mv-content">
+      <h2>Our Mission</h2>
+      <p>
+        To develop future-ready innovators by delivering transformative education in artificial intelligence, engineering, and digital sciences—empowering learners to create intelligent, ethical, and human-centered technologies that advance society.
+      </p>
+    </div>
+  </section>
+
+  <!-- VISION -->
+  <section class="mv-section mv-vision">
+    <div class="mv-vision-hexagon"></div>
+    <div class="mv-vision-spotlight"></div>
+    <div class="mv-border-trace"></div>
+    <div class="mv-corner-glow mv-corner-glow-tl"></div>
+    <div class="mv-corner-glow mv-corner-glow-br"></div>
+    <div class="mv-vision-orbit">
+      <div class="mv-vision-orbit-dot mv-vision-orbit-dot-1"></div>
+      <div class="mv-vision-orbit-dot mv-vision-orbit-dot-2"></div>
+      <div class="mv-vision-orbit-dot mv-vision-orbit-dot-3"></div>
+    </div>
+    <div class="mv-vision-bracket mv-vision-bracket-tl"></div>
+    <div class="mv-vision-bracket mv-vision-bracket-tr"></div>
+    <div class="mv-vision-bracket mv-vision-bracket-bl"></div>
+    <div class="mv-vision-bracket mv-vision-bracket-br"></div>
+    <div class="mv-vision-star mv-vision-star-1"></div>
+    <div class="mv-vision-star mv-vision-star-2"></div>
+    <div class="mv-vision-star mv-vision-star-3"></div>
+    <div class="mv-vision-star mv-vision-star-4"></div>
+
+    <svg class="mv-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="#0d47a1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      <circle cx="12" cy="12" r="3" stroke="#0d47a1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+
+    <div class="mv-title">VISION</div>
+    <div class="mv-content">
+      <h2>Our Vision</h2>
+      <p>
+        To be Asia’s leading hub for next-generation digital education and technological innovation—globally recognized for excellence in AI research, engineering breakthroughs, and the creation of solutions that elevate human life.
+      </p>
+    </div>
+  </section>
+
+  <!-- Center glowing divider -->
+  <div class="mv-center-divider"></div>
+
+</div>
+<hr class="mv-separator">
 
 <!--------------------------------------------------------------------------------------------------------------->
 
@@ -384,7 +457,6 @@ body {
 
 
 <!--------------------------------------------------------------------------------------------------------------->
-
 
 <section class="events-section py-5">
   <div class="container">
@@ -525,21 +597,50 @@ body {
 
       </div>
 
-      <!-- Carousel Controls -->
-      <button class="carousel-control-prev" type="button" data-bs-target="#eventsCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#eventsCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
+<!-- Previous Button -->
+<button class="carousel-control-prev" type="button" data-bs-target="#eventsCarousel" data-bs-slide="prev">
+  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+  <span class="visually-hidden">Previous</span>
+</button>
+
+<!-- Next Button -->
+<button class="carousel-control-next" type="button" data-bs-target="#eventsCarousel" data-bs-slide="next">
+  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+  <span class="visually-hidden">Next</span>
+</button>
+
 
     </div>
   </div>
 </section>
 
 <style>
+/* Position Previous Button */
+#eventsCarousel .carousel-control-prev {
+  position: absolute;
+  left: -150px; /* moves button outside carousel */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+}
+
+/* Position Next Button */
+#eventsCarousel .carousel-control-next {
+  position: absolute;
+  right: -150px; /* moves button outside carousel */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+}
+
+/* Customize arrow icons */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-size: 50% 50%;
+}
+
 
 .events-section {
   background-color: #f8f9fa;
@@ -596,17 +697,20 @@ body {
   border-top-right-radius: 12px;
 }
 
-.carousel-control-prev {
-  left: -200px;       
-  top: 50%;          
-  transform: translateY(-50%);
-}
-
 .carousel-control-next {
-  right: -200px;      
+  right: 10px;  /* distance from carousel edge */
   top: 50%;
   transform: translateY(-50%);
+  z-index: 5;
 }
+
+.carousel-control-prev {
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+}
+
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
@@ -621,7 +725,7 @@ filter: invert(50%) sepia(10%) saturate(0%) brightness(70%);
 <!--------------------------------------------------------------------------------------------------------------->
 
 
-<section class="events-section py-5">
+<section class="news-section py-5">
 <div class="container py-5">
   <h1 class="display-4 text-center fw-bold mb-5">Latest News</h1>
 
