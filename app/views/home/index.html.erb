@@ -320,6 +320,7 @@ body {
 </div>
 <hr class="mv-separator">
 
+
 <!--------------------------------------------------------------------------------------------------------------->
 
 
@@ -454,7 +455,125 @@ body {
     });
   </script>
 </section>
+<!--------------------------------------------------------------------------------------------------------------->
+<section id="campus-tour" class="py-5 fade-in-section">
+  <div class="container">
+    <div class="section-header text-center mb-5">
+      <h1>Campus Tour</h1>
+      <p>Explore our state-of-the-art facilities and vibrant campus life</p>
+    </div>
 
+    <div class="gallery-grid">
+
+  <div class="gallery-item" 
+       data-short="Campus administration center" 
+       data-long="The administrative heart of CIT, where faculty offices and student services are located. Here, students are welcomed and guided through their academic journey with support and care.">
+    <%= image_tag "facilities/admin building.jpg", alt: "Admin Building", class: "img-fluid" %>
+    <div class="gallery-overlay">
+      <h3>Admin Building</h3>
+      <p class="short-desc">Campus administration center</p>
+    </div>
+  </div>
+
+  <div class="gallery-item" 
+       data-short="Modern computing classrooms & labs" 
+       data-long="The College of Computer Studies building features modern classrooms and computer labs, empowering students to explore programming, AI, and digital innovation in a hands-on learning environment.">
+    <%= image_tag "facilities/cocs building.jpg", alt: "College of Computer Studies", class: "img-fluid" %>
+    <div class="gallery-overlay">
+      <h3>College of Computer Studies</h3>
+      <p class="short-desc">Modern computing classrooms & labs</p>
+    </div>
+  </div>
+
+  <div class="gallery-item" 
+       data-short="Workshops & collaborative engineering spaces" 
+       data-long="The Engineering Building offers state-of-the-art workshops and collaborative spaces for students to design, prototype, and innovate. Perfect for aspiring engineers ready to shape the future.">
+    <%= image_tag "facilities/engineeringbuilding.jpg", alt: "Engineering Building", class: "img-fluid" %>
+    <div class="gallery-overlay">
+      <h3>Engineering Building</h3>
+      <p class="short-desc">Workshops & collaborative engineering spaces</p>
+    </div>
+  </div>
+
+  <div class="gallery-item" 
+       data-short="Fully equipped science labs" 
+       data-long="Science Laboratory Complex features fully-equipped labs for chemistry, biology, and physics, providing students with hands-on research opportunities and fostering scientific curiosity.">
+    <%= image_tag "facilities/science lab complex.jpg", alt: "Science Laboratory Complex", class: "img-fluid" %>
+    <div class="gallery-overlay">
+      <h3>Science Laboratory Complex</h3>
+      <p class="short-desc">Fully equipped science labs</p>
+    </div>
+  </div>
+
+  <div class="gallery-item" 
+       data-short="Campus cafeteria & social hub" 
+       data-long="Our Cafeteria offers a variety of meals and snacks in a welcoming environment. It’s the perfect place for students to recharge, socialize, and build friendships.">
+    <%= image_tag "facilities/cafetteria.jpg", alt: "Cafeteria", class: "img-fluid" %>
+    <div class="gallery-overlay">
+      <h3>Cafeteria</h3>
+      <p class="short-desc">Campus cafeteria & social hub</p>
+    </div>
+  </div>
+
+  <div class="gallery-item" 
+       data-short="Outdoor space for relaxation & events" 
+       data-long="Yard A is a vibrant outdoor space for relaxation, events, and student activities. Students are encouraged to connect, collaborate, and enjoy campus life.">
+    <%= image_tag "facilities/courtyRD.jpg", alt: "Yard A", class: "img-fluid" %>
+    <div class="gallery-overlay">
+      <h3>Yard A</h3>
+      <p class="short-desc">Outdoor space for relaxation & events</p>
+    </div>
+  </div>
+
+  <div class="gallery-item" 
+       data-short="Open courtyard for student gatherings" 
+       data-long="Yard B provides additional open space for gatherings, sports, and campus events, creating a friendly environment that nurtures student engagement.">
+    <%= image_tag "facilities/courtyard2.jpg", alt: "Yard B", class: "img-fluid" %>
+    <div class="gallery-overlay">
+      <h3>Yard B</h3>
+      <p class="short-desc">Open courtyard for student gatherings</p>
+    </div>
+  </div>
+
+  <div class="gallery-item" 
+       data-short="Knowledge hub with books & digital resources" 
+       data-long="The Library houses a vast collection of books, digital resources, and study areas. It encourages students to explore knowledge, conduct research, and grow intellectually.">
+    <%= image_tag "facilities/libraray.jpg", alt: "Library", class: "img-fluid" %>
+    <div class="gallery-overlay">
+      <h3>Library</h3>
+      <p class="short-desc">Knowledge hub with books & digital resources</p>
+    </div>
+  </div>
+
+  <div class="gallery-item" 
+       data-short="Fitness center & sports facility" 
+       data-long="The Gym is fully equipped with modern fitness equipment and sports facilities. Students are encouraged to stay active, healthy, and energized while building lifelong habits.">
+    <%= image_tag "facilities/gym.jpg", alt: "Gym", class: "img-fluid" %>
+    <div class="gallery-overlay">
+      <h3>Gym</h3>
+      <p class="short-desc">Fitness center & sports facility</p>
+    </div>
+  </div>
+
+</div>
+
+
+
+    </div>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="closeBtn" aria-label="Close">×</button>
+    <div class="lightbox-content">
+      <img class="lightbox-image" id="lightboxImage" src="" alt="Facility Image" />
+      <div class="lightbox-caption">
+        <h2 id="lightboxCaption">Facility Name</h2>
+        <p id="lightboxDescription">Facility description goes here.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!--------------------------------------------------------------------------------------------------------------->
 
