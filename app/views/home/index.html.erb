@@ -19,7 +19,6 @@
 </section>
 
 <style>
-/* Top Header */
 .top-header {
   background-color: #004a99;
   padding: 35px 0;
@@ -48,7 +47,6 @@
   margin: 0;
 }
 
-/* Hero Section */
 .hero-section {
   height: 80vh;
   width: 100%;
@@ -95,7 +93,6 @@
   text-shadow: 0 3px 12px rgba(0,0,0,0.55);
 }
 
-/* Remove spacing for homepage */
 body {
   padding-top: 0 !important;
 }
@@ -107,8 +104,8 @@ body {
 </style>
 
 
-
 <!--------------------------------------------------------------------------------------------------------------->
+
 
 <section id="overview" class="py-5 fade-in-section">
   <div class="container">
@@ -157,27 +154,19 @@ body {
   </div>
 </section>
 
-<!--------------------------------------------------------------------------------------------------------------->
-
-
-<!--------------------------------------------------------------------------------------------------------------->
-
 <style>
-/* Stats Section Wrapper */
 .stats-section-wrapper {
     width: 100%;
     background: linear-gradient(to bottom, #052659, #004e99, #3A76C0);
     padding: 60px 0;
 }
 
-/* Stats Section Container */
 .stats-section {
     max-width: 1200px;
     margin: 0 auto;
     text-align: center;
 }
 
-/* Section Title */
 .stats-section .section-title {
     font-family: Arial, sans-serif;
     text-transform: uppercase;
@@ -188,7 +177,6 @@ body {
     margin-bottom: 30px;
 }
 
-/* Tabs */
 .stats-section .tabs {
     display: flex;
     gap: 15px;
@@ -214,7 +202,6 @@ body {
     color: #ffffff;
 }
 
-/* Glass Box */
 .stats-section .glass-box {
     padding: 50px;
     border-radius: 24px;
@@ -225,7 +212,6 @@ body {
     margin: 0 auto;
 }
 
-/* Stats Grid */
 .stats-section .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -246,7 +232,6 @@ body {
     line-height: 1.4;
 }
 
-/* Responsive */
 @media(max-width: 900px){
     .stats-section .stats-grid {
         grid-template-columns: 1fr;
@@ -260,6 +245,10 @@ body {
     }
 }
 </style>
+
+
+<!--------------------------------------------------------------------------------------------------------------->
+
 
 <section id="stats" class="stats-section-wrapper">
     <div class="stats-section">
@@ -392,6 +381,9 @@ body {
     });
   </script>
 </section>
+
+
+<!--------------------------------------------------------------------------------------------------------------->
 
 
 <section class="events-section py-5">
@@ -555,14 +547,12 @@ body {
   border-bottom: 4px solid #dee2e6;
 }
 
-/* Heading */
 .modern-heading {
   font-family: 'Helvetica', Arial, sans-serif;
   font-weight: 700;
   color: #343a40;
 }
 
-/* Cards */
 .event-card {
   border-radius: 12px;
   transition: transform 0.3s, box-shadow 0.3s;
@@ -573,7 +563,6 @@ body {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* Event type */
 .event-type {
   display: inline-block;
   font-size: 0.8rem;
@@ -582,27 +571,23 @@ body {
   margin-bottom: 0.5rem;
 }
 
-/* Meta info */
 .event-meta {
   font-size: 0.85rem;
   color: #6c757d;
   margin-bottom: 0.25rem;
 }
 
-/* Card title */
 .card-title {
   font-size: 1.05rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
 
-/* Card text */
 .card-text {
   font-size: 0.9rem;
   color: #495057;
 }
 
-/* Card images */
 .event-img {
   width: 100%;
   height: 200px;
@@ -611,7 +596,6 @@ body {
   border-top-right-radius: 12px;
 }
 
-/* Move controls further outside the carousel */
 .carousel-control-prev {
   left: -200px;       
   top: 50%;          
@@ -619,12 +603,11 @@ body {
 }
 
 .carousel-control-next {
-  right: -200px;      /* move right button further right */
+  right: -200px;      
   top: 50%;
   transform: translateY(-50%);
 }
 
-/* Optional: make buttons bigger */
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
 filter: invert(50%) sepia(10%) saturate(0%) brightness(70%);
@@ -635,69 +618,8 @@ filter: invert(50%) sepia(10%) saturate(0%) brightness(70%);
 </style>
 
 
+<!--------------------------------------------------------------------------------------------------------------->
 
-
-
-
-<style>
-  /* CARD BASE */
-  .news-card {
-    position: relative;
-    height: 260px;
-    border-radius: 12px;
-    overflow: hidden;
-    color: white;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  /* HOVER LIFT */
-  .news-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
-  }
-
-  /* IMAGE */
-  .news-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(55%);
-  }
-
-  /* OVERLAY */
-  .news-overlay {
-    position: absolute;
-    bottom: 0;
-    padding: 20px;
-    width: 100%;
-  }
-
-
-  /* PAGINATION ICONS */
-  .pagination-arrows i {
-    font-size: 2.5rem;      
-    color: #004a99;
-  ;         
-    cursor: pointer;        
-    transition: transform 0.2s ease, color 0.2s ease;
-  }
-
-  .pagination-arrows i:hover {
-    transform: scale(1.2);  
-    color: #ADD8E6;         
-
-    
-    /* Hide all cards by default */
-    .news-card-wrapper {
-      display: none;
-    }
-
-    /* Show only active cards */
-    .news-card-wrapper.active {
-      display: block;
-    }
-</style>
 
 <section class="events-section py-5">
 <div class="container py-5">
@@ -914,3 +836,413 @@ document.getElementById('nextBtn').addEventListener('click', () => {
 });
 </script>
 </section>
+
+<style>
+  .news-card {
+    position: relative;
+    height: 260px;
+    border-radius: 12px;
+    overflow: hidden;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .news-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+  }
+
+  .news-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(55%);
+  }
+
+  .news-overlay {
+    position: absolute;
+    bottom: 0;
+    padding: 20px;
+    width: 100%;
+  }
+
+
+  .pagination-arrows i {
+    font-size: 2.5rem;      
+    color: #004a99;
+  ;         
+    cursor: pointer;        
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+
+  .pagination-arrows i:hover {
+    transform: scale(1.2);  
+    color: #ADD8E6;         
+
+    
+    .news-card-wrapper {
+      display: none;
+    }
+
+    .news-card-wrapper.active {
+      display: block;
+    }
+</style>
+
+
+<!--------------------------------------------------------------------------------------------------------------->
+
+
+<section id="programsSection" class="programs-section py-5">
+  <div class="text-center mb-4">
+    <h2 class="fw-bold text-white">PROGRAMS OFFERED</h2>
+  </div>
+
+  <div id="programsCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+
+      <!-- ================= SLIDE 1 ================= -->
+      <div class="carousel-item active">
+        <div class="program-grid">
+
+          <!-- CARD 1 -->
+          <div class="program-card glass-card">
+            <img src="<%= asset_path('card1.png') %>" class="program-img" alt="Program Icon">
+            <div class="text-container">
+              <h5 class="fw-bold">Computer Science</h5>
+              <p>Focused on algorithms, software engineering, and modern computing foundations to build real-world applications.</p>
+              <a href="#" class="btn enroll-btn">Enroll Now</a>
+            </div>
+          </div>
+
+          <!-- CARD 2 -->
+          <div class="program-card glass-card">
+            <img src="<%= asset_path('card2.png') %>" class="program-img" alt="Program Icon">
+            <div class="text-container">
+              <h5 class="fw-bold">Information Technology</h5>
+              <p>Covers networking, systems administration, cybersecurity basics, and enterprise IT infrastructure.</p>
+              <a href="#" class="btn enroll-btn">Enroll Now</a>
+            </div>
+          </div>
+
+          <!-- CARD 3 -->
+          <div class="program-card glass-card">
+            <img src="<%= asset_path('card3.png') %>" class="program-img" alt="Program Icon">
+            <div class="text-container">
+              <h5 class="fw-bold">Computer Engineering</h5>
+              <p>Blends hardware and software engineering including circuits, processors, and embedded systems.</p>
+              <a href="#" class="btn enroll-btn">Enroll Now</a>
+            </div>
+          </div>
+
+          <!-- CARD 4 -->
+          <div class="program-card glass-card">
+            <img src="<%= asset_path('card4.png') %>" class="program-img" alt="Program Icon">
+            <div class="text-container">
+              <h5 class="fw-bold">Software Engineering</h5>
+              <p>Specializes in software design, testing, agile development, and engineering large-scale systems.</p>
+              <a href="#" class="btn enroll-btn">Enroll Now</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ================= SLIDE 2 ================= -->
+      <div class="carousel-item">
+        <div class="program-grid">
+
+          <!-- CARD 5 -->
+          <div class="program-card glass-card">
+            <img src="<%= asset_path('card5.png') %>" class="program-img" alt="Program Icon">
+            <div class="text-container">
+              <h5 class="fw-bold">Cybersecurity</h5>
+              <p>Focus on digital defense, threat prevention, ethical hacking, and securing computer systems.</p>
+              <a href="#" class="btn enroll-btn">Enroll Now</a>
+            </div>
+          </div>
+
+          <!-- CARD 6 -->
+          <div class="program-card glass-card">
+            <img src="<%= asset_path('card6.png') %>" class="program-img" alt="Program Icon">
+            <div class="text-container">
+              <h5 class="fw-bold">Data Science</h5>
+              <p>Learn data analytics, machine learning, visualization, and transforming data into smart decisions.</p>
+              <a href="#" class="btn enroll-btn">Enroll Now</a>
+            </div>
+          </div>
+
+          <!-- CARD 7 -->
+          <div class="program-card glass-card">
+            <img src="<%= asset_path('card7.png') %>" class="program-img" alt="Program Icon">
+            <div class="text-container">
+              <h5 class="fw-bold">Artificial Intelligence</h5>
+              <p>Study neural networks, automation, AI ethics, and advanced intelligent systems.</p>
+              <a href="#" class="btn enroll-btn">Enroll Now</a>
+            </div>
+          </div>
+
+          <!-- CARD 8 -->
+          <div class="program-card glass-card">
+            <img src="<%= asset_path('card8.png') %>" class="program-img" alt="Program Icon">
+            <div class="text-container">
+              <h5 class="fw-bold">Robotics Technology</h5>
+              <p>Covers robotic systems, automation, sensor integration, and programmable mechanical design.</p>
+              <a href="#" class="btn enroll-btn">Enroll Now</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ================= SLIDE 3 ================= -->
+      <div class="carousel-item">
+        <div class="program-grid">
+
+          <!-- CARD 9 -->
+          <div class="program-card glass-card">
+            <img src="<%= asset_path('card9.png') %>" class="program-img" alt="Program Icon">
+            <div class="text-container">
+              <h5 class="fw-bold">Game Development</h5>
+              <p>Learn game engines, 3D design, gameplay systems, and interactive entertainment development.</p>
+              <a href="#" class="btn enroll-btn">Enroll Now</a>
+            </div>
+          </div>
+
+          <!-- CARD 10 -->
+          <div class="program-card glass-card">
+            <img src="<%= asset_path('card10.png') %>" class="program-img" alt="Program Icon">
+            <div class="text-container">
+              <h5 class="fw-bold">Information Systems</h5>
+              <p>Business-focused IT discipline covering systems analysis, business tech management, and automation.</p>
+              <a href="#" class="btn enroll-btn">Enroll Now</a>
+            </div>
+          </div>
+
+          <!-- CARD 11 -->
+          <div class="program-card glass-card">
+            <img src="<%= asset_path('card11.png') %>" class="program-img" alt="Program Icon">
+            <div class="text-container">
+              <h5 class="fw-bold">Network Engineering</h5>
+              <p>Teaches routing, switching, server configuration, cloud networks, and enterprise connectivity.</p>
+              <a href="#" class="btn enroll-btn">Enroll Now</a>
+            </div>
+          </div>
+
+          <!-- CARD 12 -->
+          <div class="program-card glass-card">
+            <img src="<%= asset_path('card12.png') %>" class="program-img" alt="Program Icon">
+            <div class="text-container">
+              <h5 class="fw-bold">Cloud Computing</h5>
+              <p>Focus on AWS, Azure, virtualization, distributed systems, and scalable cloud infrastructures.</p>
+              <a href="#" class="btn enroll-btn">Enroll Now</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ================= SLIDE 4 ================= -->
+      <div class="carousel-item">
+        <div class="program-grid">
+
+          <!-- CARD 13 -->
+          <div class="program-card glass-card">
+            <img src="<%= asset_path('card13.png') %>" class="program-img" alt="Program Icon">
+            <div class="text-container">
+              <h5 class="fw-bold">Web Development</h5>
+              <p>Front-end, back-end, databases, web frameworks, and full-stack modern development workflows.</p>
+              <a href="#" class="btn enroll-btn">Enroll Now</a>
+            </div>
+          </div>
+
+          <!-- CARD 14 -->
+          <div class="program-card glass-card">
+            <img src="<%= asset_path('card14.png') %>" class="program-img" alt="Program Icon">
+            <div class="text-container">
+              <h5 class="fw-bold">Mobile App Development</h5>
+              <p>Build Android & iOS apps, UI/UX, mobile frameworks, and deploy mobile software products.</p>
+              <a href="#" class="btn enroll-btn">Enroll Now</a>
+            </div>
+          </div>
+
+          <!-- CARD 15 -->
+          <div class="program-card glass-card">
+            <img src="<%= asset_path('card15.png') %>" class="program-img" alt="Program Icon">
+            <div class="text-container">
+              <h5 class="fw-bold">Digital Animation</h5>
+              <p>Learn 2D/3D animation, motion design, visual effects, and production pipeline for digital media.</p>
+              <a href="#" class="btn enroll-btn">Enroll Now</a>
+            </div>
+          </div>
+
+          <!-- CARD 16 -->
+          <div class="program-card glass-card">
+            <img src="<%= asset_path('card16.png') %>" class="program-img" alt="Program Icon">
+            <div class="text-container">
+              <h5 class="fw-bold">Multimedia Technology</h5>
+              <p>Covers graphics, audio, video, digital content creation, and interactive media technologies.</p>
+              <a href="#" class="btn enroll-btn">Enroll Now</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Carousel Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#programsCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+
+    <button class="carousel-control-next" type="button" data-bs-target="#programsCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+
+  </div>
+</section>
+
+<style>
+
+.programs-section {
+  min-height: 100vh;
+  width: 100%;
+  background:
+      linear-gradient(rgba(0, 30, 90, 0.82), rgba(0, 30, 90, 0.82)),
+      url('<%= asset_path("programbg.png") %>') center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px 0;
+  color: white;
+}
+
+.program-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  padding: 0 80px;
+}
+
+.program-card {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 30px;
+  padding: 35px;
+  height: 300px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border: 1px solid rgba(0, 135, 255, 0.55);
+  box-shadow:
+    0 0 20px rgba(0, 120, 255, 0.35),   
+    inset 0 0 20px rgba(0, 120, 255, 0.25); 
+
+  transition: 0.3s ease;
+}
+
+.program-card:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 0 28px rgba(0, 150, 255, 0.55),
+    inset 0 0 25px rgba(0, 150, 255, 0.35);
+}
+
+.program-img {
+  width: 40%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+  outline: 2px solid rgba(0, 150, 255, 0.45);
+  outline-offset: 8px;
+}
+
+.programs-title {
+  font-family: Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #ffffff;
+  font-size: 36px;
+  font-weight: 800;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.text-container {
+  width: 60%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.text-container h5 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.text-container p {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.enroll-btn {
+  margin-top: 12px;
+  background: rgba(255,255,255,0.95);
+  color: #004aad;
+  font-weight: 600;
+  padding: 8px 26px;
+  border-radius: 50px;
+  border: none;
+  transition: 0.25s ease;
+}
+
+.enroll-btn:hover {
+  background: rgba(0,135,255,0.95);    
+  color: white;
+  box-shadow: 0 0 12px rgba(0,135,255,0.7);
+  transform: translateY(-2px);
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 5%;
+}
+
+.carousel-control-prev {
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.carousel-control-next {
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-image: none !important;    
+
+  mask-size: 40px 40px;
+  -webkit-mask-size: 40px 40px;
+
+  width: 40px;
+  height: 40px;
+  background-color: white;              
+}
+
+.carousel-control-prev-icon {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/%3E%3C/svg%3E");
+}
+
+.carousel-control-next-icon {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M4.646 1.646a.5.5 0 0 0 0 .708L10.293 8l-5.647 5.646a.5.5 0 0 0 .708.708l6-6a.5.5 0 0 0 0-.708l-6-6a.5.5 0 0 0-.708 0z'/%3E%3C/svg%3E");
+}
+
+</style>
