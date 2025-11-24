@@ -42,3 +42,58 @@ document.addEventListener("DOMContentLoaded", () => {
 
   elements.forEach(el => observer.observe(el));
 });
+
+document.querySelectorAll('.gallery-item').forEach(item => {
+  item.addEventListener('click', () => {
+    const img = item.querySelector('img');
+    const caption = item.querySelector('.gallery-overlay h3').textContent;
+    const description = item.dataset.description; // get description
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+    const lightboxDescription = document.getElementById('lightboxDescription');
+
+    lightboxImage.src = img.src;
+    lightboxCaption.textContent = caption;
+    lightboxDescription.textContent = description;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  });
+});
+
+const closeBtn = document.getElementById('closeBtn');
+const lightbox = document.getElementById('lightbox');
+
+function closeLightbox() {
+  lightbox.classList.remove('active');
+  document.body.style.overflow = 'auto';
+}
+
+closeBtn.addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', e => {
+  if (e.target === lightbox) closeLightbox();
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox();
+});
+
+document.querySelectorAll('.gallery-item').forEach(item => {
+  item.addEventListener('click', () => {
+    const img = item.querySelector('img');
+    const caption = item.querySelector('.gallery-overlay h3').textContent;
+    const longDesc = item.dataset.long;
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+    const lightboxDescription = document.getElementById('lightboxDescription');
+
+    lightboxImage.src = img.src;
+    lightboxCaption.textContent = caption;
+    lightboxDescription.textContent = longDesc;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  });
+});
+
