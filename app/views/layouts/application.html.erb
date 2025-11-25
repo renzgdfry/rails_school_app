@@ -16,6 +16,11 @@
   
 
   <style>
+
+    html {
+    overflow-y: scroll;
+    }
+
     body {
       margin: 0;
       padding-top: 56px;
@@ -148,12 +153,22 @@
       border-color: white;
     }
 
-
-    
     #sidebar {
       width: 280px;
       background: linear-gradient(to bottom, #052659, #5483B3, #7DA0CA);
     }
+    
+    .offcanvas-backdrop {
+      background-color: rgba(0, 0, 0, 0.7) !important; 
+      backdrop-filter: blur(5px); 
+    }
+
+  
+.offcanvas-open-no-padding {
+  overflow: hidden !important;
+  padding-right: 0 !important;
+}
+
 
     #sidebar .offcanvas-body {
       padding: 0;
