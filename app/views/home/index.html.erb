@@ -470,6 +470,29 @@ body {
         padding: 30px;
     }
 }
+
+.fade-left.hidden {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: all 0.8s ease-out;
+}
+
+.fade-left.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fade-right.hidden {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: all 0.8s ease-out;
+}
+
+.fade-right.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
 </style>
 
 
@@ -559,137 +582,140 @@ body {
 
 
 <section id="stats" class="stats-section-wrapper">
-    <div class="stats-section">
-        <!-- Section Title -->
-        <h2 class="section-title">Stats That Set Us Apart</h2>
+  <div class="stats-section">
+    <!-- Section Title -->
+    <h2 class="section-title">Stats That Set Us Apart</h2>
 
-        <!-- Tabs -->
-        <div class="tabs">
-            <div class="tab active" onclick="switchTab('academics', event)">Academics</div>
-            <div class="tab" onclick="switchTab('innovation', event)">Innovation & Research</div>
-            <div class="tab" onclick="switchTab('global', event)">Global Recognition</div>
-        </div>
-
-        <!-- Glass Box -->
-        <div class="glass-box">
-            <!-- Academics -->
-            <div id="academics" class="tab-content">
-                <div class="stats-grid">
-                    <div>
-                        <div class="stat-value"><span class="count" data-target="98"></span>%</div>
-                        <div class="stat-desc">98% of CIT graduates secure employment or pursue further studies within 6 months.</div>
-                    </div>
-                    <div>
-                        <div class="stat-value"><span class="count" data-target="12"></span>:1</div>
-                        <div class="stat-desc">Student-to-faculty ratio, giving students strong academic support.</div>
-                    </div>
-                    <div>
-                        <div class="stat-value"><span class="count" data-target="150"></span>+</div>
-                        <div class="stat-desc">Over 150 specialized tech courses, including AI, cybersecurity, robotics, and more.</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Innovation -->
-            <div id="innovation" class="tab-content" style="display:none;">
-                <div class="stats-grid">
-                    <div>
-                        <div class="stat-value"><span class="count" data-target="20"></span>+</div>
-                        <div class="stat-desc">State-of-the-art AI, engineering, robotics, and digital sciences laboratories.</div>
-                    </div>
-                    <div>
-                        <div class="stat-value"><span class="count" data-target="50"></span>+</div>
-                        <div class="stat-desc">Annual student-led innovation projects with industry partners.</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Global -->
-            <div id="global" class="tab-content" style="display:none;">
-                <div class="stats-grid">
-                    <div>
-                        <div class="stat-value"><span class="count" data-target="30"></span>+</div>
-                        <div class="stat-desc">More than 30 partners and collaborations with global tech companies.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- Tabs -->
+    <div class="tabs">
+      <div class="tab active" data-tab="academics">Academics</div>
+      <div class="tab" data-tab="innovation">Innovation & Research</div>
+      <div class="tab" data-tab="global">Global Recognition</div>
     </div>
 
+    <!-- Glass Box -->
+    <div class="glass-box">
+      <!-- Academics -->
+      <div id="academics" class="tab-content">
+        <div class="stats-grid">
+          <div>
+            <div class="stat-value"><span class="count" data-target="98"></span>%</div>
+            <div class="stat-desc">98% of CIT graduates secure employment or pursue further studies within 6 months.</div>
+          </div>
+          <div>
+            <div class="stat-value"><span class="count" data-target="12"></span>:1</div>
+            <div class="stat-desc">Student-to-faculty ratio, giving students strong academic support.</div>
+          </div>
+          <div>
+            <div class="stat-value"><span class="count" data-target="150"></span>+</div>
+            <div class="stat-desc">Over 150 specialized tech courses, including AI, cybersecurity, robotics, and more.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Innovation -->
+      <div id="innovation" class="tab-content" style="display:none;">
+        <div class="stats-grid">
+          <div>
+            <div class="stat-value"><span class="count" data-target="20"></span>+</div>
+            <div class="stat-desc">State-of-the-art AI, engineering, robotics, and digital sciences laboratories.</div>
+          </div>
+          <div>
+            <div class="stat-value"><span class="count" data-target="50"></span>+</div>
+            <div class="stat-desc">Annual student-led innovation projects with industry partners.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Global -->
+      <div id="global" class="tab-content" style="display:none;">
+        <div class="stats-grid">
+          <div>
+            <div class="stat-value"><span class="count" data-target="30"></span>+</div>
+            <div class="stat-desc">More than 30 partners and collaborations with global tech companies.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
-    function switchTab(tabId, event){
-        const section = event.target.closest('.stats-section');
+    document.addEventListener("turbo:load", initStatsSection);
+    document.addEventListener("DOMContentLoaded", initStatsSection);
 
-        // Switch active tab
-        section.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-        event.target.classList.add("active");
+    function initStatsSection() {
+      const section = document.querySelector('.stats-section');
+      if (!section) return;
 
-        // Show only active tab content
-        section.querySelectorAll(".tab-content").forEach(c => c.style.display = "none");
-        const activeContent = section.querySelector("#" + tabId);
-        activeContent.style.display = "block";
+      const tabs = section.querySelectorAll('.tab');
+      const contents = section.querySelectorAll('.tab-content');
 
-        // Start counters for the newly active tab
-        startCounters(activeContent);
-    }
+      // Switch tab function
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          // Remove active from all tabs
+          tabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
 
-    // Counter animation
-    function startCounters(container){
-        const counters = container.querySelectorAll(".count");
-        counters.forEach(counter => {
-            const target = Number(counter.dataset.target);
-            let current = 0;
-            const step = target / 60;
+          // Hide all tab contents
+          contents.forEach(c => c.style.display = 'none');
 
-            function update(){
-                current += step;
-                if(current < target){
-                    counter.textContent = Math.ceil(current);
-                    requestAnimationFrame(update);
-                } else {
-                    counter.textContent = target;
-                }
-            }
+          // Show active content
+          const targetId = tab.dataset.tab;
+          const activeContent = section.querySelector('#' + targetId);
+          activeContent.style.display = 'block';
 
-            counter.textContent = "0";
-            update();
+          // Start counters for the newly active tab
+          startCounters(activeContent);
         });
-    }
+      });
 
-    // Check if element is in viewport
-    function isElementInViewport(el) {
-        const rect = el.getBoundingClientRect();
-        return (
-            rect.top < (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.bottom > 0
-        );
-    }
+      // Start counters for first active tab on load
+      const firstTab = section.querySelector('.tab.active');
+      if (firstTab) {
+        const firstContent = section.querySelector('#' + firstTab.dataset.tab);
+        startCounters(firstContent);
+      }
 
-    // Scroll listener to restart counters when section scrolls into view
-    document.addEventListener("DOMContentLoaded", () => {
-        const section = document.querySelector('.stats-section');
-        
-        // Start counters immediately for first tab
-        const firstTab = section.querySelector(".tab.active");
-        if(firstTab){
-            const tabId = firstTab.getAttribute("onclick").match(/'(.+?)'/)[1];
-            const activeContent = section.querySelector("#" + tabId);
-            startCounters(activeContent);
+      // Scroll-triggered counter restart
+      window.addEventListener('scroll', () => {
+        if (isElementInViewport(section)) {
+          const activeTab = section.querySelector('.tab.active');
+          const activeContent = section.querySelector('#' + activeTab.dataset.tab);
+          startCounters(activeContent);
         }
+      });
 
-        // Re-run counters when section is scrolled into view
-        window.addEventListener("scroll", () => {
-            if(isElementInViewport(section)){
-                const activeTab = section.querySelector(".tab.active");
-                const tabId = activeTab.getAttribute("onclick").match(/'(.+?)'/)[1];
-                const activeContent = section.querySelector("#" + tabId);
-                startCounters(activeContent);
+      // Utility functions
+      function startCounters(container) {
+        const counters = container.querySelectorAll('.count');
+        counters.forEach(counter => {
+          const target = Number(counter.dataset.target);
+          let current = 0;
+          const step = target / 60;
+
+          function update() {
+            current += step;
+            if (current < target) {
+              counter.textContent = Math.ceil(current);
+              requestAnimationFrame(update);
+            } else {
+              counter.textContent = target;
             }
+          }
+          counter.textContent = "0";
+          update();
         });
-    });
+      }
+
+      function isElementInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        return rect.top < (window.innerHeight || document.documentElement.clientHeight) &&
+               rect.bottom > 0;
+      }
+    }
   </script>
 </section>
-
 
 <!--------------------------------------------------------------------------------------------------------------->
 
