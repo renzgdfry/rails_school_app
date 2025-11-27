@@ -1,7 +1,7 @@
 <div id="<%= dom_id @classlist %>" class="border shadow-sm rounded-3 overflow-hidden mb-3">
   <div class="p-4 d-flex align-items-center gap-3 text-white"
        style="
-         background: linear-gradient(135deg, rgba(13, 60, 150, 0.9), rgba(70, 130, 180, 0.8));
+         background: #004a99;
          backdrop-filter: blur(8px);
          -webkit-backdrop-filter: blur(8px);
          border-bottom: 1px solid rgba(255, 255, 255, 0.15);
@@ -14,8 +14,8 @@
     </div>
   </div>
 
-  <div class="p-4 border-bottom">
-    <div class="row text-center g-3 justify-content-center">
+  <div class="p-4">
+    <div class="row text-center g-3">
       <div class="col-12 col-md-6">
         <p class="text-secondary small mb-1">Student Name</p>
         <h5><%= @classlist.student.name %></h5>
@@ -31,23 +31,49 @@
 
 <div class="d-flex justify-content-between mt-3">
   <div class="d-flex gap-2">
+
     <%= link_to "#",
-      class: "btn btn-danger d-flex align-items-center gap-2",
+      class: "btn btn-outline-danger d-flex align-items-center gap-2 btn-glass",
+      style: "padding: 0.6rem 1.4rem; border-radius: 50px; font-weight: 600;",
       data: { bs_toggle: "modal", bs_target: "#confirmDeleteModal", classlist_id: @classlist.id } do %>
-      <i class="bi bi-trash-fill"></i>
-      Destroy this classlist
+        <i class="bi bi-trash-fill"></i>
+        Destroy this classlist
     <% end %>
 
-    <%= link_to edit_classlist_path(@classlist), class: "btn btn-success d-flex align-items-center gap-2" do %>
-      <i class="bi bi-gear-fill"></i>
-      Edit this classlist
+    <%= link_to edit_classlist_path(@classlist),
+      class: "btn btn-outline-success d-flex align-items-center gap-2 btn-glass",
+      style: "padding: 0.6rem 1.4rem; border-radius: 50px; font-weight: 600;" do %>
+        <i class="bi bi-gear-fill"></i>
+        Edit this classlist
     <% end %>
+
   </div>
 
-  <div>
-    <%= link_to classlists_path, class: "btn btn-secondary d-flex align-items-center gap-2" do %>
+  <%= link_to classlists_path,
+    class: "btn btn-outline-secondary d-flex align-items-center gap-2 btn-glass",
+    style: "padding: 0.6rem 1.4rem; border-radius: 50px; font-weight: 600;" do %>
       <i class="bi bi-box-arrow-left"></i>
       Back to classlists
-    <% end %>
+  <% end %>
+</div>
+
+<!-- Delete Confirmation Modal (unchanged) -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title" id="confirmDeleteLabel">Confirm Delete</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        Are you sure you want to delete this classlist?
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <a href="#" id="confirmDeleteBtn" class="btn btn-danger">Delete</a>
+      </div>
+    </div>
   </div>
 </div>
