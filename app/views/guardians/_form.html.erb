@@ -28,13 +28,16 @@
 
     <% if guardian.new_record? %>
       <div class="d-flex justify-content-between">
-        <%= link_to guardians_path, class: "btn btn-secondary d-flex align-items-center gap-2" do %>
+        <%= link_to guardians_path,
+            class: "btn btn-outline-secondary d-flex align-items-center gap-2 btn-glass",
+            style: "padding: 0.6rem 1.4rem; border-radius: 50px; font-weight: 600;" do %>
           <i class="bi bi-box-arrow-left"></i>
           Back to guardians
         <% end %>
 
-        <%= form.button class: "btn btn-success d-flex align-items-center gap-2" do %>
-          <i class="bi bi-person-heart"></i>
+        <%= form.button class: "btn btn-outline-success d-flex align-items-center gap-2 btn-glass",
+            style: "padding: 0.6rem 1.4rem; border-radius: 50px; font-weight: 600;" do %>
+          <i class="bi bi-plus-circle-fill"></i>
           Create Guardian
         <% end %>
       </div>
@@ -42,19 +45,23 @@
       <div class="d-flex justify-content-between align-items-center mt-3">
         <div class="d-flex gap-2">
           <%= link_to "#",
-              class: "btn btn-danger d-flex align-items-center gap-2",
+              class: "btn btn-outline-danger d-flex align-items-center gap-2 btn-glass",
+              style: "padding: 0.6rem 1.4rem; border-radius: 50px; font-weight: 600;",
               data: { bs_toggle: "modal", bs_target: "#confirmDeleteModal", guardian_id: guardian.id } do %>
             <i class="bi bi-trash-fill"></i>
             Delete Guardian
           <% end %>
 
-          <%= form.button class: "btn btn-success d-flex align-items-center gap-2" do %>
+          <%= form.button class: "btn btn-outline-success d-flex align-items-center gap-2 btn-glass",
+              style: "padding: 0.6rem 1.4rem; border-radius: 50px; font-weight: 600;" do %>
             <i class="bi bi-arrow-repeat"></i>
             Update Guardian
           <% end %>
         </div>
 
-        <%= link_to guardians_path, class: "btn btn-secondary d-flex align-items-center gap-2" do %>
+        <%= link_to guardians_path,
+            class: "btn btn-outline-secondary d-flex align-items-center gap-2 btn-glass",
+            style: "padding: 0.6rem 1.4rem; border-radius: 50px; font-weight: 600;" do %>
           <i class="bi bi-box-arrow-left"></i>
           Back to guardians
         <% end %>
