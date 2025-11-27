@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   get "cvAmer", to: "home#cvAmer"
   get "cvKen", to: "home#cvKen"
   get "cvRenz", to: "home#cvRenz"
+  get "admission", to: "home#admission"  
+  get "contact_us", to: "home#contact_us"
+  get "campus_tour", to: "home#campus_tour"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
