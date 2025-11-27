@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   resources :students
   get "about", to: "home#about_us"
   resources :departments
+  get "cvAmer", to: "home#cvAmer"
+  get "cvKen", to: "home#cvKen"
+  get "cvRenz", to: "home#cvRenz"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
