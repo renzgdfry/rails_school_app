@@ -255,3 +255,29 @@ function initNewsPagination() {
 // initialize when Turbo loads or page loads
 document.addEventListener("turbo:load", initNewsPagination);
 document.addEventListener("DOMContentLoaded", initNewsPagination);
+
+
+// HEAD-BOTTOM STRIPES ANIMATION
+function initHeadBottomStripes() {
+  const section = document.querySelector(".head-bottom-section");
+  if (!section) return;
+
+  function handleStripeAnimation() {
+    const rect = section.getBoundingClientRect();
+
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      section.classList.add("animate");
+    } else {
+      section.classList.remove("animate");
+    }
+  }
+
+  // Trigger on scroll
+  window.addEventListener("scroll", handleStripeAnimation);
+
+  // Trigger on initial load
+  handleStripeAnimation();
+}
+
+document.addEventListener("turbo:load", initHeadBottomStripes);
+document.addEventListener("DOMContentLoaded", initHeadBottomStripes);
