@@ -1,21 +1,22 @@
 <div id="<%= dom_id @section %>" class="border shadow-sm rounded-3 overflow-hidden mb-3">
   <div class="p-4 d-flex align-items-center gap-3 text-white"
        style="
-         background: linear-gradient(135deg, rgba(13, 60, 150, 0.9), rgba(70, 130, 180, 0.8));
+         background: #004a99;
          backdrop-filter: blur(8px);
          -webkit-backdrop-filter: blur(8px);
          border-bottom: 1px solid rgba(255, 255, 255, 0.15);
          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
        ">
     <i class="bi bi-diagram-3 fs-1" style="text-shadow: 0 0 6px rgba(173, 216, 230, 0.8);"></i>
+
     <div class="d-flex flex-column justify-content-center">
       <h3 class="mb-0 fw-bold"><%= @section.name %></h3>
+      <p class="mb-0 opacity-75"><%= @section.subject.name %> — <%= @section.subject.teacher.name %></p>
     </div>
   </div>
 
-
-  <div class="p-4 border-bottom">
-    <div class="row text-center g-3 justify-content-center">
+  <div class="p-4">
+    <div class="row text-center g-3">
       <div class="col-12 col-md-3">
         <p class="text-secondary small mb-1">Room</p>
         <h5><%= @section.room.presence || "—" %></h5>
@@ -39,26 +40,78 @@
   </div>
 </div>
 
+<div class="border rounded p-3 shadow-sm mb-3 table-responsive">
+  <h3>Students List</h3>
+
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th class="text-secondary fw-normal">Student Name</th>
+        <th class="text-secondary fw-normal">Program</th>
+        <th class="text-secondary fw-normal">Year Level</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @section.classlists.each do |classlist| %>
+        <tr class="fw-medium">
+          <td><%= classlist.student.name %></td>
+          <td><%= classlist.student.program %></td>
+          <td><%= classlist.student.year_level %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
 <div class="d-flex justify-content-between mt-3">
   <div class="d-flex gap-2">
-    <%= link_to edit_section_path(@section), class: "btn btn-success d-flex align-items-center gap-2" do %>
-      <i class="bi bi-gear-fill"></i>
-      Edit this section
+
+    <!-- DELETE BUTTON (matches student style) -->
+    <%= link_to "#",
+      class: "btn btn-outline-danger d-flex align-items-center gap-2 btn-glass",
+      style: "padding: 0.6rem 1.4rem; border-radius: 50px; font-weight: 600;",
+      data: { bs_toggle: "modal", bs_target: "#confirmDeleteModal", section_id: @section.id } do %>
+        <i class="bi bi-trash-fill"></i>
+        Destroy this section
     <% end %>
 
-    <%= button_to section_path(@section),
-      method: :delete,
-      class: "btn btn-danger d-flex align-items-center gap-2",
-      data: { turbo_confirm: "Are you sure you want to delete this section?" } do %>
-      <i class="bi bi-trash-fill"></i>
-      Destroy this section
+    <!-- EDIT BUTTON (matches student style) -->
+    <%= link_to edit_section_path(@section),
+      class: "btn btn-outline-success d-flex align-items-center gap-2 btn-glass",
+      style: "padding: 0.6rem 1.4rem; border-radius: 50px; font-weight: 600;" do %>
+        <i class="bi bi-gear-fill"></i>
+        Edit this section
     <% end %>
+
   </div>
 
-  <div>
-    <%= link_to sections_path, class: "btn btn-secondary d-flex align-items-center gap-2" do %>
+  <!-- BACK BUTTON (matches student style) -->
+  <%= link_to sections_path,
+    class: "btn btn-outline-secondary d-flex align-items-center gap-2 btn-glass",
+    style: "padding: 0.6rem 1.4rem; border-radius: 50px; font-weight: 600;" do %>
       <i class="bi bi-box-arrow-left"></i>
       Back to sections
-    <% end %>
+  <% end %>
+</div>
+
+<!-- Bootstrap Delete Confirmation Modal (unchanged) -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title" id="confirmDeleteLabel">Confirm Delete</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        Are you sure you want to delete this section?
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <a href="#" id="confirmDeleteBtn" class="btn btn-danger">Delete</a>
+      </div>
+    </div>
   </div>
 </div>
