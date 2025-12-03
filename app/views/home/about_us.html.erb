@@ -4,20 +4,15 @@
 body {
   margin: 0;
   padding: 0;
-
-  /* Background image */
-  background-image: url('<%= asset_path "background.jpg" %>'); /* replace with your file name */
-  background-size: cover;        /* makes the image cover the whole screen */
-  background-position: center;   /* centers the image */
-  background-repeat: no-repeat;  /* prevents tiling */
-  background-attachment: fixed;  /* optional: stays fixed when scrolling */
+  background: black;  /* plain black background */
   z-index: 0;
 }
 
 
+
 /* HERO SECTION */
 .hero-section {
-  height: 30vh;
+  height: 60vh;
   width: 100%;
   overflow: visible;
   position: relative;
@@ -66,48 +61,49 @@ body {
   padding: 30px;
   border-radius: 22px;
 
-  /* Neutral glass background */
-  background: rgba(245, 245, 245, 0.3);   /* soft light gray, semi-transparent */
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(220, 220, 220, 0.4);
+  /* Slightly dark glass background */
+  background: rgba(40, 40, 40, 0.25);   /* dark but light enough over black */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1); /* subtle border */
 
   /* Shadow for depth */
   box-shadow:
-    0 0 20px rgba(0, 0, 0, 0.15),
-    inset 0 0 15px rgba(255, 255, 255, 0.1);
+    0 0 20px rgba(0, 0, 0, 0.25),
+    inset 0 0 15px rgba(255, 255, 255, 0.05);
 
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-align: center;
-  color: #222;  /* dark text for readability */
+  color: #f1f1f1;  /* light text for readability */
 }
 
 .glass-card:hover {
   transform: translateY(-10px);
   box-shadow:
-    0 0 25px rgba(0, 0, 0, 0.2),
-    inset 0 0 20px rgba(255, 255, 255, 0.15);
+    0 0 25px rgba(0, 0, 0, 0.35),
+    inset 0 0 20px rgba(255, 255, 255, 0.08);
 }
 
-/* Card text styling */
 .glass-card h4 a {
-  color: #222;
-  font-weight: bold;
+  color: #f1f1f1;
 }
 
-.glass-card p {
-  color: rgba(50, 50, 50, 0.85);
+.glass-card p.text-mutedd {
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .glass-card .btn-outline-primary {
-  border-color: rgba(180, 180, 180, 0.7);
-  color: #222;
+  color: #f1f1f1;
+  border-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(60, 60, 60, 0.4);  /* lighter dark button */
 }
 
 .glass-card .btn-outline-primary:hover {
-  background-color: rgba(200, 200, 200, 0.7);
-  border-color: rgba(200, 200, 200, 0.7);
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.7);
+  color: #fff;
 }
+
 
 .big-member-card {
   display: flex;
@@ -208,13 +204,47 @@ body {
   border-color: #1c86ee;
   color: white;
 }
+  .overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4); /* darken video */
+  z-index: 1;
+}
+  /* Glassy blue buttons for big cards */
+.big-member-card .btn-outline-primary {
+  color: #e0f0ff;                       /* light text */
+  background: rgba(10, 60, 120, 0.45);  /* slightly dark blue glass */
+  border: 1px solid rgba(70, 140, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow:
+    0 4px 15px rgba(0, 0, 0, 0.25),
+    inset 0 0 10px rgba(255, 255, 255, 0.05);
+  transition: 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover effect */
+.big-member-card .btn-outline-primary:hover {
+  background: rgba(30, 90, 180, 0.6);  /* slightly lighter blue on hover */
+  border-color: rgba(90, 160, 255, 0.9);
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 12px rgba(255, 255, 255, 0.1);
+}
 </style>
 
 <!-- HERO -->
 <div class="hero-section about-hero-section d-flex align-items-center justify-content-center text-center text-white">
-  <%= image_tag "aboutus1.png", class: "hero-bg" %>
+  
+  <video class="hero-bg" autoplay loop muted playsinline>
+    <source src="<%= asset_path 'aboutbg.mp4' %>" type="video/mp4">
+  </video>
+
   <div class="overlay"></div>
   <h1 class="position-relative">About Us</h1>
+
 </div>
 
 <!-- PREVIEW CARDS -->
@@ -263,86 +293,101 @@ body {
     MEET THE TEAM
   </h2>
 
-  <!-- MEMBER 1 -->
-  <div class="big-member-card mb-5" id="member-1">
-    <div class="row align-items-center">
+ <!-- MEMBER 1 -->
+<div class="big-member-card mb-5" id="member-1">
+  <div class="row align-items-center">
 
-      <div class="col-md-4 text-center">
-        <img src="<%= asset_path 'Ken.png' %>" class="big-member-photo">
+    <div class="col-md-4 text-center">
+      <img src="<%= asset_path 'Ken.png' %>" class="big-member-photo">
+    </div>
+
+    <div class="col-md-8">
+      <h1 class="big-member-name">Kenneth Ronquillo</h1>
+      <h4 class="big-member-role">Computer Engineering</h4>
+      <p class="big-member-desc">
+        A passionate developer who specializes in building modern, scalable, and secure applications.
+        With years of hands-on experience, I focus on delivering clean and efficient solutions.
+      </p>
+
+      <div class="big-socials mb-3">
+        <a href="#" class="me-3"><i class="bi bi-github"></i></a>
+        <a href="#" class="me-3"><i class="bi bi-linkedin"></i></a>
+        <a href="mailto:someone@gmail.com"><i class="bi bi-envelope-fill"></i></a>
       </div>
 
-      <div class="col-md-8">
-        <h1 class="big-member-name">Kenneth Ronquillo</h1>
-        <h4 class="big-member-role">Computer Engineering</h4>
-        <p class="big-member-desc">
-          A passionate developer who specializes in building modern, scalable, and secure applications.
-          With years of hands-on experience, I focus on delivering clean and efficient solutions.
-        </p>
-
-        <div class="big-socials">
-          <a href="#" class="me-3"><i class="bi bi-github"></i></a>
-          <a href="#" class="me-3"><i class="bi bi-linkedin"></i></a>
-          <a href="mailto:someone@gmail.com"><i class="bi bi-envelope-fill"></i></a>
-        </div>
-
+      <!-- MORE INFO BUTTON -->
+      <div class="text-center mt-3">
+        <%= link_to "More Info", cvKen_path, class: "btn btn-outline-primary btn-lg" %>
       </div>
 
     </div>
+
   </div>
+</div>
 
+<!-- MEMBER 2 -->
+<div class="big-member-card mb-5" id="member-2">
+  <div class="row align-items-center">
 
-  <!-- MEMBER 2 -->
-  <div class="big-member-card mb-5" id="member-2">
-    <div class="row align-items-center">
+    <div class="col-md-4 text-center">
+      <img src="<%= asset_path 'Amer.png' %>" class="big-member-photo">
+    </div>
 
-      <div class="col-md-4 text-center">
-        <img src="<%= asset_path 'Amer.png' %>" class="big-member-photo">
+    <div class="col-md-8">
+      <h1 class="big-member-name">Amer Talastasin</h1>
+      <h4 class="big-member-role">Computer Engineering</h4>
+      <p class="big-member-desc">
+        Designing clean, user-centered interfaces is my passion.
+        I transform complex ideas into beautiful and intuitive experiences.
+      </p>
+
+      <div class="big-socials mb-3">
+        <a href="#" class="me-3"><i class="bi bi-github"></i></a>
+        <a href="#" class="me-3"><i class="bi bi-linkedin"></i></a>
+        <a href="mailto:someone@gmail.com"><i class="bi bi-envelope-fill"></i></a>
       </div>
 
-      <div class="col-md-8">
-        <h1 class="big-member-name">Amer Talastasin</h1>
-        <h4 class="big-member-role">Computer Engineering</h4>
-        <p class="big-member-desc">
-          Designing clean, user-centered interfaces is my passion.
-          I transform complex ideas into beautiful and intuitive experiences.
-        </p>
-
-        <div class="big-socials">
-          <a href="#" class="me-3"><i class="bi bi-github"></i></a>
-          <a href="#" class="me-3"><i class="bi bi-linkedin"></i></a>
-          <a href="mailto:someone@gmail.com"><i class="bi bi-envelope-fill"></i></a>
-        </div>
+      <!-- MORE INFO BUTTON -->
+      <div class="text-center mt-3">
+        <%= link_to "More Info", cvAmer_path, class: "btn btn-outline-primary btn-lg" %>
       </div>
 
     </div>
+
   </div>
+</div>
 
+<!-- MEMBER 3 -->
+<div class="big-member-card mb-5" id="member-3">
+  <div class="row align-items-center">
 
-  <!-- MEMBER 3 -->
-  <div class="big-member-card mb-5" id="member-3">
-    <div class="row align-items-center">
+    <div class="col-md-4 text-center">
+      <img src="<%= asset_path 'Renz.png' %>" class="big-member-photo">
+    </div>
 
-      <div class="col-md-4 text-center">
-        <img src="<%= asset_path 'Renz.png' %>" class="big-member-photo">
+    <div class="col-md-8">
+      <h1 class="big-member-name">Lorenz Godfrey Loterte</h1>
+      <h4 class="big-member-role">Computer Engineering</h4>
+      <p class="big-member-desc">
+        I ensure smooth workflow, structured planning, and productive coordination across all teams.
+        My goal is to deliver successful results through strong leadership and collaboration.
+      </p>
+
+      <div class="big-socials mb-3">
+        <a href="#" class="me-3"><i class="bi bi-github"></i></a>
+        <a href="#" class="me-3"><i class="bi bi-linkedin"></i></a>
+        <a href="mailto:someone@gmail.com"><i class="bi bi-envelope-fill"></i></a>
       </div>
 
-      <div class="col-md-8">
-        <h1 class="big-member-name">Lorenz Godfrey Loterte</h1>
-        <h4 class="big-member-role">Computer Engineering</h4>
-        <p class="big-member-desc">
-          I ensure smooth workflow, structured planning, and productive coordination across all teams.
-          My goal is to deliver successful results through strong leadership and collaboration.
-        </p>
-
-        <div class="big-socials">
-          <a href="#" class="me-3"><i class="bi bi-github"></i></a>
-          <a href="#" class="me-3"><i class="bi bi-linkedin"></i></a>
-          <a href="mailto:someone@gmail.com"><i class="bi bi-envelope-fill"></i></a>
-        </div>
+      <!-- MORE INFO BUTTON -->
+      <div class="text-center mt-3">
+        <%= link_to "More Info", cvRenz_path, class: "btn btn-outline-primary btn-lg" %>
       </div>
 
     </div>
+
   </div>
+</div>
 
 </section>
 
