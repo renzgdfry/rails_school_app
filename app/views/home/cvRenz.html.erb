@@ -1,0 +1,621 @@
+<% content_for :no_container, true %>
+
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+  }
+
+  .bg-page {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .bg-section {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bg-1 {
+    background:
+      url('<%= asset_path "Renz1.jpg" %>') center / cover no-repeat;
+  }
+
+  .bg-2 {
+    background:
+     linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.55)),
+      url('<%= asset_path "Renz2.jpg" %>') center / cover no-repeat;
+  }
+
+  .bg-3 {
+    background:
+      url('<%= asset_path "Renz3.jpg" %>') center / cover no-repeat;
+  }
+
+/* FIRST SECTION */
+.hero-text {
+  position: absolute;
+  left: 8%;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  text-align: left;
+  font-family: "Arial", "Helvetica", sans-serif;
+}
+
+.hero-text .name {
+  padding-left: 7px;
+  font-size: 3rem;
+  font-weight: 400;           
+  letter-spacing: 4px;
+  margin-bottom: 1px;         
+}
+
+.hero-text .title {
+  font-size: 9.9rem;
+  font-weight: 900;
+  -webkit-text-stroke: 3px #fff;
+  margin-bottom: 6px;
+  line-height: 1;
+}
+
+.hero-text .subtitle {
+  padding-left: 7px;
+  font-size: 2rem;
+  font-weight: 300;
+  letter-spacing: 23px;
+  opacity: 0.85;
+  text-align: center;
+  width: 100%;
+  max-width: fit-content;
+  margin: 0 auto 28px auto;    
+}
+
+.hero-text .contact-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 34px;
+  border-radius: 999px;
+  background: rgba(74,163,255,0.15);
+  border: 1.5px solid #4aa3ff;
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.hero-text .contact-btn:hover {
+  background: rgba(74,163,255,0.3);
+  transform: translateY(-2px);
+}
+
+.bg-section.bg-1 .big-socials {
+  position: absolute;
+  bottom: 40px;
+  left: 8%;
+  display: flex;
+  align-items: center;
+}
+
+.bg-section.bg-1 .big-socials a {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(74,163,255,0.15);
+  border: 1.5px solid #4aa3ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.3rem;
+  margin-right: 14px;
+  opacity: 1;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.bg-section.bg-1 .big-socials a:hover {
+  background: rgba(74,163,255,0.3);
+  transform: translateY(-3px);
+}
+
+/* SECOND SECTION */
+
+.bg-section.bg-2 {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-left: 6%;
+  padding-right: 6%;
+  color: #fff;
+}
+
+/* 3-column layout */
+.about-container {
+  display: grid;
+  grid-template-columns: 320px 40px 1fr;
+  align-items: center;
+  width: 100%;
+  max-width: 1400px;
+}
+
+.education-content {
+  padding-right: 20px;
+}
+
+.education-title {
+  font-size: 2rem;
+  letter-spacing: 6px;
+  margin-bottom: 40px;
+  opacity: 0.85;
+}
+
+.education-item {
+  margin-bottom: 34px;
+}
+
+.education-level {
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  opacity: 0.55;
+  margin-bottom: 6px;
+}
+
+.education-item p {
+  font-size: 1.15rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
+.about-line {
+  width: 4px;
+  height: 480px;
+  background: linear-gradient(
+    to bottom,
+    #4aa3ff,
+    rgba(74,163,255,0.25)
+  );
+  justify-self: center;
+}
+
+.about-content {
+  max-width: 620px;
+}
+
+.about-title {
+  font-size: 2rem;
+  letter-spacing: 6px;
+  margin-bottom: 12px;
+  opacity: 0.85;
+}
+
+.about-email {
+  font-size: 1rem;
+  opacity: 0.6;
+  margin-bottom: 28px;
+}
+
+.about-text {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  opacity: 0.9;
+  margin-bottom: 46px;
+}
+
+.about-address p {
+  font-size: 0.95rem;
+  opacity: 0.6;
+  margin: 0;
+}
+
+/* THIRD SECTION*/
+
+.bg-section.bg-3 {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0 6%;
+  color: #fff;
+}
+
+.skills-container {
+  display: grid;
+  grid-template-columns: 420px 40px 1fr;
+  width: 100%;
+  max-width: 1400px;
+  align-items: start;
+}
+
+.skills-title {
+  font-size: 1.6rem;
+  letter-spacing: 5px;
+  margin-bottom: 32px;
+  opacity: 0.85;
+}
+
+.skills-title.mt {
+  margin-top: 60px;
+}
+
+.skills-left .skill {
+  margin-bottom: 24px;
+}
+
+.skill span {
+  font-size: 1.1rem;
+  opacity: 0.85;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.skill-bar {
+  width: 100%;
+  height: 4px;
+  background: rgba(255,255,255,0.15);
+}
+
+.skill-bar div {
+  height: 100%;
+  background: #4aa3ff;
+}
+
+.skills-line {
+  width: 4px;
+  height: 800px;
+  background: linear-gradient(
+    to bottom,
+    #4aa3ff,
+    rgba(74,163,255,0.2)
+  );
+  justify-self: center;
+}
+
+.skills-right {
+  max-width: 620px;
+}
+
+.experience-item {
+  margin-bottom: 26px;
+}
+
+.experience-item span {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+.experience-item p {
+  font-size: 1rem;
+  opacity: 0.7;
+  margin: 6px 0 0;
+}
+
+.can-do {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.can-do li {
+  font-size: 1.1rem;
+  opacity: 0.85;
+  margin-bottom: 10px;
+}
+
+.interests {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.interests div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.1rem;
+  opacity: 0.85;
+}
+
+.interests i {
+  font-size: 1.6rem;
+  color: #4aa3ff;
+}
+
+/* LET’S CONNECT – LEFT */
+.connect-content {
+  align-self: start;
+}
+
+.connect-content {
+  margin-top: 100px;
+  max-width: 280px;
+}
+
+.connect-title {
+  font-size: 1.5rem;
+  letter-spacing: 5px;
+  margin-bottom: 36px;
+  opacity: 0.9;
+}
+
+.connect-item {
+  margin-bottom: 28px;
+}
+
+.connect-item i {
+  font-size: 1.4rem;
+  color: #4aa3ff;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.connect-item span {
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  opacity: 0.6;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.connect-item p {
+  font-size: 1.1rem;
+  opacity: 0.85;
+  margin: 0;
+}
+
+.connect-form textarea {
+  width: 100%;
+  height: 120px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  padding: 14px;
+  font-size: 0.95rem;
+  resize: none;
+  margin-top: 24px;
+  margin-bottom: 16px;
+}
+
+.connect-form textarea::placeholder {
+  color: rgba(255,255,255,0.5);
+}
+
+.connect-form button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 999px;
+  background: rgba(74,163,255,0.15);
+  border: 1.5px solid #4aa3ff;
+  color: #fff;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.connect-form button:hover {
+  background: rgba(74,163,255,0.3);
+  transform: translateY(-2px);
+}
+
+
+</style>
+
+
+
+
+html {
+  scroll-behavior: smooth;
+}
+<div class="bg-page">
+
+  <section class="bg-section bg-1">
+  <div class="hero-text">
+    <div class="name">LORENZ GODFREY</div>
+    <div class="title">LOTERTE</div>
+    <div class="subtitle">COMPUTER ENGINEER</div>
+    <a href="#connect" class="contact-btn">Contact Me</a>
+  </div>
+  <div class="big-socials glass-socials">
+  <a href="https://github.com/renzgdfry" target="_blank" class="me-3">
+    <i class="bi bi-github"></i>
+  </a>
+  <a href="https://www.linkedin.com/in/lorenz-godfrey-loterte-7b7586296/" target="_blank" class="me-3">
+    <i class="bi bi-linkedin"></i>
+  </a>
+  <a href="mailto:lloterte@gbox.adnu.edu.ph">
+    <i class="bi bi-envelope-fill"></i>
+  </a>
+</div>
+</section>
+
+
+  <section class="bg-section bg-2">
+  <div class="about-container">
+
+    <!-- LEFT: EDUCATION -->
+    <div class="education-content">
+      <h3 class="education-title">EDUCATION</h3>
+
+      <div class="education-item">
+        <span class="education-level">Primary</span>
+        <p>Milaor Central School</p>
+      </div>
+
+      <div class="education-item">
+        <span class="education-level">Secondary</span>
+        <p>Pili Parochial School Inc.</p>
+      </div>
+
+      <div class="education-item">
+        <span class="education-level">Tertiary</span>
+        <p>Ateneo de Naga University</p>
+      </div>
+    </div>
+
+    <!-- CENTER LINE -->
+    <div class="about-line"></div>
+
+    <!-- RIGHT: ABOUT -->
+    <div class="about-content">
+      <h2 class="about-title">ABOUT</h2>
+
+      <p class="about-email">lloterte@gbox.adnu.edu.ph</p>
+
+      <p class="about-text">
+        Computer Engineer with hands-on experience in software
+        development, system administration, and hardware
+        integration. Specializing in building, maintaining,
+        and optimizing reliable computing systems for academic
+        and real-world environments. I am capable of diagnosing
+        complex technical issues, implementing efficient
+        solutions, and adapting quickly to emerging
+        technologies while maintaining secure and
+        high-performance system operations.
+      </p>
+
+      <div class="about-address">
+        <p>San Fernando, Camarines Sur</p>
+        <p>Zone 3, Grijalvo</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+  <section class="bg-section bg-3" id="connect">
+  <div class="skills-container">
+
+    <!-- LEFT COLUMN -->
+    <div class="skills-left">
+
+      <h3 class="skills-title">SOFTWARE SKILLS</h3>
+
+      <div class="skill">
+        <span>Web Development</span>
+        <div class="skill-bar"><div style="width: 90%"></div></div>
+      </div>
+
+      <div class="skill">
+        <span>System Administration</span>
+        <div class="skill-bar"><div style="width: 85%"></div></div>
+      </div>
+
+      <div class="skill">
+        <span>Database Management</span>
+        <div class="skill-bar"><div style="width: 80%"></div></div>
+      </div>
+
+      <div class="skill">
+        <span>Networking & Troubleshooting</span>
+        <div class="skill-bar"><div style="width: 75%"></div></div>
+      </div>
+
+      <h3 class="skills-title mt">LANGUAGES</h3>
+
+      <div class="skill">
+        <span>English</span>
+        <div class="skill-bar"><div style="width: 90%"></div></div>
+      </div>
+
+      <div class="skill">
+        <span>Filipino</span>
+        <div class="skill-bar"><div style="width: 95%"></div></div>
+      </div>
+
+      <div class="skill">
+        <span>Bicol</span>
+        <div class="skill-bar"><div style="width: 85%"></div></div>
+      </div>
+
+    </div>
+
+    <!-- CENTER LINE -->
+    <div class="skills-line"></div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="skills-right">
+
+      <h3 class="skills-title">EXPERIENCE</h3>
+
+      <div class="experience-item">
+        <span>Junior Computer Engineer</span>
+        <p>Handled system maintenance, network setup, and technical support for internal operations.</p>
+      </div>
+
+      <div class="experience-item">
+        <span>IT Support Assistant</span>
+        <p>Provided hardware and software troubleshooting, system updates, and user support.</p>
+      </div>
+
+      <div class="experience-item">
+        <span>Freelance Tech Consultant</span>
+        <p>Assisted clients with system optimization, web deployment, and technical documentation.</p>
+      </div>
+
+      <h3 class="skills-title mt">WHAT CAN I DO?</h3>
+
+      <ul class="can-do">
+        <li>System Setup & Maintenance</li>
+        <li>Web Application Development</li>
+        <li>Technical Troubleshooting</li>
+        <li>Network Configuration</li>
+      </ul>
+
+      <h3 class="skills-title mt">INTERESTS</h3>
+
+      <div class="interests">
+        <div><i class="bi bi-laptop"></i><span>Technology</span></div>
+        <div><i class="bi bi-controller"></i><span>Gaming</span></div>
+        <div><i class="bi bi-music-note-beamed"></i><span>Music</span></div>
+        <div><i class="bi bi-camera"></i><span>Photography</span></div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="connect-content">
+
+  <h3 class="connect-title">LET’S CONNECT</h3>
+
+  <div class="connect-item">
+    <i class="bi bi-envelope"></i>
+    <span>Email Me</span>
+    <p>lloterte@gbox.adnu.edu.ph</p>
+  </div>
+
+  <div class="connect-item">
+    <i class="bi bi-telephone"></i>
+    <span>Call Me</span>
+    <p>0927 975 9824</p>
+  </div>
+
+  <form class="connect-form">
+    <textarea placeholder="Write your message here..."></textarea>
+    <button type="submit">
+      <i class="bi bi-send"></i>
+      Send Message
+    </button>
+  </form>
+
+</div>
+</section>
