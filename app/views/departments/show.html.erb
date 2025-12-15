@@ -1,3 +1,15 @@
+<style>
+body {
+  background: linear-gradient(
+    to bottom,
+    #004a99 10%,
+    rgba(0, 74, 153, 0.5) 70%,
+    rgba(0, 74, 153, 0) 100%
+  );
+  min-height: 100vh;
+}
+</style>
+
 <div id="<%= dom_id @department %>" class="border shadow-sm rounded-3 overflow-hidden mb-3">
   <!-- Department Header -->
   <div class="p-4 d-flex align-items-center gap-3 text-white"
@@ -34,8 +46,8 @@
   </div>
 </div>
 
-<!-- Students Table -->
-<div class="mb-4 table-responsive">
+<!-- Students Table Container -->
+<div class="border rounded p-3 shadow-sm mb-3 table-responsive">
   <h4 class="fw-bold mb-3">List of Students</h4>
   <table class="table table-striped table-hover align-middle">
     <thead>
@@ -59,8 +71,8 @@
   </table>
 </div>
 
-<!-- Teachers Table -->
-<div class="mb-4 table-responsive">
+<!-- Teachers Table Container -->
+<div class="border rounded p-3 shadow-sm mb-3 table-responsive">
   <h4 class="fw-bold mb-3">List of Teachers</h4>
   <table class="table table-striped table-hover align-middle">
     <thead>
@@ -86,8 +98,8 @@
   </table>
 </div>
 
-<!-- Staff Table -->
-<div class="mb-4 table-responsive">
+<!-- Staff Table Container -->
+<div class="border rounded p-3 shadow-sm mb-3 table-responsive">
   <h4 class="fw-bold mb-3">List of Staff</h4>
   <table class="table table-striped table-hover align-middle">
     <thead>
@@ -110,6 +122,9 @@
     </tbody>
   </table>
 </div>
+
+
+
 
 <!-- Action Buttons -->
 <div class="d-flex justify-content-between mt-3">

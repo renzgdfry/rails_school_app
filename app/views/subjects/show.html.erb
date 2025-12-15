@@ -1,3 +1,15 @@
+<style>
+body {
+  background: linear-gradient(
+    to bottom,
+    #004a99 10%,
+    rgba(0, 74, 153, 0.5) 70%,
+    rgba(0, 74, 153, 0) 100%
+  );
+  min-height: 100vh;
+}
+</style>
+
 <div id="<%= dom_id @subject %>" class="border shadow-sm rounded-3 overflow-hidden mb-3">
   <div class="p-4 d-flex align-items-center gap-3 text-white"
        style="
@@ -8,14 +20,15 @@
          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
        ">
     <i class="bi bi-book-fill fs-1" style="text-shadow: 0 0 6px rgba(173, 216, 230, 0.8);"></i>
+
     <div class="d-flex flex-column justify-content-center">
       <h3 class="mb-0 fw-bold"><%= @subject.name %></h3>
-      <p class="mb-0 opacity-75"></p>
+      <p class="mb-0 opacity-75"><%= @subject.teacher&.name || "—" %></p>
     </div>
   </div>
 
-  <div class="p-4 border-bottom">
-    <div class="row text-center g-3 justify-content-center">
+  <div class="p-4">
+    <div class="row text-center g-3">
       <div class="col-12 col-md-3">
         <p class="text-secondary small mb-1">Number of Units</p>
         <h5><%= @subject.number_of_units %></h5>
@@ -34,41 +47,41 @@
   </div>
 </div>
 
-  <% @subject.sections.each do |section| %>
-    <div class="border rounded p-3 mb-3">
-      <div class="d-flex justify-content-between align-items-center mb-2">
-        <h5 class="fw-bold mb-0">
-          Section: <%= section.name %>
-        </h5>
+<% @subject.sections.each do |section| %>
+  <div class="border rounded p-3 shadow-sm mb-3 table-responsive">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <h5 class="fw-bold mb-0">
+        Section: <%= section.name %>
+      </h5>
 
-        <small class="fw-semibold" style="color: #000; font-size: 1.25rem;">
-  Room: <%= section.room %> |
-  Time Slot: <%= section.time_slot %> |
-  Students: <%= section.number_of_students %>
-</small>
-      </div>
-
-      <table class="table table-striped table-hover align-middle">
-        <thead>
-          <tr>
-            <th class="text-secondary fw-normal">Student Name</th>
-            <th class="text-secondary fw-normal">Program</th>
-            <th class="text-secondary fw-normal">Year Level</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% section.classlists.each do |classlist| %>
-            <tr class="fw-medium">
-              <td><%= classlist.student.name %></td>
-              <td><%= classlist.student.program %></td>
-              <td><%= classlist.student.year_level %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <small class="fw-semibold" style="color: #000; font-size: 1.25rem;">
+        Room: <%= section.room %> |
+        Time Slot: <%= section.time_slot %> |
+        Students: <%= section.number_of_students %>
+      </small>
     </div>
-  <% end %>
-</div>
+
+    <table class="table table-striped table-hover align-middle">
+      <thead>
+        <tr>
+          <th class="text-secondary fw-normal">Student Name</th>
+          <th class="text-secondary fw-normal">Program</th>
+          <th class="text-secondary fw-normal">Year Level</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% section.classlists.each do |classlist| %>
+          <tr class="fw-medium">
+            <td><%= classlist.student.name %></td>
+            <td><%= classlist.student.program %></td>
+            <td><%= classlist.student.year_level %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
 
 <div class="d-flex justify-content-between mt-3">
   <div class="d-flex gap-2">
@@ -98,13 +111,13 @@
   <% end %>
 </div>
 
-<!-- Delete Confirmation Modal -->
+<!-- Bootstrap Delete Confirmation Modal -->
 <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header bg-danger text-white">
         <h5 class="modal-title" id="confirmDeleteLabel">Confirm Delete</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
       </div>
 
       <div class="modal-body">
