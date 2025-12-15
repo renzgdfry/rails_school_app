@@ -1,0 +1,243 @@
+<% content_for :no_container, true %>
+
+<style>
+/* --- GLOBAL --- */
+body {
+  margin: 0;
+  padding: 0;
+  background: black;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+/* --- HERO SECTION --- */
+.hero-section {
+  width: 100%;
+  height: 40vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+  
+.us-hero-section {
+  width: 100vw;
+  margin-top: calc(50% - 50vw);
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.65);
+  z-index: 0;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+}
+
+.hero-section h1 {
+  position: relative;
+  z-index: 2;
+  font-size: 5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: white;
+}
+
+/* --- GLASS CARD --- */
+.glass-card {
+  background: rgba(40,40,40,0.35);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 20px;
+  padding: 35px;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 0 25px rgba(0,0,0,0.35);
+  color: white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+}
+
+/* --- FORM --- */
+.form-control {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: white;
+}
+
+.form-control::placeholder {
+  color: rgba(255,255,255,0.5);
+}
+
+.form-control:focus {
+  background: rgba(255,255,255,0.12);
+  color: white;
+  border-color: #4db8ff;
+  box-shadow: none;
+}
+
+.btn-submit {
+  background: #004a99;
+  border: none;
+  font-weight: 600;
+}
+
+.btn-submit:hover {
+  background: #1c86ee;
+}
+
+/* --- CONTACT CARDS --- */
+.contact-cards-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contact-card {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border-radius: 20px;
+  background: rgba(40,40,40,0.25);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.35);
+}
+
+.icon-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(0,74,153,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin-right: 15px;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+</style>
+
+<!-- HERO -->
+<div class="hero-section us-hero-section">
+  <video class="hero-bg" autoplay loop muted playsinline>
+    <source src="<%= asset_path 'aboutbg.mp4' %>" type="video/mp4">
+  </video>
+  <div class="overlay"></div>
+  <h1>Contact Us</h1>
+</div>
+
+<!-- CONTACT CONTENT -->
+<div class="container py-5">
+  <div class="row g-4">
+
+    <!-- FORM COLUMN -->
+    <div class="col-lg-6">
+      <div class="glass-card h-100">
+        <h2 class="mb-3">Get In Touch</h2>
+        <p class="mb-4 text-white">Fill out the form and we’ll respond as soon as possible.</p>
+
+        <div id="successMessage" class="alert alert-success d-none">
+          ✓ Message sent successfully!
+        </div>
+
+        <form id="contactForm">
+          <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" placeholder="you@email.com" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Subject</label>
+            <input type="text" class="form-control" required>
+          </div>
+          <div class="mb-4">
+            <label class="form-label">Message</label>
+            <textarea class="form-control" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-submit w-100" style="color: white;">Send Message</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- INFO CARDS COLUMN -->
+    <div class="col-lg-6">
+      <div class="glass-card h-100 p-4">
+        <h2 class="mb-4">Contact Information</h2>
+        <p class="text-white mb-4">Reach out to us through any of these channels.</p>
+
+        <div class="contact-cards-wrapper">
+
+          <div class="contact-card">
+            <div class="icon-circle">
+              <i class="bi bi-telephone-fill"></i>
+            </div>
+            <div>
+              <div class="fw-semibold">Phone</div>
+              <div>(+63) 96-155-80206</div>
+            </div>
+          </div>
+
+          <div class="contact-card">
+            <div class="icon-circle">
+              <i class="bi bi-envelope-fill"></i>
+            </div>
+            <div>
+              <div class="fw-semibold">Email</div>
+              <div>cognitectcollege_contact@university.edu</div>
+            </div>
+          </div>
+
+          <div class="contact-card">
+            <div class="icon-circle">
+              <i class="bi bi-geo-alt-fill"></i>
+            </div>
+            <div>
+              <div class="fw-semibold">Address</div>
+              <div>123 University Avenue City, State 12345</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const form = document.getElementById('contactForm');
+const successMessage = document.getElementById('successMessage');
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  form.reset();
+  successMessage.classList.remove('d-none');
+  setTimeout(() => successMessage.classList.add('d-none'), 4000);
+});
+</script>
