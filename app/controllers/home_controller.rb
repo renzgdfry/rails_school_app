@@ -4,4 +4,8 @@ class HomeController < ApplicationController
 
   def about_us
   end
+
+  def admission
+    @student = Student.new
+  end
 end

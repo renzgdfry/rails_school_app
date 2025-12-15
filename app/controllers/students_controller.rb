@@ -20,22 +20,38 @@ class StudentsController < ApplicationController
   end
 
   # POST /students or /students.json
-  def create
-    @student = Student.new(student_params)
+def create
+  @student = Student.new(student_params)
 
-    respond_to do |format|
-      if @student.save
+  respond_to do |format|
+    if @student.save
+      @student.department.increment!(:student_count)
 
-        @student.department.increment!(:student_count)
-
+      
+      if params[:admission_form]
+        format.html do
+          flash[:notice] = "🎉 Your application has been submitted successfully!"
+          redirect_back fallback_location: admission_path
+        end
+        format.json { render json: { message: "Application submitted successfully" }, status: :created }
+      else
+        
         format.html { redirect_to @student, notice: "Student was successfully created." }
         format.json { render :show, status: :created, location: @student }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @student.errors, status: :unprocessable_entity }
       end
+    else
+      format.html do
+        if params[:admission_form]
+          flash[:alert] = "❌ Please fix the errors below."
+          redirect_back fallback_location: admission_path
+        else
+          render :new, status: :unprocessable_entity
+        end
+      end
+      format.json { render json: @student.errors, status: :unprocessable_entity }
     end
   end
+end
 
   # PATCH/PUT /students/1 or /students/1.json
   def update
