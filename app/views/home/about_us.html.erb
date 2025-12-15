@@ -10,9 +10,6 @@ body {
   overflow-x: hidden;
 }
 
-
-
-/* HERO SECTION */
 .hero-section {
   height: 60vh;
   width: 100%;
@@ -21,7 +18,6 @@ body {
   z-index: 0;
 }
 
-/* FORCE FULL WIDTH – removes white left/right gap */
 .about-hero-section {
   width: 100vw;
   margin-top: calc(50% - 50vw);
@@ -40,7 +36,6 @@ body {
 }
 
 
-/* HERO TEXT */
 .hero-section h1 {
   z-index: 3;
   font-weight: 800;
@@ -49,7 +44,6 @@ body {
   text-transform: uppercase;
 }
 
-/* GLASS PREVIEW CARDS – Neutral glass to complement dark blue hero */
 .preview-section-wrapper {
   margin-top: -120px; 
   position: relative;
@@ -63,20 +57,18 @@ body {
   padding: 30px;
   border-radius: 22px;
 
-  /* Slightly dark glass background */
-  background: rgba(40, 40, 40, 0.25);   /* dark but light enough over black */
+  background: rgba(40, 40, 40, 0.25);  
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1); /* subtle border */
+  border: 1px solid rgba(255, 255, 255, 0.1); 
 
-  /* Shadow for depth */
   box-shadow:
     0 0 20px rgba(0, 0, 0, 0.25),
     inset 0 0 15px rgba(255, 255, 255, 0.05);
 
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-align: center;
-  color: #f1f1f1;  /* light text for readability */
+  color: #f1f1f1; 
 }
 
 .glass-card:hover {
@@ -97,7 +89,7 @@ body {
 .glass-card .btn-outline-primary {
   color: #f1f1f1;
   border-color: rgba(255, 255, 255, 0.5);
-  background-color: rgba(60, 60, 60, 0.4);  /* lighter dark button */
+  background-color: rgba(60, 60, 60, 0.4);  
 }
 
 .glass-card .btn-outline-primary:hover {
@@ -114,27 +106,24 @@ body {
   border-radius: 25px;
   min-height: 60vh;
 
-  /* Lighter dark blue glass background */
-  background: rgba(40, 60, 100, 0.55);  /* lighter dark-blue glass */
+  background: rgba(40, 60, 100, 0.55); 
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(80, 130, 200, 0.35); /* subtle blue border */
+  border: 1px solid rgba(80, 130, 200, 0.35); 
 
-  /* Shadows to give depth */
   box-shadow:
     0 0 30px rgba(30, 70, 140, 0.25),
     inset 0 0 20px rgba(255, 255, 255, 0.05);
 
-  color: white;           /* text color remains readable */
+  color: white;           
   transition: transform 0.3s ease;
   margin-bottom: 50px;
 }
 
 .big-member-card:hover {
-  transform: translateY(-10px);  /* subtle lift */
+  transform: translateY(-10px);  
 }
 
-/* Member Photo */
 .big-member-photo {
   width: 300px;
   height: 300px;
@@ -143,7 +132,6 @@ body {
   box-shadow: 0 10px 20px rgba(0,0,0,0.4);
 }
 
-/* Name and Role Text */
 .big-member-name {
   font-size: 3.5rem;
   font-weight: bold;
@@ -162,7 +150,6 @@ body {
   line-height: 1.6;
 }
 
-/* Social Icons */
 .big-socials {
   margin-top: 25px;
 }
@@ -187,19 +174,17 @@ body {
   font-family: "Arial", "Helvetica", sans-serif;
 }
 
-/* Member role text */
 .glass-card p.text-mutedd {
-  color: white;  /* pure white */
-  opacity: 0.5;  /* optional: slightly softer if needed */
+  color: white; 
+  opacity: 0.5;  
 }
 
-/* Make big-member-card See Profile buttons identical to Read More buttons */
 .big-member-card .btn-outline-primary {
-  color: #f1f1f1;                  /* white text like Read More */
+  color: #f1f1f1;                 
   border-color: rgba(255, 255, 255, 0.5);
   background-color: rgba(60, 60, 60, 0.4);
-  padding: 0.375rem 0.75rem;       /* same as btn-sm */
-  font-size: 0.875rem;             /* same as btn-sm */
+  padding: 0.375rem 0.75rem;     
+  font-size: 0.875rem;            
   line-height: 1.5;
   border-radius: 0.25rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
@@ -220,10 +205,9 @@ body {
     inset 0 0 20px rgba(255, 255, 255, 0.05);
 }
 
-  /* Glassy blue buttons for big cards */
 .big-member-card .btn-outline-primary {
-  color: #e0f0ff;                       /* light text */
-  background: rgba(10, 60, 120, 0.45);  /* slightly dark blue glass */
+  color: #e0f0ff;                       
+  background: rgba(10, 60, 120, 0.45);
   border: 1px solid rgba(70, 140, 255, 0.7);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -233,9 +217,8 @@ body {
   transition: 0.3s ease, transform 0.3s ease;
 }
 
-/* Hover effect */
 .big-member-card .btn-outline-primary:hover {
-  background: rgba(30, 90, 180, 0.6);  /* slightly lighter blue on hover */
+  background: rgba(30, 90, 180, 0.6);  
   border-color: rgba(90, 160, 255, 0.9);
   color: #fff;
   transform: translateY(-3px);
