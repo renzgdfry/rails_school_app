@@ -193,25 +193,33 @@ body {
   opacity: 0.5;  /* optional: slightly softer if needed */
 }
 
-/* Read More button */
-.glass-card .btn-outline-primary {
-  color: white;                  /* text white */
-  border-color: #004a99;         /* bright blue border */
-  background-color: #004a99;     /* blue button background */
-  transition: 0.3s ease;
+/* Make big-member-card See Profile buttons identical to Read More buttons */
+.big-member-card .btn-outline-primary {
+  color: #f1f1f1;                  /* white text like Read More */
+  border-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(60, 60, 60, 0.4);
+  padding: 0.375rem 0.75rem;       /* same as btn-sm */
+  font-size: 0.875rem;             /* same as btn-sm */
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
-.glass-card .btn-outline-primary:hover {
-  background-color: #1c86ee;     /* slightly darker blue on hover */
-  border-color: #1c86ee;
-  color: white;
+.big-member-card .btn-outline-primary:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.7);
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35), inset 0 0 12px rgba(255, 255, 255, 0.1);
 }
-  .overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4); /* darken video */
-  z-index: 1;
+
+.big-member-card {
+  box-shadow:
+    0 0 20px rgba(255, 255, 255, 0.15),
+    0 0 40px rgba(70, 140, 255, 0.25),
+    inset 0 0 20px rgba(255, 255, 255, 0.05);
 }
+
   /* Glassy blue buttons for big cards */
 .big-member-card .btn-outline-primary {
   color: #e0f0ff;                       /* light text */
@@ -289,103 +297,101 @@ body {
 
   </div>
 
+<!-- TEAM SECTION -->
 <section class="team-section mt-5">
 
-  <<h2 class="about-title mb-5">
+  <h2 class="about-title mb-5">
     MEET THE TEAM
   </h2>
 
- <!-- MEMBER 1 -->
-<div class="big-member-card mb-5" id="member-1">
-  <div class="row align-items-center">
+  <!-- MEMBER 1 -->
+  <div class="big-member-card mb-5" id="member-1">
+    <div class="row align-items-center">
 
-    <div class="col-md-4 text-center">
-      <img src="<%= asset_path 'Ken.png' %>" class="big-member-photo">
-    </div>
-
-    <div class="col-md-8">
-      <h1 class="big-member-name">Kenneth Ronquillo</h1>
-      <h4 class="big-member-role">Computer Engineering</h4>
-      <p class="big-member-desc">
-        A passionate developer with a strong foundation in software engineering and systems logic. Specializes in creating efficient, scalable, and clean code structures. Always eager to explore new technologies, automate tasks, and bring digital ideas to life through intuitive and well-built applications.
-      </p>
-
-      <div class="big-socials mb-3">
-        <a href="https://github.com/kenronquillo15" target="_blank" class="me-3"><i class="bi bi-github"></i></a>
-        <a href="https://www.linkedin.com/in/kenneth-ronquillo-146597296/" target="_blank" class="me-3"><i class="bi bi-linkedin"></i></a>
-        <a href="mailto:keronquillo@gbox.adnu.edu.ph"><i class="bi bi-envelope-fill"></i></a>
+      <div class="col-md-4 text-center">
+        <img src="<%= asset_path 'Ken.png' %>" class="big-member-photo">
       </div>
 
-      <div class="text-center mt-3">
-        <%= link_to "More Info", cvKen_path, class: "btn btn-outline-primary btn-lg" %>
+      <div class="col-md-8 position-relative">
+        <h1 class="big-member-name">Kenneth Ronquillo</h1>
+        <h4 class="big-member-role">Computer Engineering</h4>
+        <p class="big-member-desc">
+          A passionate developer with a strong foundation in software engineering and systems logic. Specializes in creating efficient, scalable, and clean code structures. Always eager to explore new technologies, automate tasks, and bring digital ideas to life through intuitive and well-built applications.
+        </p>
+
+        <div class="big-socials mb-3 d-flex justify-content-between align-items-center">
+          <div>
+            <a href="https://github.com/kenronquillo15" target="_blank" class="me-3"><i class="bi bi-github"></i></a>
+            <a href="https://www.linkedin.com/in/kenneth-ronquillo-146597296/" target="_blank" class="me-3"><i class="bi bi-linkedin"></i></a>
+            <a href="mailto:keronquillo@gbox.adnu.edu.ph"><i class="bi bi-envelope-fill"></i></a>
+          </div>
+          <div>
+            <%= link_to "See Profile", cvKen_path, class: "btn btn-outline-primary btn-sm" %>
+          </div>
+        </div>
+
       </div>
-
-    </div>
-  </div>
-</div>
-
-
-<!-- MEMBER 2 -->
-<div class="big-member-card mb-5" id="member-2">
-  <div class="row align-items-center">
-
-    <div class="col-md-4 text-center">
-      <img src="<%= asset_path 'Amer.png' %>" class="big-member-photo">
-    </div>
-
-    <div class="col-md-8">
-      <h1 class="big-member-name">Amer Talastasin</h1>
-      <h4 class="big-member-role">Computer Engineering</h4>
-      <p class="big-member-desc">
-        A creative thinker who focuses on crafting user-friendly interfaces and visually appealing layouts. Skilled in transforming concepts into polished designs that enhance usability and engagement. Detail-oriented, innovative, and committed to creating clean, modern, and functional digital experiences.
-      </p>
-
-      <div class="big-socials mb-3">
-        <a href="https://github.com/atalastasin" target="_blank" class="me-3"><i class="bi bi-github"></i></a>
-        <a href="https://www.linkedin.com/in/amer-b-talastasin-319330296/" target="_blank" class="me-3"><i class="bi bi-linkedin"></i></a>
-        <a href="mailto:atalastasin@gbox.adnu.edu.ph"><i class="bi bi-envelope-fill"></i></a>
-      </div>
-
-      <div class="text-center mt-3">
-        <%= link_to "More Info", cvAmer_path, class: "btn btn-outline-primary btn-lg" %>
-      </div>
-
     </div>
   </div>
-</div>
 
+  <!-- MEMBER 2 -->
+  <div class="big-member-card mb-5" id="member-2">
+    <div class="row align-items-center">
 
-<!-- MEMBER 3 -->
-<div class="big-member-card mb-5" id="member-3">
-  <div class="row align-items-center">
-
-    <div class="col-md-4 text-center">
-      <img src="<%= asset_path 'Renz.png' %>" class="big-member-photo">
-    </div>
-
-    <div class="col-md-8">
-      <h1 class="big-member-name">Lorenz Godfrey Loterte</h1>
-      <h4 class="big-member-role">Computer Engineering</h4>
-      <p class="big-member-desc">
-        A strategic planner responsible for coordinating tasks, documenting progress, and ensuring smooth team collaboration. Skilled in research, analysis, and communication, bringing structure and clarity to the project. Ensures deadlines are met and that the team’s work aligns with the project goals and user needs.
-      </p>
-
-      <div class="big-socials mb-3">
-        <a href="https://github.com/renzgdfry" target="_blank" class="me-3"><i class="bi bi-github"></i></a>
-        <a href="https://www.linkedin.com/in/lorenz-godfrey-loterte-7b7586296/" target="_blank" class="me-3"><i class="bi bi-linkedin"></i></a>
-        <a href="mailto:lloterte@gbox.adnu.edu.ph"><i class="bi bi-envelope-fill"></i></a>
+      <div class="col-md-4 text-center">
+        <img src="<%= asset_path 'Amer.png' %>" class="big-member-photo">
       </div>
 
-      <div class="text-center mt-3">
-        <%= link_to "More Info", cvRenz_path, class: "btn btn-outline-primary btn-lg" %>
-      </div>
+      <div class="col-md-8 position-relative">
+        <h1 class="big-member-name">Amer Talastasin</h1>
+        <h4 class="big-member-role">Computer Engineering</h4>
+        <p class="big-member-desc">
+          A creative thinker who focuses on crafting user-friendly interfaces and visually appealing layouts. Skilled in transforming concepts into polished designs that enhance usability and engagement. Detail-oriented, innovative, and committed to creating clean, modern, and functional digital experiences.
+        </p>
 
+        <div class="big-socials mb-3 d-flex justify-content-between align-items-center">
+          <div>
+            <a href="https://github.com/atalastasin" target="_blank" class="me-3"><i class="bi bi-github"></i></a>
+            <a href="https://www.linkedin.com/in/amer-b-talastasin-319330296/" target="_blank" class="me-3"><i class="bi bi-linkedin"></i></a>
+            <a href="mailto:atalastasin@gbox.adnu.edu.ph"><i class="bi bi-envelope-fill"></i></a>
+          </div>
+          <div>
+            <%= link_to "See Profile", cvAmer_path, class: "btn btn-outline-primary btn-sm" %>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
-</div>
 
+  <!-- MEMBER 3 -->
+  <div class="big-member-card mb-5" id="member-3">
+    <div class="row align-items-center">
+
+      <div class="col-md-4 text-center">
+        <img src="<%= asset_path 'Renz.png' %>" class="big-member-photo">
+      </div>
+
+      <div class="col-md-8 position-relative">
+        <h1 class="big-member-name">Lorenz Godfrey Loterte</h1>
+        <h4 class="big-member-role">Computer Engineering</h4>
+        <p class="big-member-desc">
+          A strategic planner responsible for coordinating tasks, documenting progress, and ensuring smooth team collaboration. Skilled in research, analysis, and communication, bringing structure and clarity to the project. Ensures deadlines are met and that the team’s work aligns with the project goals and user needs.
+        </p>
+
+        <div class="big-socials mb-3 d-flex justify-content-between align-items-center">
+          <div>
+            <a href="https://github.com/renzgdfry" target="_blank" class="me-3"><i class="bi bi-github"></i></a>
+            <a href="https://www.linkedin.com/in/lorenz-godfrey-loterte-7b7586296/" target="_blank" class="me-3"><i class="bi bi-linkedin"></i></a>
+            <a href="mailto:lloterte@gbox.adnu.edu.ph"><i class="bi bi-envelope-fill"></i></a>
+          </div>
+          <div>
+            <%= link_to "See Profile", cvRenz_path, class: "btn btn-outline-primary btn-sm" %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 
 </section>
-
-
-</div>
