@@ -136,6 +136,16 @@ body {
   text-align: center;
   z-index: 5;
 }
+
+.head-bottom-box {
+  text-decoration: none; 
+  color: inherit;      
+  display: flex;        
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 </style>
 
 
@@ -159,11 +169,11 @@ body {
   <div class="head-bottom-plus"><i class="bi bi-plus-lg"></i></div>
 </button>
 
-<button class="head-bottom-box">
+<%= link_to admission_path, class: "head-bottom-box" do %>
   <i class="bi bi-file-earmark-plus-fill head-bottom-icon"></i>
   <h3>Admission</h3>
   <div class="head-bottom-plus"><i class="bi bi-plus-lg"></i></div>
-</button>
+<% end %>
 
 <button class="head-bottom-box" onclick="document.getElementById('overview').scrollIntoView({ behavior: 'smooth' })">
   <i class="bi bi-arrow-right-circle-fill head-bottom-icon"></i>
@@ -1768,9 +1778,10 @@ document.getElementById('nextBtn').addEventListener('click', () => {
 
   <div class="bottom-banner-buttons">
 
-    <button class="banner-btn banner-btn-filled">
+    <%= link_to admission_path, class: "banner-btn banner-btn-filled", style: "text-decoration: none;" do %>
       ENROLL NOW
-    </button>
+    <% end %>
+
 
     <button class="banner-btn"
       onclick="document.getElementById('campus-tour').scrollIntoView({ behavior: 'smooth' })">

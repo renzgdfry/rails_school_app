@@ -1,0 +1,147 @@
+<% content_for :no_container, true %>
+
+<style>
+  body { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; padding: 0; }
+
+  .main-wrapper {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  }
+
+  .content-container {
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+  }
+
+  .admissions-card {
+    background: white;
+    width: 100%;
+    height: 100%;
+  }
+
+    .logo-container {
+    width: 100px; 
+    height: 100px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    border-radius: 12px;
+    overflow: hidden; 
+    background: none; 
+    }
+
+    .logo-image {
+    width: 100%;  
+    height: 100%; 
+    object-fit: contain; 
+    }
+
+  .school-name,
+  .admissions-heading,
+  .welcome-text,
+  .form-label {
+    color: #1a2d5a;
+    font-weight: 700;
+  }
+
+  .announcement-card {
+    background: #004a99;
+    border-radius: 12px;
+    padding: 1.5rem;
+    color: white;
+    margin-top: 1rem;
+  }
+
+  .announcement-title { color: #d4af37; font-size: 1.25rem; font-weight: 600; }
+  .deadline-date { color: #d4af37; font-weight: 700; }
+
+  .form-control,
+  .form-select {
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    padding: 0.75rem;
+  }
+
+  .btn-navy {
+    background: linear-gradient(135deg, #1a2d5a 0%, #2a4d8f 100%);
+    color: white;
+    border-radius: 8px;
+    padding: 0.75rem;
+    font-weight: 600;
+  }
+</style>
+
+<div class="main-wrapper">
+  <div class="content-container">
+    <div class="admissions-card">
+      <div class="row g-0">
+
+        <!-- LEFT PANEL -->
+        <div class="col-lg-6 p-5 text-center">
+          <div class="logo-container mx-auto">
+            <%= link_to root_path do %>
+                <%= image_tag "tech.png", alt: "Prestige University Logo", class: "img-fluid logo-image" %>
+            <% end %>
+          </div>
+
+          <h1 class="school-name">Cognitech Institute of Technology</h1>
+          <h2 class="admissions-heading mt-3">Admissions</h2>
+
+          <div class="announcement-card text-start">
+            <div class="announcement-title">📢 Announcement</div>
+            <p>
+              Application Deadline:
+              <span class="deadline-date">December 15, 2026</span>
+            </p>
+            <p>
+              All applicants must submit their official requirements before the deadline.
+            </p>
+          </div>
+        </div>
+
+        <!-- RIGHT PANEL (RAILS FORM) -->
+        <div class="col-lg-6 p-5 bg-light">
+          <h2 class="welcome-text mb-4">Welcome!</h2>
+
+          <%= form_with model: @student, url: students_path, local: true do |form| %>
+            <%= hidden_field_tag :admission_form, true %>
+
+            <div class="mb-3">
+              <%= form.label :department_id, "Department", class: "form-label" %>
+              <%= form.collection_select :department_id,
+                    Department.all, :id, :name,
+                    { prompt: "Select Department" },
+                    class: "form-select", required: true %>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :program, class: "form-label" %>
+              <%= form.text_field :program, class: "form-control", required: true %>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :name, class: "form-label" %>
+              <%= form.text_field :name, class: "form-control", required: true %>
+            </div>
+
+            <div class="mb-4">
+              <%= form.label :year_level, class: "form-label" %>
+              <%= form.number_field :year_level, class: "form-control", required: true %>
+            </div>
+
+            <%= form.submit "Submit Application", class: "btn btn-navy w-100" %>
+
+          <% end %>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+

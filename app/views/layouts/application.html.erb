@@ -412,8 +412,9 @@
         <% end %>
       </li>
 
-      <li><%= link_to root_path(anchor: 'botbanner'), class: "nav-link #{'active' if controller_name == 'admissions'}" do %>
-        <i class="bi bi-file-earmark-check-fill"></i><span>Admission</span>
+      <%= link_to admission_path, class: "nav-link #{'active' if controller_name == 'admission'}" do %>
+        <i class="bi bi-file-earmark-check-fill"></i>
+        <span>Admission</span>
       <% end %></li>
 
       <li><%= link_to root_path(anchor: 'programsSection'), class: "nav-link #{'active' if controller_name == 'academics'}" do %>
