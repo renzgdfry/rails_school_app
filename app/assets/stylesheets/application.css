@@ -1057,3 +1057,56 @@ body {
   transform: translateY(0);
   pointer-events: auto; /* enable interaction when visible */
 }
+
+.facility-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.facility-img {
+  position: relative;
+  width: 100%;
+  height: 220px;
+}
+
+.facility-img img.main-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.3s ease;
+}
+
+.facility-hover-gallery {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;  /* horizontal layout */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.hover-left, .hover-right {
+  width: 50%;  /* each takes exactly half */
+  height: 100%;
+  overflow: hidden;
+}
+
+.hover-left img, .hover-right img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.facility-card:hover .main-img {
+  opacity: 0;
+}
+
+.facility-card:hover .facility-hover-gallery {
+  opacity: 1;
+}
+
