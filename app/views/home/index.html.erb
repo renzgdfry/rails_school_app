@@ -1683,16 +1683,15 @@ document.getElementById('nextBtn').addEventListener('click', () => {
   </h2>
 
   <div class="bottom-banner-buttons">
-    <%= link_to admission_path, class: "banner-btn banner-btn-filled", style: "text-decoration: none;" do %>
+    <%= link_to admission_path, class: "banner-btn", style: "text-decoration: none;" do %>
       ENROLL NOW
     <% end %>
 
-    <button class="banner-btn"
-      onclick="document.getElementById('campus-tour').scrollIntoView({ behavior: 'smooth' })">
+    <%= link_to campus_tour_path, class: "banner-btn", style: "text-decoration: none;" do %>
       PLAN A VISIT
-    </button>
+    <% end %>
 
-    <button class="banner-btn"
+    <button class="banner-btn "
       onclick="document.getElementById('programsSection').scrollIntoView({ behavior: 'smooth' })">
       EXPLORE ACADEMICS
     </button>
