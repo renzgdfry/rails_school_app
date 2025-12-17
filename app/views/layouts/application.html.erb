@@ -449,9 +449,11 @@
 
   <% if content_for?(:no_container) %>
     <%= yield %>
+    <%= render "shared/floating_calendar" %>
   <% else %>
     <div class="bg-white p-4 rounded-4 shadow-sm">
       <%= yield %>
+      <%= render "shared/floating_calendar" %>
     </div>
   <% end %>
 </div>
