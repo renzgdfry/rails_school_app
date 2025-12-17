@@ -1,1123 +1,1276 @@
-<!doctype html>
 <html lang="en" class="h-full">
  <head>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+ </head>
+ <body class="h-full">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Personal Portfolio</title>
+  <title>Kenneth B. Ronquillo - CV</title>
   <script src="/_sdk/element_sdk.js"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    body {
+    html, body {
+      height: 100%;
       box-sizing: border-box;
-    }
-    
-    * {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
-
-html, body {
-  width: 100%;
-  min-height: 100%;
-}
-
-
-    .gradient-bg {
+    
+    #app-wrapper {
+      width: 100%;
+      height: 100%;
+      overflow: auto;
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     }
-
-    .card {
-      background: white;
-      border-radius: 16px;
-      padding: 32px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-    }
-
-    .skill-bar {
-      height: 8px;
-      background: #e5e7eb;
-      border-radius: 999px;
-      overflow: hidden;
+    
+    /* Hero Section with Gradient */
+    .hero-section {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 6rem 0;
+      text-align: center;
+      color: white;
       position: relative;
+      overflow: hidden;
     }
-
-    .skill-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #3b82f6, #2563eb);
-      border-radius: 999px;
-      transition: width 1.5s ease;
-      width: 0;
+    
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,138.7C960,139,1056,117,1152,101.3C1248,85,1344,75,1392,69.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+      background-size: cover;
+      opacity: 0.3;
     }
-
-    .skill-item:hover .skill-fill {
-      filter: brightness(1.1);
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
     }
-
-    .section {
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fadeInUp 0.8s ease forwards;
+    
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      animation: fadeInUp 1s ease-out;
     }
-
+    
+    .hero-subtitle {
+      font-size: 1.5rem;
+      font-weight: 300;
+      margin-bottom: 2rem;
+      animation: fadeInUp 1.2s ease-out;
+    }
+    
+    .trait-badge {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      color: white;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 30px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin: 0.5rem;
+      transition: all 0.3s ease;
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    .trait-badge:nth-child(1) { animation-delay: 0s; }
+    .trait-badge:nth-child(2) { animation-delay: 0.5s; }
+    .trait-badge:nth-child(3) { animation-delay: 1s; }
+    .trait-badge:nth-child(4) { animation-delay: 1.5s; }
+    
+    .trait-badge:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    
     @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
-
-    @keyframes bounce-slow {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-10px);
-      }
-    }
-
-    .animate-bounce-slow {
-      animation: bounce-slow 3s ease-in-out infinite;
-    }
-
-    .timeline-item {
+    
+    .intro-card {
+      background: white;
+      border-radius: 20px;
+      padding: 3rem;
+      margin-top: -4rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
       position: relative;
-      padding-left: 40px;
-      margin-bottom: 32px;
+      z-index: 2;
     }
-
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 8px;
-      width: 12px;
-      height: 12px;
-      background: #93c5fd;
-      border-radius: 50%;
-      border: 2px solid white;
-      box-shadow: 0 0 0 2px #bfdbfe;
+    
+    /* Zigzag Layout for Strengths */
+    .strength-section {
+      background: white;
+      padding: 5rem 0;
     }
-
-    .timeline-item::after {
-      content: '';
-      position: absolute;
-      left: 7px;
-      top: 24px;
-      width: 2px;
-      height: calc(100% + 8px);
-      background: #e5e7eb;
+    
+    .strength-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 4rem;
+      gap: 3rem;
     }
-
-    .timeline-item:last-child::after {
-      display: none;
+    
+    .strength-item:nth-child(even) {
+      flex-direction: row-reverse;
     }
-
-    .contact-icon {
-      width: 48px;
-      height: 48px;
-      background: linear-gradient(135deg, #3b82f6, #2563eb);
-      border-radius: 12px;
+    
+    .strength-icon {
+      flex-shrink: 0;
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 30px;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.3s ease;
+      font-size: 3.5rem;
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+      transition: all 0.3s ease;
+      animation: pulse 2s infinite;
     }
-
-    .contact-icon:hover {
-      transform: scale(1.1) rotate(5deg);
+    
+    .strength-item:hover .strength-icon {
+      transform: rotate(10deg) scale(1.1);
     }
-
-    /* Floating animation for decorative elements */
-    @keyframes float {
-      0%, 100% {
-        transform: translateY(0px);
-      }
-      50% {
-        transform: translateY(-20px);
-      }
+    
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4); }
+      50% { box-shadow: 0 10px 40px rgba(102, 126, 234, 0.6); }
     }
-
-    .float-animation {
-      animation: float 6s ease-in-out infinite;
+    
+    .strength-content {
+      flex: 1;
+      background: #f8f9fa;
+      padding: 2rem;
+      border-radius: 15px;
+      border-left: 4px solid #667eea;
     }
-
-    /* Pulse animation */
-    @keyframes pulse-glow {
-      0%, 100% {
-        box-shadow: 0 0 20px rgba(102, 126, 234, 0.4);
-      }
-      50% {
-        box-shadow: 0 0 40px rgba(102, 126, 234, 0.8);
-      }
+    
+    .strength-item:nth-child(even) .strength-content {
+      border-left: none;
+      border-right: 4px solid #764ba2;
     }
-
-    .pulse-glow {
-      animation: pulse-glow 2s ease-in-out infinite;
-    }
-
-    /* Shimmer effect */
-    @keyframes shimmer {
-      0% {
-        background-position: -1000px 0;
-      }
-      100% {
-        background-position: 1000px 0;
-      }
-    }
-
-    .shimmer {
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-      background-size: 1000px 100%;
-      animation: shimmer 3s infinite;
-    }
-
-    /* Particle effect */
-    .particle {
-      position: absolute;
-      width: 4px;
-      height: 4px;
-      background: white;
-      border-radius: 50%;
-      pointer-events: none;
-      opacity: 0;
-      animation: particle-float 3s ease-out;
-    }
-
-    @keyframes particle-float {
-      0% {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-100px) scale(0);
-        opacity: 0;
-      }
-    }
-
-    /* Tilt effect on cards */
-    .tilt-card {
-      transform-style: preserve-3d;
-      transition: transform 0.3s ease;
-    }
-
-    /* Gradient text animation */
-    @keyframes gradient-shift {
-      0% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-      100% {
-        background-position: 0% 50%;
-      }
-    }
-
-    .gradient-text {
-      background: linear-gradient(90deg, #667eea, #764ba2, #667eea);
-      background-size: 200% 200%;
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: gradient-shift 3s ease infinite;
-    }
-
-    /* Ripple effect */
-    .ripple {
+    
+    /* Experience Section with Card Layout */
+    .experience-section {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 5rem 0;
       position: relative;
       overflow: hidden;
     }
-
-    .ripple::after {
+    
+    .experience-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.05)" d="M0,96L48,128C96,160,192,224,288,240C384,256,480,224,576,197.3C672,171,768,149,864,154.7C960,160,1056,192,1152,197.3C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+      background-size: cover;
+      opacity: 0.3;
+    }
+    
+    .experience-section .section-title {
+      color: white;
+    }
+    
+    .experience-section .section-subtitle {
+      color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .experience-card {
+      background: white;
+      border-radius: 25px;
+      padding: 2.5rem;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+    }
+    
+    .experience-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s ease;
+    }
+    
+    .experience-card:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .experience-card:hover {
+      transform: translateY(-15px) scale(1.03);
+      box-shadow: 0 25px 60px rgba(102, 126, 234, 0.4);
+    }
+    
+    .experience-icon-wrapper {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      position: relative;
+      transition: all 0.4s ease;
+    }
+    
+    .experience-card:hover .experience-icon-wrapper {
+      transform: rotate(10deg) scale(1.1);
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
+    }
+    
+    .experience-icon {
+      font-size: 2.5rem;
+      animation: floatIcon 3s ease-in-out infinite;
+    }
+    
+    @keyframes floatIcon {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+    
+    .experience-content {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .experience-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #667eea;
+      margin-bottom: 1rem;
+      transition: color 0.3s ease;
+    }
+    
+    .experience-card:hover .experience-title {
+      color: #764ba2;
+    }
+    
+    .experience-description {
+      color: #555;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+    
+    .experience-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    
+    .exp-tag {
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      color: #667eea;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .experience-card:hover .exp-tag {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      transform: translateY(-2px);
+    }
+    
+    .experience-number {
+      position: absolute;
+      bottom: 1rem;
+      right: 1.5rem;
+      font-size: 4rem;
+      font-weight: 900;
+      color: rgba(102, 126, 234, 0.08);
+      transition: all 0.3s ease;
+      z-index: 0;
+    }
+    
+    .experience-card:hover .experience-number {
+      color: rgba(102, 126, 234, 0.15);
+      transform: scale(1.2);
+    }
+    
+    /* Hexagonal Skills Layout */
+    .skills-section {
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      padding: 5rem 0;
+    }
+    
+    .skill-hexagon {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid transparent;
+    }
+    
+    .skill-hexagon::before {
       content: '';
       position: absolute;
       top: 50%;
       left: 50%;
       width: 0;
       height: 0;
+      background: radial-gradient(circle, rgba(102, 126, 234, 0.08) 0%, transparent 70%);
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.5);
       transform: translate(-50%, -50%);
-      transition: width 0.6s, height 0.6s;
+      transition: width 0.6s ease, height 0.6s ease;
     }
-
-    .ripple:hover::after {
-      width: 300px;
-      height: 300px;
+    
+    .skill-hexagon:hover::before {
+      width: 400px;
+      height: 400px;
     }
-
-    /* Magnetic hover effect */
-    .magnetic {
-      transition: transform 0.2s ease;
+    
+    .skill-hexagon:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+      border-color: rgba(102, 126, 234, 0.3);
     }
-
-    /* Animated gradient background */
-    @keyframes gradient-move {
-      0% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-      100% {
-        background-position: 0% 50%;
-      }
+    
+    .skill-bar-container {
+      height: 16px;
+      background: linear-gradient(90deg, #e0e0e0, #f0f0f0);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
     }
-
-    .animated-gradient {
-      background: linear-gradient(-45deg, #667eea, #5a7fe8, #4c85e6, #3b82f6);
-      background-size: 200% 200%;
-      animation: gradient-move 45s ease infinite;
+    
+    .skill-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      border-radius: 10px;
+      transition: width 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      position: relative;
+      overflow: hidden;
     }
-
-    /* Animated particle floating */
-    @keyframes particle-float-up {
-      0% {
-        transform: translateY(0) translateX(0);
-        opacity: 0;
-      }
-      10% {
-        opacity: 1;
-      }
-      90% {
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-100px) translateX(20px);
-        opacity: 0;
-      }
+    
+    .skill-bar::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      animation: shimmer 2s infinite;
     }
-
-    .animate-particle-float {
-      animation: particle-float-up 8s ease-in-out infinite;
+    
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
     }
-
-    /* Orbital rotation */
-    @keyframes orbit {
-      0% {
-        transform: rotate(0deg) translateX(30px) rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg) translateX(30px) rotate(-360deg);
-      }
+    
+    /* Timeline Education */
+    .education-section {
+      background: white;
+      padding: 5rem 0;
+      position: relative;
     }
-
-    .animate-orbit {
-      animation: orbit 20s linear infinite;
+    
+    .timeline {
+      position: relative;
+      padding-left: 4rem;
     }
-
-    @keyframes orbit-reverse {
-      0% {
-        transform: rotate(0deg) translateX(-40px) rotate(0deg);
-      }
-      100% {
-        transform: rotate(-360deg) translateX(-40px) rotate(360deg);
-      }
+    
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 1.5rem;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, #667eea, #764ba2);
     }
-
-    .animate-orbit-reverse {
-      animation: orbit-reverse 25s linear infinite;
+    
+    .timeline-item {
+      position: relative;
+      margin-bottom: 3rem;
     }
-
-    /* Slow pulse */
-    @keyframes pulse-slow {
-      0%, 100% {
-        transform: scale(1);
-        opacity: 0.05;
-      }
-      50% {
-        transform: scale(1.1);
-        opacity: 0.15;
-      }
+    
+    .timeline-dot {
+      position: absolute;
+      left: -2.65rem;
+      top: 0;
+      width: 30px;
+      height: 30px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border: 4px solid white;
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+      z-index: 1;
     }
-
-    .animate-pulse-slow {
-      animation: pulse-slow 4s ease-in-out infinite;
+    
+    .timeline-badge {
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
     }
-
-    /* Slow spin */
-    @keyframes spin-slow {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
-      }
+    
+    .timeline-card {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      border: 2px solid #f0f0f0;
     }
-
-    .animate-spin-slow {
-      animation: spin-slow 20s linear infinite;
+    
+    .timeline-card:hover {
+      transform: translateX(10px);
+      box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2);
+      border-color: #667eea;
     }
-
-    /* Fade in up with scale */
-    @keyframes fade-in-scale {
-      0% {
-        opacity: 0;
-        transform: translateY(40px) scale(0.9);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+    
+    /* Language Cards with Icons */
+    .languages-section {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 5rem 0;
+      color: white;
     }
-
-    .animate-fade-in-scale {
-      animation: fade-in-scale 0.8s ease-out forwards;
+    
+    .language-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 2.5rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      height: 100%;
     }
-
-    /* Glow pulse animation */
-    @keyframes glow-pulse {
-      0%, 100% {
-        box-shadow: 0 0 20px rgba(102, 126, 234, 0.3), 0 0 40px rgba(102, 126, 234, 0.1);
-      }
-      50% {
-        box-shadow: 0 0 30px rgba(102, 126, 234, 0.5), 0 0 60px rgba(102, 126, 234, 0.2);
-      }
+    
+    .language-card:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
     }
-
-    .animate-glow-pulse {
-      animation: glow-pulse 3s ease-in-out infinite;
+    
+    .language-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      display: inline-block;
+      animation: bounce 2s infinite;
     }
-
-    /* Drift animation for backgrounds */
-    @keyframes drift {
-      0% {
-        transform: translate(0, 0);
-      }
-      50% {
-        transform: translate(10px, 10px);
-      }
-      100% {
-        transform: translate(0, 0);
-      }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
     }
-
-    .animate-drift {
-      animation: drift 20s ease-in-out infinite;
+    
+    /* Contact Section - Horizontal Split Layout */
+    .contact-section {
+      background: white;
+      padding: 5rem 0;
     }
-
-    /* Float slow for decorative elements */
-    @keyframes float-slow {
-      0%, 100% {
-        transform: translateY(0px) rotate(0deg);
-      }
-      33% {
-        transform: translateY(-15px) rotate(5deg);
-      }
-      66% {
-        transform: translateY(-8px) rotate(-5deg);
-      }
+    
+    .contact-main-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+      position: relative;
     }
-
-    .animate-float-slow {
-      animation: float-slow 8s ease-in-out infinite;
+    
+    .contact-left {
+      padding: 4rem;
+      color: white;
+      position: relative;
+      z-index: 1;
     }
-
-    /* Skill card hover effect */
-    .skill-card-hover {
+    
+    .contact-left::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at top left, rgba(255,255,255,0.1) 0%, transparent 50%);
+      animation: gradientShift 15s ease infinite;
+    }
+    
+    @keyframes gradientShift {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(10%, 10%); }
+    }
+    
+    .contact-left h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .contact-left p {
+      font-size: 1.1rem;
+      opacity: 0.95;
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .contact-right {
+      background: white;
+      padding: 3rem;
+    }
+    
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1.5rem;
+      background: #f8f9fa;
+      border-radius: 15px;
+      margin-bottom: 1.5rem;
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     }
-
-    .skill-card-hover:hover {
-      transform: translateY(-12px) scale(1.02);
+    
+    .contact-item:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 20px 50px rgba(102, 126, 234, 0.25);
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
     }
-
-    /* Parallax effect */
-    .parallax-slow {
-      transition: transform 0.5s ease-out;
+    
+    .contact-icon-box {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 2rem;
+      transition: all 0.3s ease;
+      position: relative;
+      pointer-events: none;
+    }
+    
+    .contact-icon-box::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 15px;
+      opacity: 0;
+      filter: blur(10px);
+      transition: opacity 0.3s ease;
+      z-index: -1;
+      pointer-events: none;
+    }
+    
+    .contact-item:hover .contact-icon-box {
+      transform: rotate(10deg) scale(1.1);
+    }
+    
+    .contact-item:hover .contact-icon-box::after {
+      opacity: 0.7;
+    }
+    
+    .contact-info {
+      flex: 1;
+      pointer-events: none;
+    }
+    
+    .contact-info h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #667eea;
+      margin-bottom: 0.3rem;
+      pointer-events: none;
+    }
+    
+    .contact-info p {
+      margin: 0;
+      color: #666;
+      font-size: 0.95rem;
+      pointer-events: none;
+    }
+    
+    .contact-info .contact-value {
+      font-weight: 600;
+      color: #333;
+      font-size: 1rem;
+      pointer-events: none;
+    }
+    
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      border-radius: 25px;
+      padding: 4rem;
+      text-align: center;
+      color: white;
+      box-shadow: 0 20px 60px rgba(245, 87, 108, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      animation: rotate 20s linear infinite;
+    }
+    
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    
+    .cta-content {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .btn-primary-custom {
+      background: white;
+      color: #f5576c;
+      border: none;
+      padding: 1rem 3rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    
+    .btn-primary-custom:hover {
+      transform: scale(1.1);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+      background: #fff;
+      color: #f5576c;
+    }
+    
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-subtitle {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 3rem;
     }
   </style>
-  <style>@view-transition { navigation: auto; }</style>
-  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
- </head>
- <body class="min-h-screen w-full overflow-x-hidden">
-  <div id="app" class="min-h-screen w-full">
-<!-- Hero Section -->
-   <section class="animated-gradient text-white min-h-screen flex items-center justify-center px-6 relative overflow-hidden">
-<!-- Animated floating particles -->
-    <div class="absolute top-10 left-10 w-2 h-2 bg-white rounded-full opacity-60 animate-particle-float" style="animation-delay: 0s;"></div>
-    <div class="absolute top-20 left-1/4 w-3 h-3 bg-blue-200 rounded-full opacity-50 animate-particle-float" style="animation-delay: 1s;"></div>
-    <div class="absolute top-40 right-1/3 w-2 h-2 bg-purple-200 rounded-full opacity-70 animate-particle-float" style="animation-delay: 2s;"></div>
-    <div class="absolute top-60 left-1/2 w-4 h-4 bg-white rounded-full opacity-40 animate-particle-float" style="animation-delay: 1.5s;"></div>
-    <div class="absolute top-80 right-1/4 w-2 h-2 bg-indigo-200 rounded-full opacity-60 animate-particle-float" style="animation-delay: 0.5s;"></div>
-    <div class="absolute bottom-40 left-1/3 w-3 h-3 bg-white rounded-full opacity-50 animate-particle-float" style="animation-delay: 2.5s;"></div>
-    <div class="absolute bottom-60 right-1/2 w-2 h-2 bg-pink-200 rounded-full opacity-70 animate-particle-float" style="animation-delay: 1.8s;"></div>
-    <div class="absolute bottom-20 left-2/3 w-4 h-4 bg-blue-200 rounded-full opacity-40 animate-particle-float" style="animation-delay: 3s;"></div><!-- Rotating glow orbs -->
-    <div class="absolute top-1/4 left-1/4 w-64 h-64 animate-orbit" style="animation-duration: 20s;">
-     <div class="w-full h-full bg-gradient-to-br from-pink-300 to-purple-300 opacity-20 rounded-full blur-3xl"></div>
-    </div>
-    <div class="absolute top-1/2 right-1/4 w-80 h-80 animate-orbit-reverse" style="animation-duration: 25s;">
-     <div class="w-full h-full bg-gradient-to-br from-blue-300 to-cyan-300 opacity-20 rounded-full blur-3xl"></div>
-    </div><!-- Pulsing rings -->
-    <div class="absolute top-10 left-10 w-64 h-64 bg-white opacity-5 rounded-full animate-pulse-slow"></div>
-    <div class="absolute bottom-10 right-10 w-96 h-96 bg-white opacity-5 rounded-full animate-pulse-slow" style="animation-delay: 2s;"></div>
-    <div class="absolute top-1/2 left-1/4 w-32 h-32 bg-white opacity-10 rounded-full animate-pulse-slow" style="animation-delay: 1s;"></div><!-- Geometric shapes -->
-    <div class="absolute top-1/3 right-10 w-20 h-20 border-2 border-white opacity-10 rotate-45 animate-spin-slow"></div>
-    <div class="absolute bottom-1/3 left-10 w-16 h-16 border-2 border-blue-200 opacity-20 animate-spin-slow" style="animation-duration: 15s;"></div>
-    <div class="w-full flex items-center justify-center">
-  <div class="max-w-4xl mx-auto text-center relative z-10">
-<div class="w-60 h-60 bg-white rounded-full mx-auto mb-8 flex items-center justify-center shadow-2xl animate-bounce-slow pulse-glow relative overflow-hidden">
-  <!-- Your avatar image -->
-  <%= image_tag 'Ken.png', alt: 'Avatar', class: 'w-full h-full object-cover rounded-full' %>
-  <!-- Sparkle effects around avatar -->
-  <div class="absolute -top-2 -right-2 w-4 h-4 bg-yellow-300 rounded-full animate-ping opacity-75"></div>
-  <div class="absolute -bottom-2 -left-2 w-3 h-3 bg-blue-300 rounded-full animate-ping opacity-75" style="animation-delay: 0.5s;"></div>
-  <div class="absolute top-1/4 -right-4 w-2 h-2 bg-pink-300 rounded-full animate-ping opacity-75" style="animation-delay: 1s;"></div>
+  <div id="app-wrapper"><!-- Hero Section -->
+   <header class="hero-section">
+    <div class="hero-content">
+     <div class="container-fluid px-0">
+<!-- Profile Photo -->
+<div class="profile-photo-wrapper" style="margin-bottom: 2rem;">
+  <div class="profile-photo-container" style="width: 180px; height: 180px; margin: 0 auto; position: relative;">
+    <img id="profile-photo" src="<%= asset_path 'Ken.png' %>" 
+         style="width: 100%; height: 100%; border-radius: 50%; border: 5px solid rgba(255,255,255,0.5); 
+                box-shadow: 0 15px 50px rgba(0,0,0,0.3); object-fit: cover; transition: all 0.3s ease;">
+  </div>
 </div>
 
-     <h1 id="hero-name" class="text-6xl font-bold mb-6 gradient-text animate-fade-in-scale" style="-webkit-text-fill-color: white;">Kenneth B. Ronquillo</h1>
-     <p id="hero-tagline" class="text-2xl text-blue-100 mb-8 animate-fade-in-scale" style="animation-delay: 0.2s;">"Eager to Learn and Build Solutions"</p><!-- Social icons -->
-     <div class="flex justify-center gap-6 mt-12"><a href="#about" class="social-icon w-14 h-14 bg-white bg-opacity-20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-opacity-30 transition cursor-pointer magnetic ripple"> <span class="text-2xl">👤</span> </a> <a href="#skills" class="social-icon w-14 h-14 bg-white bg-opacity-20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-opacity-30 transition cursor-pointer magnetic ripple"> <span class="text-2xl">🔗</span> </a> <a href="#education" class="social-icon w-14 h-14 bg-white bg-opacity-20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-opacity-30 transition cursor-pointer magnetic ripple"> <span class="text-2xl">💻</span> </a> <a href="#contact" class="social-icon w-14 h-14 bg-white bg-opacity-20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-opacity-30 transition cursor-pointer magnetic ripple"> <span class="text-2xl">📧</span> </a>
-     </div>
-    </div>
-   </section><!-- About Section - Split Screen Design -->
-   <section id="about" class="section py-0 bg-white relative overflow-hidden"><!-- Animated wave layers at top -->
-    <div class="absolute top-0 left-0 right-0 h-64 opacity-30 z-0">
-     <svg class="absolute top-0 w-full h-full" viewbox="0 0 1200 120" preserveaspectratio="none"><path d="M0,60 C300,100 600,20 900,60 C1050,80 1200,40 1200,40 L1200,0 L0,0 Z" fill="url(#wave-gradient-about1)">
-       <animate attributename="d" dur="10s" repeatcount="indefinite" values="M0,60 C300,100 600,20 900,60 C1050,80 1200,40 1200,40 L1200,0 L0,0 Z; M0,40 C300,20 600,100 900,40 C1050,60 1200,80 1200,80 L1200,0 L0,0 Z; M0,60 C300,100 600,20 900,60 C1050,80 1200,40 1200,40 L1200,0 L0,0 Z" />
-      </path> <defs>
-       <lineargradient id="wave-gradient-about1" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.4" />
-        <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:0.4" />
-       </lineargradient>
-      </defs>
-     </svg>
-     <svg class="absolute top-0 w-full h-full" viewbox="0 0 1200 120" preserveaspectratio="none"><path d="M0,80 C400,40 800,100 1200,60 L1200,0 L0,0 Z" fill="url(#wave-gradient-about2)">
-       <animate attributename="d" dur="12s" repeatcount="indefinite" values="M0,80 C400,40 800,100 1200,60 L1200,0 L0,0 Z; M0,50 C400,90 800,30 1200,70 L1200,0 L0,0 Z; M0,80 C400,40 800,100 1200,60 L1200,0 L0,0 Z" />
-      </path> <defs>
-       <lineargradient id="wave-gradient-about2" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" style="stop-color:#6366f1;stop-opacity:0.3" />
-        <stop offset="100%" style="stop-color:#a855f7;stop-opacity:0.3" />
-       </lineargradient>
-      </defs>
-     </svg>
-    </div><!-- Animated wave layers at bottom -->
-    <div class="absolute bottom-0 left-0 right-0 h-64 opacity-30 z-0">
-     <svg class="absolute bottom-0 w-full h-full" viewbox="0 0 1200 120" preserveaspectratio="none"><path d="M0,60 C300,20 600,100 900,60 C1050,40 1200,80 1200,80 L1200,120 L0,120 Z" fill="url(#wave-gradient-about3)">
-       <animate attributename="d" dur="9s" repeatcount="indefinite" values="M0,60 C300,20 600,100 900,60 C1050,40 1200,80 1200,80 L1200,120 L0,120 Z; M0,80 C300,100 600,20 900,80 C1050,100 1200,40 1200,40 L1200,120 L0,120 Z; M0,60 C300,20 600,100 900,60 C1050,40 1200,80 1200,80 L1200,120 L0,120 Z" />
-      </path> <defs>
-       <lineargradient id="wave-gradient-about3" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.4" />
-        <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:0.4" />
-       </lineargradient>
-      </defs>
-     </svg>
-     <svg class="absolute bottom-0 w-full h-full" viewbox="0 0 1200 120" preserveaspectratio="none"><path d="M0,40 C400,80 800,20 1200,50 L1200,120 L0,120 Z" fill="url(#wave-gradient-about4)">
-       <animate attributename="d" dur="11s" repeatcount="indefinite" values="M0,40 C400,80 800,20 1200,50 L1200,120 L0,120 Z; M0,70 C400,30 800,90 1200,40 L1200,120 L0,120 Z; M0,40 C400,80 800,20 1200,50 L1200,120 L0,120 Z" />
-      </path> <defs>
-       <lineargradient id="wave-gradient-about4" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" style="stop-color:#6366f1;stop-opacity:0.3" />
-        <stop offset="100%" style="stop-color:#a855f7;stop-opacity:0.3" />
-       </lineargradient>
-      </defs>
-     </svg>
-    </div><!-- Animated background elements for About section -->
-    <div class="absolute top-10 left-10 w-72 h-72 bg-gradient-to-br from-blue-200 to-indigo-300 rounded-full blur-3xl opacity-20 float-animation"></div>
-    <div class="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-br from-purple-200 to-pink-300 rounded-full blur-3xl opacity-20 float-animation" style="animation-delay: 1.5s;"></div>
-    <div class="absolute top-1/2 left-1/3 w-64 h-64 bg-gradient-to-br from-cyan-200 to-blue-300 rounded-full blur-3xl opacity-15 float-animation" style="animation-delay: 3s;"></div><!-- Floating particles for About -->
-    <div class="absolute top-20 left-1/4 w-3 h-3 bg-blue-300 rounded-full opacity-40 animate-particle-float" style="animation-delay: 0s;"></div>
-    <div class="absolute top-40 right-1/3 w-2 h-2 bg-purple-300 rounded-full opacity-50 animate-particle-float" style="animation-delay: 1s;"></div>
-    <div class="absolute bottom-40 left-1/2 w-4 h-4 bg-indigo-300 rounded-full opacity-30 animate-particle-float" style="animation-delay: 2s;"></div>
-    <div class="absolute bottom-60 right-1/4 w-2 h-2 bg-pink-300 rounded-full opacity-40 animate-particle-float" style="animation-delay: 1.5s;"></div><!-- Animated geometric shapes -->
-    <div class="absolute top-1/4 right-1/4 w-16 h-16 border border-blue-200 opacity-20 rotate-12 animate-float-slow"></div>
-    <div class="absolute bottom-1/3 left-1/4 w-12 h-12 border-2 border-purple-200 opacity-25 rounded-full animate-float-slow" style="animation-delay: 2s;"></div>
-    <div class="max-w-7xl mx-auto relative z-10">
-     <div class="grid md:grid-cols-2 min-h-screen"><!-- Left Side - Main Content -->
-      <div class="bg-gradient-to-br from-blue-50 to-purple-50 p-12 flex flex-col justify-center relative">
-       <div class="absolute top-0 right-0 w-64 h-64 bg-blue-200 rounded-full blur-3xl opacity-20 animate-pulse-slow"></div>
-       <div class="relative z-10">
-        <div class="inline-block mb-6"><span class="text-6xl">👤</span>
-        </div>
-        <h2 class="text-5xl font-bold text-gray-800 mb-6">About Me</h2>
-        <h3 class="text-2xl font-bold text-gray-800 mb-6">Kenneth B. Ronquillo</h3>
-        <h3 class="text-2xl font-bold text-gray-800 mb-6">Age: 21</h3>
-        <p id="about-description" class="text-xl text-gray-700 leading-relaxed mb-8">Hi! I'm a Computer Engineering student currently building my foundation in programming, embedded systems, and basic software development. I enjoy learning by doing any computer-related tasks whether it's working on academic projects, experimenting with hardware, or improving my technical skills. I'm motivated to grow, open to feedback, and eager to gain real-world experience through internships and training opportunities.</p>
-        <div class="flex flex-wrap gap-3"><span class="px-5 py-3 bg-white text-blue-700 rounded-full text-sm font-semibold shadow-md">Logical Thinker</span> <span class="px-5 py-3 bg-white text-purple-700 rounded-full text-sm font-semibold shadow-md">Hands-On Learner</span> <span class="px-5 py-3 bg-white text-indigo-700 rounded-full text-sm font-semibold shadow-md">Detail-Oriented</span> <span class="px-5 py-3 bg-white text-blue-700 rounded-full text-sm font-semibold shadow-md">Growth Mindset</span>
-        </div>
-       </div>
-      </div><!-- Right Side - Trait Cards -->
-      <div class="p-12 flex flex-col justify-center gap-6 bg-white">
-       <div class="flex items-start gap-6 p-6 bg-gradient-to-r from-blue-50 to-transparent rounded-2xl border-l-4 border-blue-500 hover:shadow-lg transition">
-        <div class="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl flex items-center justify-center flex-shrink-0"><span class="text-3xl">🎯</span>
-        </div>
-        <div>
-         <h3 class="text-2xl font-bold text-gray-800 mb-2">Goal-Oriented</h3>
-         <p class="text-gray-600">Focused on building practical engineering skills through hands-on projects and continuous learning</p>
-        </div>
-       </div>
-       <div class="flex items-start gap-6 p-6 bg-gradient-to-r from-purple-50 to-transparent rounded-2xl border-l-4 border-purple-500 hover:shadow-lg transition">
-        <div class="w-16 h-16 bg-gradient-to-br from-purple-400 to-purple-600 rounded-xl flex items-center justify-center flex-shrink-0"><span class="text-3xl">⚡</span>
-        </div>
-        <div>
-         <h3 class="text-2xl font-bold text-gray-800 mb-2">Adaptable Learner</h3>
-         <p class="text-gray-600">Quick to pick up new tools and technologies through practice, experimentation, and coursework</p>
-        </div>
-       </div>
-       <div class="flex items-start gap-6 p-6 bg-gradient-to-r from-indigo-50 to-transparent rounded-2xl border-l-4 border-indigo-500 hover:shadow-lg transition">
-        <div class="w-16 h-16 bg-gradient-to-br from-indigo-400 to-indigo-600 rounded-xl flex items-center justify-center flex-shrink-0"><span class="text-3xl">🤝</span>
-        </div>
-        <div>
-         <h3 class="text-2xl font-bold text-gray-800 mb-2">Collaborative</h3>
-         <p class="text-gray-600">Experienced in working with teams on academic projects and presentations to deliver effective solutions</p>
-        </div>
-       </div>
+      <p class="mb-2" id="page-title" style="font-size: 1.2rem; opacity: 0.9;">About Me</p>
+      <h1 class="hero-title" id="name">Kenneth B. Ronquillo</h1>
+      <p class="hero-subtitle" id="age-display">Age: 21</p>
+      <div class="my-4"><span class="trait-badge">🧠 Logical Thinker</span> <span class="trait-badge">🔧 Hands-On Learner</span> <span class="trait-badge">🔍 Detail-Oriented</span> <span class="trait-badge">📈 Growth Mindset</span>
       </div>
      </div>
     </div>
-   </section><!-- Skills Section - Compact Grid Layout -->
-   <section id="skills" class="section py-20 px-6 bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 relative overflow-hidden"><!-- Animated decorative blobs -->
-    <div class="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-blue-200 to-purple-200 rounded-full blur-3xl opacity-30 float-animation"></div>
-    <div class="absolute bottom-0 right-0 w-80 h-80 bg-gradient-to-br from-indigo-200 to-pink-200 rounded-full blur-3xl opacity-30 float-animation" style="animation-delay: 2s;"></div>
-    <div class="absolute top-1/2 left-1/2 w-72 h-72 bg-gradient-to-br from-cyan-200 to-blue-200 rounded-full blur-3xl opacity-20 float-animation" style="animation-delay: 4s;"></div><!-- Animated dot pattern -->
-    <div class="absolute inset-0 opacity-5 animate-drift">
-     <div class="absolute inset-0" style="background-image: radial-gradient(circle, #3b82f6 1px, transparent 1px); background-size: 30px 30px;"></div>
-    </div><!-- Floating geometric shapes -->
-    <div class="absolute top-20 right-20 w-16 h-16 border border-blue-300 opacity-20 rotate-12 animate-float-slow"></div>
-    <div class="absolute bottom-32 left-16 w-12 h-12 border-2 border-purple-300 opacity-30 rounded-full animate-float-slow" style="animation-delay: 1s;"></div>
-    <div class="max-w-5xl mx-auto relative z-10">
-     <h2 class="text-4xl font-bold text-gray-800 mb-4 text-center">Skills &amp; Expertise</h2>
-     <p class="text-center text-gray-600 mb-12 text-lg">A showcase of my technical abilities</p>
-     <div class="grid md:grid-cols-2 gap-6"><!-- Skill 1 -->
-      <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-2xl skill-item skill-card-hover border border-blue-100 relative overflow-hidden">
-       <div class="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-full blur-2xl opacity-50"></div>
-       <div class="flex items-center gap-4 mb-4 relative z-10">
-        <div class="w-14 h-14 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg animate-glow-pulse"><span class="text-2xl">💻</span>
-        </div>
-        <div class="flex-1">
-         <h3 class="text-lg font-bold text-gray-800">Programming</h3><span class="text-sm font-semibold text-blue-600">70%</span>
-        </div>
-       </div>
-       <div class="skill-bar relative z-10">
-        <div class="skill-fill" style="width: 0" data-width="70"></div>
-       </div>
-      </div><!-- Skill 2 -->
-      <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-2xl skill-item skill-card-hover border border-purple-100 relative overflow-hidden">
-       <div class="absolute top-0 right-0 w-32 h-32 bg-purple-50 rounded-full blur-2xl opacity-50"></div>
-       <div class="flex items-center gap-4 mb-4 relative z-10">
-        <div class="w-14 h-14 bg-gradient-to-br from-purple-400 to-purple-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg"><span class="text-2xl">🔌</span>
-        </div>
-        <div class="flex-1">
-         <h3 class="text-lg font-bold text-gray-800">PCB Design &amp; Hardware Prototyping</h3><span class="text-sm font-semibold text-purple-600">85%</span>
-        </div>
-       </div>
-       <div class="skill-bar relative z-10">
-        <div class="skill-fill" style="width: 0" data-width="85"></div>
-       </div>
-      </div><!-- Skill 3 -->
-      <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-2xl skill-item skill-card-hover border border-indigo-100 relative overflow-hidden">
-       <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-full blur-2xl opacity-50"></div>
-       <div class="flex items-center gap-4 mb-4 relative z-10">
-        <div class="w-14 h-14 bg-gradient-to-br from-indigo-400 to-indigo-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg"><span class="text-2xl">🌐</span>
-        </div>
-        <div class="flex-1">
-         <h3 class="text-lg font-bold text-gray-800">Web Basics</h3><span class="text-sm font-semibold text-indigo-600">65%</span>
-        </div>
-       </div>
-       <div class="skill-bar relative z-10">
-        <div class="skill-fill" style="width: 0" data-width="65"></div>
-       </div>
-      </div><!-- Skill 4 -->
-      <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-2xl skill-item skill-card-hover border border-orange-100 relative overflow-hidden">
-       <div class="absolute top-0 right-0 w-32 h-32 bg-orange-50 rounded-full blur-2xl opacity-50"></div>
-       <div class="flex items-center gap-4 mb-4 relative z-10">
-        <div class="w-14 h-14 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg"><span class="text-2xl">⚡</span>
-        </div>
-        <div class="flex-1">
-         <h3 class="text-lg font-bold text-gray-800">Digital Logic &amp; Circuit Design</h3><span class="text-sm font-semibold text-orange-600">90%</span>
-        </div>
-       </div>
-       <div class="skill-bar relative z-10">
-        <div class="skill-fill" style="width: 0" data-width="90"></div>
-       </div>
-      </div><!-- Skill 5 -->
-      <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-2xl skill-item skill-card-hover border border-green-100 relative overflow-hidden">
-       <div class="absolute top-0 right-0 w-32 h-32 bg-green-50 rounded-full blur-2xl opacity-50"></div>
-       <div class="flex items-center gap-4 mb-4 relative z-10">
-        <div class="w-14 h-14 bg-gradient-to-br from-green-400 to-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg"><span class="text-2xl">🛠️</span>
-        </div>
-        <div class="flex-1">
-         <h3 class="text-lg font-bold text-gray-800">Version Control &amp; Development Tools</h3><span class="text-sm font-semibold text-green-600">85%</span>
-        </div>
-       </div>
-       <div class="skill-bar relative z-10">
-        <div class="skill-fill" style="width: 0" data-width="85"></div>
-       </div>
-      </div><!-- Skill 6 -->
-      <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-2xl skill-item skill-card-hover border border-pink-100 relative overflow-hidden">
-       <div class="absolute top-0 right-0 w-32 h-32 bg-pink-50 rounded-full blur-2xl opacity-50"></div>
-       <div class="flex items-center gap-4 mb-4 relative z-10">
-        <div class="w-14 h-14 bg-gradient-to-br from-pink-400 to-rose-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg"><span class="text-2xl">📊</span>
-        </div>
-        <div class="flex-1">
-         <h3 class="text-lg font-bold text-gray-800">System Analysis &amp; Software Design</h3><span class="text-sm font-semibold text-pink-600">80%</span>
-        </div>
-       </div>
-       <div class="skill-bar relative z-10">
-        <div class="skill-fill" style="width: 0" data-width="80"></div>
-       </div>
+    
+   </header><!-- Introduction Card -->
+   <div class="container">
+    <div class="intro-card">
+     <p class="intro-text" id="intro-text" style="font-size: 1.1rem; line-height: 1.8; color: #333; text-align: justify;">Hi! I'm a Computer Engineering student currently building my foundation in programming, embedded systems, and basic software development. I enjoy learning by doing any computer-related tasks whether it's working on academic projects, experimenting with hardware, or improving my technical skills. I'm motivated to grow, open to feedback, and eager to gain real-world experience through internships and training opportunities.</p>
+    </div>
+   </div><!-- Key Strengths - Zigzag Layout -->
+   <section class="strength-section">
+    <div class="container">
+     <div class="text-center mb-5">
+      <h2 class="section-title">Core Strengths</h2>
+      <p class="section-subtitle">What drives my professional growth</p>
+     </div>
+     <div class="strength-item">
+      <div class="strength-icon">
+       🎯
+      </div>
+      <div class="strength-content">
+       <h3 style="color: #667eea; margin-bottom: 0.5rem;">Goal-Oriented</h3>
+       <p style="margin: 0;">Focused on building practical engineering skills through hands-on projects and continuous learning</p>
+      </div>
+     </div>
+     <div class="strength-item">
+      <div class="strength-icon">
+       📚
+      </div>
+      <div class="strength-content">
+       <h3 style="color: #764ba2; margin-bottom: 0.5rem;">Adaptable Learner</h3>
+       <p style="margin: 0;">Quick to pick up new tools and technologies through practice, experimentation, and coursework</p>
+      </div>
+     </div>
+     <div class="strength-item">
+      <div class="strength-icon">
+       🤝
+      </div>
+      <div class="strength-content">
+       <h3 style="color: #667eea; margin-bottom: 0.5rem;">Collaborative</h3>
+       <p style="margin: 0;">Experienced in working with teams on academic projects and presentations to deliver effective solutions</p>
       </div>
      </div>
     </div>
-   </section><!-- Education Section - Horizontal Timeline -->
-   <section id="education" class="section py-20 px-6 bg-gradient-to-br from-white via-indigo-50 to-purple-50 relative overflow-hidden"><!-- Animated wave layers -->
-    <div class="absolute bottom-0 left-0 right-0 h-64 opacity-20">
-     <svg class="absolute bottom-0 w-full h-full" viewbox="0 0 1200 120" preserveaspectratio="none"><path d="M0,60 C300,100 600,20 900,60 C1050,80 1200,40 1200,40 L1200,120 L0,120 Z" fill="url(#wave-gradient1)" class="animate-wave-slow">
-       <animate attributename="d" dur="8s" repeatcount="indefinite" values="M0,60 C300,100 600,20 900,60 C1050,80 1200,40 1200,40 L1200,120 L0,120 Z; M0,40 C300,20 600,100 900,40 C1050,60 1200,80 1200,80 L1200,120 L0,120 Z; M0,60 C300,100 600,20 900,60 C1050,80 1200,40 1200,40 L1200,120 L0,120 Z" />
-      </path> <defs>
-       <lineargradient id="wave-gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" style="stop-color:#667eea;stop-opacity:0.3" />
-        <stop offset="100%" style="stop-color:#764ba2;stop-opacity:0.3" />
-       </lineargradient>
-      </defs>
-     </svg>
-    </div><!-- Decorative background elements -->
-    <div class="absolute top-10 right-10 w-72 h-72 bg-blue-100 rounded-full blur-3xl opacity-40 float-animation"></div>
-    <div class="absolute bottom-20 left-10 w-96 h-96 bg-purple-100 rounded-full blur-3xl opacity-40 float-animation" style="animation-delay: 2s;"></div>
-    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-indigo-100 rounded-full blur-3xl opacity-30 float-animation" style="animation-delay: 1s;"></div><!-- Decorative dots pattern with animation -->
-    <div class="absolute inset-0 opacity-5 animate-drift">
-     <div class="absolute inset-0" style="background-image: radial-gradient(circle, #3b82f6 1px, transparent 1px); background-size: 40px 40px;"></div>
-    </div><!-- Decorative lines -->
-    <div class="absolute top-20 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-200 to-transparent opacity-30"></div>
-    <div class="absolute bottom-20 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-200 to-transparent opacity-30"></div>
-    <div class="max-w-7xl mx-auto relative z-10">
-     <h2 class="text-4xl font-bold text-gray-800 mb-4 text-center">Education Journey</h2>
-     <p class="text-center text-gray-600 mb-16 text-lg">My path through learning and growth</p><!-- Horizontal Timeline -->
-     <div class="relative mb-20"><!-- Timeline Line -->
-      <div class="absolute top-24 left-0 right-0 h-1 bg-gradient-to-r from-blue-200 via-purple-300 to-indigo-200 hidden md:block"></div>
-      <div class="grid md:grid-cols-3 gap-8 relative"><!-- Education 1 -->
-       <div class="text-center">
-        <div class="relative inline-block mb-6">
-         <div class="absolute -top-1 -left-1 w-12 h-12 bg-green-400 rounded-full flex items-center justify-center text-white font-bold shadow-lg z-20"><span class="text-xs">NOW</span>
-         </div>
-         <div class="w-32 h-32 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center shadow-2xl relative z-10"><span class="text-5xl">🎓</span>
+   </section><!-- Skills Section - Hexagonal Layout -->
+   <section class="skills-section">
+    <div class="container">
+     <div class="text-center mb-5">
+      <h2 class="section-title">Skills &amp; Expertise</h2>
+      <p class="section-subtitle">A showcase of my technical abilities</p>
+     </div>
+     <div class="row">
+      <div class="col-lg-10 mx-auto">
+       <div class="row">
+        <div class="col-md-6">
+         <div class="skill-hexagon">
+          <div class="d-flex justify-content-between mb-2"><span style="font-weight: 600;">💻 Programming</span> <span style="font-weight: bold; color: #667eea;">70%</span>
+          </div>
+          <div class="skill-bar-container">
+           <div class="skill-bar" style="width: 70%"></div>
+          </div>
          </div>
         </div>
-        <div class="bg-white rounded-2xl shadow-lg p-8 border-t-4 border-blue-500 h-80 flex flex-col hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 relative overflow-hidden">
-         <div class="absolute top-0 right-0 w-40 h-40 bg-blue-50 rounded-full blur-2xl opacity-60"></div>
-         <h3 class="text-xl font-bold text-gray-800 mb-3 relative z-10">Computer Engineering</h3>
-         <p class="text-blue-600 font-semibold mb-4 relative z-10">2023-Present</p>
-         <p class="text-sm text-gray-600 mb-3 italic relative z-10">Ateneo de Naga University Main Campus</p>
-         <p class="text-sm text-gray-500 leading-relaxed relative z-10">Currently pursuing a Bachelor's degree in Computer Engineering, focusing on hardware design, embedded systems, and software development.</p>
+        <div class="col-md-6">
+         <div class="skill-hexagon">
+          <div class="d-flex justify-content-between mb-2"><span style="font-weight: 600;">🔌 PCB Design &amp; Hardware</span> <span style="font-weight: bold; color: #667eea;">85%</span>
+          </div>
+          <div class="skill-bar-container">
+           <div class="skill-bar" style="width: 85%"></div>
+          </div>
+         </div>
         </div>
-       </div><!-- Education 2 -->
-       <div class="text-center">
-        <div class="w-32 h-32 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center shadow-2xl mx-auto mb-6 hover:scale-110 transition-transform duration-300"><span class="text-5xl">📚</span>
+        <div class="col-md-6">
+         <div class="skill-hexagon">
+          <div class="d-flex justify-content-between mb-2"><span style="font-weight: 600;">🌐 Web Basics</span> <span style="font-weight: bold; color: #667eea;">65%</span>
+          </div>
+          <div class="skill-bar-container">
+           <div class="skill-bar" style="width: 65%"></div>
+          </div>
+         </div>
         </div>
-        <div class="bg-white rounded-2xl shadow-lg p-8 border-t-4 border-purple-500 h-80 flex flex-col hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 relative overflow-hidden">
-         <div class="absolute top-0 right-0 w-40 h-40 bg-purple-50 rounded-full blur-2xl opacity-60"></div>
-         <h3 class="text-xl font-bold text-gray-800 mb-3 relative z-10">Secondary Education</h3>
-         <p class="text-purple-600 font-semibold mb-4 relative z-10">2018-2023</p>
-         <p class="text-sm text-gray-600 mb-3 italic relative z-10">Ateneo De Naga University Pacol Campus</p>
-         <p class="text-sm text-gray-500 leading-relaxed relative z-10">Completed secondary education under the General Academic Strand (GAS), building a well-rounded foundation across multiple disciplines while developing a passion for technology and engineering.</p>
+        <div class="col-md-6">
+         <div class="skill-hexagon">
+          <div class="d-flex justify-content-between mb-2"><span style="font-weight: 600;">⚡ Digital Logic &amp; Circuit</span> <span style="font-weight: bold; color: #667eea;">90%</span>
+          </div>
+          <div class="skill-bar-container">
+           <div class="skill-bar" style="width: 90%"></div>
+          </div>
+         </div>
         </div>
-       </div><!-- Education 3 -->
-       <div class="text-center">
-        <div class="w-32 h-32 bg-gradient-to-br from-indigo-400 to-indigo-600 rounded-full flex items-center justify-center shadow-2xl mx-auto mb-6 hover:scale-110 transition-transform duration-300"><span class="text-5xl">✏️</span>
+        <div class="col-md-6">
+         <div class="skill-hexagon">
+          <div class="d-flex justify-content-between mb-2"><span style="font-weight: 600;">🔧 Version Control &amp; Tools</span> <span style="font-weight: bold; color: #667eea;">85%</span>
+          </div>
+          <div class="skill-bar-container">
+           <div class="skill-bar" style="width: 85%"></div>
+          </div>
+         </div>
         </div>
-        <div class="bg-white rounded-2xl shadow-lg p-8 border-t-4 border-indigo-500 h-80 flex flex-col hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 relative overflow-hidden">
-         <div class="absolute top-0 right-0 w-40 h-40 bg-indigo-50 rounded-full blur-2xl opacity-60"></div>
-         <h3 class="text-xl font-bold text-gray-800 mb-3 relative z-10">Primary Education</h3>
-         <p class="text-indigo-600 font-semibold mb-4 relative z-10">2009-2017</p>
-         <p class="text-sm text-gray-600 mb-3 italic relative z-10">Naga City Montessori School</p>
-         <p class="text-sm text-gray-500 leading-relaxed relative z-10">Completed primary education with 6th honorable mention, demonstrating consistent academic excellence and strong work ethic throughout elementary years.</p>
-        </div>
-       </div>
-      </div>
-     </div><!-- Languages - Compact Horizontal Design -->
-     <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-3xl p-10">
-      <h3 class="text-3xl font-bold text-gray-800 mb-8 text-center">Languages I Speak</h3>
-      <div class="flex justify-center items-center gap-12 flex-wrap">
-       <div class="flex items-center gap-4">
-        <div class="w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg"><span class="text-4xl">🌐</span>
-        </div>
-        <div>
-         <h4 class="text-2xl font-bold text-gray-800">English</h4>
-         <p class="text-gray-600 text-lg">Fluent</p>
-        </div>
-       </div>
-       <div class="hidden md:block w-px h-16 bg-gray-300"></div>
-       <div class="flex items-center gap-4">
-        <div class="w-20 h-20 bg-gradient-to-br from-purple-400 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg"><span class="text-4xl">🇵🇭</span>
-        </div>
-        <div>
-         <h4 class="text-2xl font-bold text-gray-800">Filipino</h4>
-         <p class="text-gray-600 text-lg">Native</p>
-        </div>
-       </div>
-       <div class="hidden md:block w-px h-16 bg-gray-300"></div>
-       <div class="flex items-center gap-4">
-        <div class="w-20 h-20 bg-gradient-to-br from-indigo-400 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg"><span class="text-4xl">🗣️</span>
-        </div>
-        <div>
-         <h4 class="text-2xl font-bold text-gray-800">Bikol Naga</h4>
-         <p class="text-gray-600 text-lg">Native</p>
+        <div class="col-md-6">
+         <div class="skill-hexagon">
+          <div class="d-flex justify-content-between mb-2"><span style="font-weight: 600;">📊 System Analysis &amp; Design</span> <span style="font-weight: bold; color: #667eea;">80%</span>
+          </div>
+          <div class="skill-bar-container">
+           <div class="skill-bar" style="width: 80%"></div>
+          </div>
+         </div>
         </div>
        </div>
       </div>
      </div>
     </div>
-   </section><!-- Contact Section - Bento Grid Style -->
-   <section id="contact" class="section py-20 px-6 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 relative overflow-hidden">
-    <div class="absolute top-0 right-0 w-96 h-96 bg-blue-200 rounded-full blur-3xl opacity-30 float-animation"></div>
-    <div class="absolute bottom-0 left-0 w-80 h-80 bg-purple-200 rounded-full blur-3xl opacity-30 float-animation" style="animation-delay: 1.5s;"></div>
-    <div class="absolute top-1/3 left-1/3 w-64 h-64 bg-indigo-200 rounded-full blur-3xl opacity-20 float-animation" style="animation-delay: 3s;"></div>
-    <div class="absolute top-1/2 right-1/3 w-72 h-72 bg-pink-200 rounded-full blur-3xl opacity-25 float-animation" style="animation-delay: 4s;"></div><!-- Floating particles for Contact -->
-    <div class="absolute top-32 left-1/4 w-3 h-3 bg-blue-400 rounded-full opacity-50 animate-particle-float" style="animation-delay: 0s;"></div>
-    <div class="absolute top-48 right-1/4 w-2 h-2 bg-purple-400 rounded-full opacity-60 animate-particle-float" style="animation-delay: 0.5s;"></div>
-    <div class="absolute bottom-32 left-1/3 w-4 h-4 bg-indigo-400 rounded-full opacity-40 animate-particle-float" style="animation-delay: 1s;"></div>
-    <div class="absolute bottom-48 right-1/3 w-2 h-2 bg-pink-400 rounded-full opacity-50 animate-particle-float" style="animation-delay: 1.5s;"></div>
-    <div class="absolute top-2/3 left-1/2 w-3 h-3 bg-cyan-400 rounded-full opacity-45 animate-particle-float" style="animation-delay: 2s;"></div><!-- Decorative grid pattern with animation -->
-    <div class="absolute inset-0 opacity-5 animate-drift">
-     <div class="absolute inset-0" style="background-image: linear-gradient(#3b82f6 1px, transparent 1px), linear-gradient(90deg, #3b82f6 1px, transparent 1px); background-size: 50px 50px;"></div>
-    </div><!-- Animated geometric shapes -->
-    <div class="absolute top-20 left-20 w-20 h-20 border border-blue-300 opacity-15 rotate-45 animate-spin-slow"></div>
-    <div class="absolute bottom-20 right-20 w-16 h-16 border-2 border-purple-300 opacity-20 animate-float-slow"></div>
-    <div class="max-w-6xl mx-auto relative z-10">
-     <div class="text-center mb-16">
-      <h2 class="text-5xl font-bold mb-4 text-gray-800">Let's Connect</h2>
-      <p class="text-xl text-gray-600">Ready to discuss your next project? Reach out!</p>
+   </section><!-- Experience Section -->
+   <section class="experience-section">
+    <div class="container">
+     <div class="text-center mb-5">
+      <h2 class="section-title">Professional Experience</h2>
+      <p class="section-subtitle">My journey in the tech industry</p>
      </div>
-     <div class="grid md:grid-cols-3 gap-6"><!-- Email Card - Spans 2 columns -->
-      <div class="md:col-span-2 bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-blue-100 hover:-translate-y-2 relative overflow-hidden group">
-       <div class="absolute top-0 right-0 w-48 h-48 bg-blue-50 rounded-full blur-3xl opacity-50 group-hover:opacity-70 transition-opacity"></div>
-       <div class="flex items-center gap-6 relative z-10">
-        <div class="w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform"><span class="text-4xl">📧</span>
-        </div>
-        <div class="flex-1">
-         <h3 class="text-sm font-semibold text-blue-600 uppercase tracking-wider mb-2">Email Me</h3>
-         <p id="contact-email" class="text-2xl font-bold text-gray-800 break-all">keronquillo@gbox.adnu.edu.ph</p>
-         <p class="text-gray-600 mt-2">Response within 24 hours.</p>
-        </div>
-       </div>
-      </div><!-- Phone Card -->
-      <div class="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-purple-100 hover:-translate-y-2 relative overflow-hidden group">
-       <div class="absolute top-0 right-0 w-32 h-32 bg-purple-50 rounded-full blur-2xl opacity-50 group-hover:opacity-70 transition-opacity"></div>
-       <div class="relative z-10">
-        <div class="w-16 h-16 bg-gradient-to-br from-purple-400 to-purple-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform"><span class="text-3xl">📞</span>
-        </div>
-        <h3 class="text-sm font-semibold text-purple-600 uppercase tracking-wider mb-2">Call Me</h3>
-        <p id="contact-phone" class="text-xl font-bold text-gray-800 mb-2">09213465375</p>
-        <p class="text-sm text-gray-600">Mon-Sat, 8AM-11PM PhT</p>
-       </div>
-      </div><!-- Location Card -->
-      <div class="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-indigo-100 hover:-translate-y-2 relative overflow-hidden group">
-       <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-full blur-2xl opacity-50 group-hover:opacity-70 transition-opacity"></div>
-       <div class="relative z-10">
-        <div class="w-16 h-16 bg-gradient-to-br from-indigo-400 to-indigo-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform"><span class="text-3xl">📍</span>
-        </div>
-        <h3 class="text-sm font-semibold text-indigo-600 uppercase tracking-wider mb-2">Location</h3>
-        <p id="contact-location" class="text-xl font-bold text-gray-800 mb-2">Naga City, Philippines</p>
-        <p class="text-sm text-gray-600">Open to remote opportunities.</p>
-       </div>
-      </div><!-- CTA Card - Spans 2 columns -->
-      <div class="md:col-span-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-3xl p-10 shadow-2xl text-white hover:shadow-3xl transition-all duration-300 relative overflow-hidden group">
-       <div class="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-       <div class="relative z-10">
-        <h3 class="text-4xl font-bold mb-4">Ready to Work Together?</h3>
-        <p class="text-xl text-blue-50 mb-6">Let's create something amazing. I'm always open to discussing new projects, creative ideas, and opportunities.</p>
-        <div class="flex gap-4">
-         <div class="px-6 py-3 bg-white text-blue-600 rounded-full font-semibold hover:bg-blue-50 transition cursor-pointer hover:scale-105 transform">
-          Send Message
+     <div class="row g-4">
+      <div class="col-lg-4 col-md-6">
+       <div class="experience-card">
+        <div class="experience-icon-wrapper">
+         <div class="experience-icon">
+          ⚙️
          </div>
         </div>
-       </div><!-- Animated elements -->
-       <div class="absolute bottom-4 right-4 w-20 h-20 border-2 border-white opacity-20 rounded-full animate-ping"></div>
+        <div class="experience-content">
+         <h3 class="experience-title">Junior Systems Engineer</h3>
+         <p class="experience-description">Building and maintaining system infrastructure, troubleshooting technical issues, and supporting cross-functional teams in delivering reliable solutions.</p>
+         <div class="experience-tags"><span class="exp-tag">Systems</span> <span class="exp-tag">Infrastructure</span> <span class="exp-tag">Support</span>
+         </div>
+        </div>
+        <div class="experience-number">
+         01
+        </div>
+       </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+       <div class="experience-card">
+        <div class="experience-icon-wrapper">
+         <div class="experience-icon">
+          💻
+         </div>
+        </div>
+        <div class="experience-content">
+         <h3 class="experience-title">Software Engineering Associate</h3>
+         <p class="experience-description">Developing software solutions, writing clean maintainable code, and collaborating on projects that solve real-world problems through technology.</p>
+         <div class="experience-tags"><span class="exp-tag">Development</span> <span class="exp-tag">Coding</span> <span class="exp-tag">Testing</span>
+         </div>
+        </div>
+        <div class="experience-number">
+         02
+        </div>
+       </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+       <div class="experience-card">
+        <div class="experience-icon-wrapper">
+         <div class="experience-icon">
+          🔧
+         </div>
+        </div>
+        <div class="experience-content">
+         <h3 class="experience-title">Hardware &amp; PCB Design Associate</h3>
+         <p class="experience-description">Designing printed circuit boards, prototyping hardware solutions, and bringing electronic concepts from schematic to physical implementation.</p>
+         <div class="experience-tags"><span class="exp-tag">PCB Design</span> <span class="exp-tag">Hardware</span> <span class="exp-tag">Prototyping</span>
+         </div>
+        </div>
+        <div class="experience-number">
+         03
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Education Timeline -->
+   <section class="education-section">
+    <div class="container">
+     <div class="text-center mb-5">
+      <h2 class="section-title">Education Journey</h2>
+      <p class="section-subtitle">My path through learning and growth</p>
+     </div>
+     <div class="row">
+      <div class="col-lg-10 mx-auto">
+       <div class="timeline">
+        <div class="timeline-item">
+         <div class="timeline-dot"></div>
+         <div class="timeline-card">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">
+           🎓
+          </div>
+          <h3 style="color: #667eea;">Computer Engineering</h3>
+          <p style="color: #999; margin-bottom: 0.5rem;">2023-2027</p>
+          <p style="font-weight: 600; margin-bottom: 1rem;">Ateneo de Naga University Main Campus</p>
+          <p style="margin: 0;">Pursuing a Bachelor's degree in Computer Engineering with focus on hardware design, embedded systems, programming, and software development fundamentals. Building hands-on experience through academic projects involving circuit design, microcontroller programming, and collaborative team-based engineering solutions.</p>
+         </div>
+        </div>
+        <div class="timeline-item">
+         <div class="timeline-dot"></div>
+         <div class="timeline-card">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">
+           📚
+          </div>
+          <h3 style="color: #764ba2;">Secondary Education</h3>
+          <p style="color: #999; margin-bottom: 0.5rem;">2018-2023</p>
+          <p style="font-weight: 600; margin-bottom: 1rem;">Ateneo De Naga University Pacol Campus</p>
+          <p>Completed secondary education under the General Academic Strand (GAS), building a well-rounded foundation across multiple disciplines while developing a passion for technology and engineering.</p>
+         </div>
+        </div>
+        <div class="timeline-item">
+         <div class="timeline-dot"></div>
+         <div class="timeline-card">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">
+           ✏️
+          </div>
+          <h3 style="color: #667eea;">Primary Education</h3>
+          <p style="color: #999; margin-bottom: 0.5rem;">2009-2017</p>
+          <p style="font-weight: 600; margin-bottom: 1rem;">Naga City Montessori School</p>
+          <p>Completed primary education with 6th honorable mention, demonstrating consistent academic excellence and strong work ethic throughout elementary years.</p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Languages Section -->
+   <section class="languages-section">
+    <div class="container">
+     <div class="text-center mb-5">
+      <h2 class="section-title" style="color: white;">Languages I Speak</h2>
+      <p class="section-subtitle" style="color: rgba(255,255,255,0.8);">Multilingual communication abilities</p>
+     </div>
+     <div class="row g-4">
+      <div class="col-md-4">
+       <div class="language-card">
+        <div class="language-icon">
+         🌐
+        </div>
+        <h3>English</h3>
+        <p style="margin: 0; opacity: 0.9;">Fluent</p>
+       </div>
+      </div>
+      <div class="col-md-4">
+       <div class="language-card">
+        <div class="language-icon">
+         🇵🇭
+        </div>
+        <h3>Filipino</h3>
+        <p style="margin: 0; opacity: 0.9;">Native</p>
+       </div>
+      </div>
+      <div class="col-md-4">
+       <div class="language-card">
+        <div class="language-icon">
+         🗣️
+        </div>
+        <h3>Bikol Naga</h3>
+        <p style="margin: 0; opacity: 0.9;">Native</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Contact Section -->
+   <section class="contact-section">
+    <div class="container">
+     <div class="text-center mb-5">
+      <h2 class="section-title">Let's Connect</h2>
+      <p class="section-subtitle">Ready to discuss your next project? Reach out!</p>
+     </div>
+     <div class="contact-main-card mb-5">
+      <div class="row g-0">
+       <div class="col-lg-5">
+        <div class="contact-left">
+         <h2>Get In Touch</h2>
+         <p>I'm always excited to connect with fellow developers, potential collaborators, and anyone interested in technology and engineering.</p>
+         </div>
+       </div>
+       
+       <div class="col-lg-7">
+        <div class="contact-right">
+         <div class="contact-item">
+          <div class="contact-icon-box">
+           📧
+          </div>
+          <div class="contact-info">
+           <h4>Email Address</h4>
+           <p class="contact-value" id="email-display">keronquillo@gbox.adnu.edu.ph</p>
+           <p>Response within 24 hours</p>
+          </div>
+         </div>
+         <div class="contact-item">
+          <div class="contact-icon-box">
+           📞
+          </div>
+          <div class="contact-info">
+           <h4>Phone Number</h4>
+           <p class="contact-value" id="phone-display">09213465375</p>
+           <p>Mon-Sat, 8AM-11PM PhT</p>
+          </div>
+         </div>
+         <div class="contact-item">
+          <div class="contact-icon-box">
+           📍
+          </div>
+          <div class="contact-info">
+           <h4>Location</h4>
+           <p class="contact-value" id="location-display">Naga City, Philippines</p>
+           <p>Open to remote opportunities</p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div><!-- CTA -->
+     <div class="row">
+      <div class="col-lg-10 mx-auto">
+       <div class="cta-section">
+        <div class="cta-content">
+         <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Ready to Work Together?</h2>
+         <p style="font-size: 1.2rem; margin-bottom: 2rem;">Let's create something amazing. I'm always open to discussing new projects, creative ideas, and opportunities.</p>
+         <form id="contact-form" style="max-width: 600px; margin: 0 auto 2rem;">
+          <div style="margin-bottom: 1rem;"><label for="sender-email" style="display: block; text-align: left; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem;">Your Email</label> <input type="email" id="sender-email" required placeholder="your.email@example.com" style="width: 100%; padding: 0.75rem 1rem; border: 2px solid rgba(255,255,255,0.3); border-radius: 10px; font-size: 1rem; background: rgba(255,255,255,0.95); color: #333;">
+          </div>
+          <div style="margin-bottom: 1.5rem;"><label for="message-box" style="display: block; text-align: left; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem;">Your Message</label> <textarea id="message-box" required placeholder="Tell me about your project or idea..." rows="4" style="width: 100%; padding: 0.75rem 1rem; border: 2px solid rgba(255,255,255,0.3); border-radius: 10px; font-size: 1rem; background: rgba(255,255,255,0.95); color: #333; resize: vertical;"></textarea>
+          </div><button type="submit" class="btn btn-primary-custom">Send Message</button>
+         </form>
+         <div id="form-status" style="display: none; padding: 1rem; border-radius: 10px; margin-top: 1rem; font-weight: 600;"></div>
+        </div>
+       </div>
       </div>
      </div>
     </div>
    </section>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     const defaultConfig = {
-      name: "Your Name",
-      tagline: "Your Professional Tagline",
-      about_text: "Hi! I'm a Computer Engineering student currently building my foundation in programming, embedded systems, and basic software development. I enjoy learning by doing any computer-related tasks whether it's working on academic projects, experimenting with hardware, or improving my technical skills. I'm motivated to grow, open to feedback, and eager to gain real-world experience through internships and training opportunities.",
-      email: "your.email@example.com",
-      phone: "+1 234 567 8900",
-      location: "City, Country",
-      background_color: "#667eea",
-      surface_color: "#ffffff",
-      text_color: "#1f2937",
-      primary_action_color: "#3b82f6",
-      secondary_action_color: "#2563eb",
-      font_family: "system-ui",
+      background_color: '#667eea',
+      card_color: '#ffffff',
+      text_color: '#1e293b',
+      primary_action_color: '#667eea',
+      secondary_action_color: '#764ba2',
+      page_title: 'About Me',
+      name: 'Kenneth B. Ronquillo',
+      age: '21',
+      intro_text: "Hi! I'm a Computer Engineering student currently building my foundation in programming, embedded systems, and basic software development. I enjoy learning by doing any computer-related tasks whether it's working on academic projects, experimenting with hardware, or improving my technical skills. I'm motivated to grow, open to feedback, and eager to gain real-world experience through internships and training opportunities.",
+      email: 'keronquillo@gbox.adnu.edu.ph',
+      phone: '09213465375',
+      location: 'Naga City, Philippines',
+      font_family: 'Inter',
       font_size: 16
     };
 
     async function onConfigChange(config) {
-      const customFont = config.font_family || defaultConfig.font_family;
-      const baseFontStack = 'system-ui, -apple-system, sans-serif';
-      const baseSize = config.font_size || defaultConfig.font_size;
-      
-      const backgroundColor = config.background_color || defaultConfig.background_color;
-      const surfaceColor = config.surface_color || defaultConfig.surface_color;
-      const textColor = config.text_color || defaultConfig.text_color;
       const primaryColor = config.primary_action_color || defaultConfig.primary_action_color;
       const secondaryColor = config.secondary_action_color || defaultConfig.secondary_action_color;
-
-      // Update text content
-      const name = config.name || defaultConfig.name;
-      const tagline = config.tagline || defaultConfig.tagline;
-      const aboutText = config.about_text || defaultConfig.about_text;
-      const email = config.email || defaultConfig.email;
-      const phone = config.phone || defaultConfig.phone;
-      const location = config.location || defaultConfig.location;
-
-      document.getElementById('hero-name').textContent = name;
-      document.getElementById('hero-tagline').textContent = tagline;
-      document.getElementById('about-description').textContent = aboutText;
-      document.getElementById('contact-email').textContent = email;
-      document.getElementById('contact-phone').textContent = phone;
-      document.getElementById('contact-location').textContent = location;
-
-      // Apply colors
-      const gradientElements = document.querySelectorAll('.gradient-bg');
-      gradientElements.forEach(el => {
-        el.style.background = `linear-gradient(135deg, ${backgroundColor} 0%, ${secondaryColor} 100%)`;
+      const cardColor = config.card_color || defaultConfig.card_color;
+      const textColor = config.text_color || defaultConfig.text_color;
+      const customFont = config.font_family || defaultConfig.font_family;
+      const baseSize = config.font_size || defaultConfig.font_size;
+      
+      // Apply gradient backgrounds
+      const heroSection = document.querySelector('.hero-section');
+      if (heroSection) {
+        heroSection.style.background = `linear-gradient(135deg, ${primaryColor} 0%, ${secondaryColor} 100%)`;
+      }
+      
+      const languagesSection = document.querySelector('.languages-section');
+      if (languagesSection) {
+        languagesSection.style.background = `linear-gradient(135deg, ${primaryColor} 0%, ${secondaryColor} 100%)`;
+      }
+      
+      // Update strength icons
+      const strengthIcons = document.querySelectorAll('.strength-icon');
+      strengthIcons.forEach(icon => {
+        icon.style.background = `linear-gradient(135deg, ${primaryColor} 0%, ${secondaryColor} 100%)`;
       });
-
-      const cards = document.querySelectorAll('.card');
-      cards.forEach(card => {
-        card.style.background = surfaceColor;
+      
+      // Update skill bars
+      const skillBars = document.querySelectorAll('.skill-bar');
+      skillBars.forEach(bar => {
+        bar.style.background = `linear-gradient(90deg, ${primaryColor}, ${secondaryColor})`;
       });
-
-      const textElements = document.querySelectorAll('h1, h2, h3, p:not(.text-white):not(.text-blue-100):not(.text-blue-600)');
-      textElements.forEach(el => {
-        if (!el.classList.contains('text-white') && !el.classList.contains('text-blue-100') && !el.classList.contains('text-blue-600')) {
-          el.style.color = textColor;
-        }
+      
+      // Update timeline dots and badges
+      const timelineDots = document.querySelectorAll('.timeline-dot');
+      timelineDots.forEach(dot => {
+        dot.style.background = `linear-gradient(135deg, ${primaryColor}, ${secondaryColor})`;
       });
-
-      const skillFills = document.querySelectorAll('.skill-fill');
-      skillFills.forEach(fill => {
-        fill.style.background = `linear-gradient(90deg, ${primaryColor}, ${secondaryColor})`;
+      
+      const timelineBadges = document.querySelectorAll('.timeline-badge');
+      timelineBadges.forEach(badge => {
+        badge.style.background = `linear-gradient(135deg, ${primaryColor}, ${secondaryColor})`;
       });
-
-      const contactIcons = document.querySelectorAll('.contact-icon');
-      contactIcons.forEach(icon => {
-        icon.style.background = `linear-gradient(135deg, ${primaryColor}, ${secondaryColor})`;
+      
+      // Update contact section
+      const contactMainCard = document.querySelector('.contact-main-card');
+      if (contactMainCard) {
+        contactMainCard.style.background = `linear-gradient(135deg, ${primaryColor} 0%, ${secondaryColor} 100%)`;
+      }
+      
+      const contactIconBoxes = document.querySelectorAll('.contact-icon-box');
+      contactIconBoxes.forEach(box => {
+        box.style.background = `linear-gradient(135deg, ${primaryColor}, ${secondaryColor})`;
       });
-
+      
+      // Update card backgrounds
+      const introCard = document.querySelector('.intro-card');
+      if (introCard) {
+        introCard.style.backgroundColor = cardColor;
+      }
+      
+      const timelineCards = document.querySelectorAll('.timeline-card');
+      timelineCards.forEach(card => {
+        card.style.backgroundColor = cardColor;
+      });
+      
+      const skillHexagons = document.querySelectorAll('.skill-hexagon');
+      skillHexagons.forEach(hex => {
+        hex.style.backgroundColor = cardColor;
+      });
+      
       // Apply font
+      const baseFontStack = 'system-ui, -apple-system, sans-serif';
       document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
       
-      // Apply font sizes
-      document.getElementById('hero-name').style.fontSize = `${baseSize * 3.75}px`;
-      document.getElementById('hero-tagline').style.fontSize = `${baseSize * 1.5}px`;
+      // Update text content
+      document.getElementById('page-title').textContent = config.page_title || defaultConfig.page_title;
+      document.getElementById('name').textContent = config.name || defaultConfig.name;
+      document.getElementById('age-display').textContent = `Age: ${config.age || defaultConfig.age}`;
+      document.getElementById('intro-text').textContent = config.intro_text || defaultConfig.intro_text;
+      document.getElementById('email-display').textContent = config.email || defaultConfig.email;
+      document.getElementById('phone-display').textContent = config.phone || defaultConfig.phone;
+      document.getElementById('location-display').textContent = config.location || defaultConfig.location;
       
-      const h2Elements = document.querySelectorAll('h2');
-      h2Elements.forEach(h2 => {
-        h2.style.fontSize = `${baseSize * 2.5}px`;
+      // Apply font sizes
+      document.getElementById('name').style.fontSize = `${baseSize * 3.5}px`;
+      document.getElementById('age-display').style.fontSize = `${baseSize * 1.5}px`;
+      document.getElementById('intro-text').style.fontSize = `${baseSize * 1.1}px`;
+      
+      const sectionTitles = document.querySelectorAll('.section-title');
+      sectionTitles.forEach(title => {
+        title.style.fontSize = `${baseSize * 2.5}px`;
       });
       
       const h3Elements = document.querySelectorAll('h3');
       h3Elements.forEach(h3 => {
         h3.style.fontSize = `${baseSize * 1.25}px`;
       });
+    }
+
+    // Handle contact form submission
+    const contactForm = document.getElementById('contact-form');
+    const formStatus = document.getElementById('form-status');
+    
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
       
-      const paragraphs = document.querySelectorAll('p');
-      paragraphs.forEach(p => {
-        p.style.fontSize = `${baseSize}px`;
-      });
-    }
-
-    function mapToCapabilities(config) {
-      return {
-        recolorables: [
-          {
-            get: () => config.background_color || defaultConfig.background_color,
-            set: (value) => {
-              config.background_color = value;
-              window.elementSdk.setConfig({ background_color: value });
-            }
-          },
-          {
-            get: () => config.surface_color || defaultConfig.surface_color,
-            set: (value) => {
-              config.surface_color = value;
-              window.elementSdk.setConfig({ surface_color: value });
-            }
-          },
-          {
-            get: () => config.text_color || defaultConfig.text_color,
-            set: (value) => {
-              config.text_color = value;
-              window.elementSdk.setConfig({ text_color: value });
-            }
-          },
-          {
-            get: () => config.primary_action_color || defaultConfig.primary_action_color,
-            set: (value) => {
-              config.primary_action_color = value;
-              window.elementSdk.setConfig({ primary_action_color: value });
-            }
-          },
-          {
-            get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
-            set: (value) => {
-              config.secondary_action_color = value;
-              window.elementSdk.setConfig({ secondary_action_color: value });
-            }
-          }
-        ],
-        borderables: [],
-        fontEditable: {
-          get: () => config.font_family || defaultConfig.font_family,
-          set: (value) => {
-            config.font_family = value;
-            window.elementSdk.setConfig({ font_family: value });
-          }
-        },
-        fontSizeable: {
-          get: () => config.font_size || defaultConfig.font_size,
-          set: (value) => {
-            config.font_size = value;
-            window.elementSdk.setConfig({ font_size: value });
-          }
-        }
-      };
-    }
-
-    function mapToEditPanelValues(config) {
-      return new Map([
-        ["name", config.name || defaultConfig.name],
-        ["tagline", config.tagline || defaultConfig.tagline],
-        ["about_text", config.about_text || defaultConfig.about_text],
-        ["email", config.email || defaultConfig.email],
-        ["phone", config.phone || defaultConfig.phone],
-        ["location", config.location || defaultConfig.location]
-      ]);
-    }
-
-    // Initialize SDK
+      const email = document.getElementById('sender-email').value;
+      const message = document.getElementById('message-box').value;
+      
+      // Show success message
+      formStatus.style.display = 'block';
+      formStatus.style.background = 'rgba(255,255,255,0.95)';
+      formStatus.style.color = '#10b981';
+      formStatus.textContent = '✓ Message sent successfully! I\'ll get back to you soon.';
+      
+      // Clear form
+      contactForm.reset();
+      
+      // Hide message after 5 seconds
+      setTimeout(() => {
+        formStatus.style.display = 'none';
+      }, 5000);
+    });
+    
     if (window.elementSdk) {
       window.elementSdk.init({
         defaultConfig,
         onConfigChange,
-        mapToCapabilities,
-        mapToEditPanelValues
-      });
-    }
-
-    // Animate skill bars on scroll
-    const observerOptions = {
-      threshold: 0.5
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const skillFills = entry.target.querySelectorAll('.skill-fill');
-          skillFills.forEach(fill => {
-            const width = fill.getAttribute('data-width');
-            setTimeout(() => {
-              fill.style.width = width + '%';
-            }, 100);
-          });
-        }
-      });
-    }, observerOptions);
-
-    const skillsSection = document.getElementById('skills');
-    if (skillsSection) {
-      observer.observe(skillsSection);
-    }
-
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
-      });
-    });
-
-    // Particle effects on social icons
-    const socialIcons = document.querySelectorAll('.social-icon');
-    socialIcons.forEach(icon => {
-      icon.addEventListener('click', function(e) {
-        const rect = this.getBoundingClientRect();
-        const x = rect.left + rect.width / 2;
-        const y = rect.top + rect.height / 2;
-        
-        for (let i = 0; i < 12; i++) {
-          const particle = document.createElement('div');
-          particle.className = 'particle';
-          particle.style.left = x + 'px';
-          particle.style.top = y + 'px';
-          particle.style.setProperty('--tx', (Math.random() - 0.5) * 200 + 'px');
-          particle.style.setProperty('--ty', (Math.random() - 0.5) * 200 + 'px');
-          document.body.appendChild(particle);
-          
-          setTimeout(() => particle.remove(), 3000);
-        }
-      });
-    });
-
-    // 3D tilt effect on cards
-    const tiltCards = document.querySelectorAll('.tilt-card');
-    tiltCards.forEach(card => {
-      card.addEventListener('mousemove', function(e) {
-        const rect = this.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        
-        const rotateX = (y - centerY) / 10;
-        const rotateY = (centerX - x) / 10;
-        
-        this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.primary_action_color || defaultConfig.primary_action_color,
+              set: (value) => {
+                config.primary_action_color = value;
+                window.elementSdk.setConfig({ primary_action_color: value });
+              }
+            },
+            {
+              get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+              set: (value) => {
+                config.secondary_action_color = value;
+                window.elementSdk.setConfig({ secondary_action_color: value });
+              }
+            },
+            {
+              get: () => config.card_color || defaultConfig.card_color,
+              set: (value) => {
+                config.card_color = value;
+                window.elementSdk.setConfig({ card_color: value });
+              }
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => {
+                config.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              }
+            }
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (value) => {
+              config.font_family = value;
+              window.elementSdk.setConfig({ font_family: value });
+            }
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (value) => {
+              config.font_size = value;
+              window.elementSdk.setConfig({ font_size: value });
+            }
+          }
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ['page_title', config.page_title || defaultConfig.page_title],
+          ['name', config.name || defaultConfig.name],
+          ['age', config.age || defaultConfig.age],
+          ['intro_text', config.intro_text || defaultConfig.intro_text],
+          ['email', config.email || defaultConfig.email],
+          ['phone', config.phone || defaultConfig.phone],
+          ['location', config.location || defaultConfig.location]
+        ])
       });
       
-      card.addEventListener('mouseleave', function() {
-        this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
-      });
-    });
-
-    // Magnetic effect on buttons
-    const magneticElements = document.querySelectorAll('.magnetic');
-    magneticElements.forEach(el => {
-      el.addEventListener('mousemove', function(e) {
-        const rect = this.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        
-        this.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
-      });
-      
-      el.addEventListener('mouseleave', function() {
-        this.style.transform = 'translate(0, 0)';
-      });
-    });
-
-    // Intersection observer for section animations
-    const sections = document.querySelectorAll('.section');
-    const sectionObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.animationPlayState = 'running';
-        }
-      });
-    }, { threshold: 0.1 });
-
-    sections.forEach(section => {
-      section.style.animationPlayState = 'paused';
-      sectionObserver.observe(section);
-    });
+      onConfigChange(window.elementSdk.config);
+    }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ad69561234aaeb9',t:'MTc2NTY0MDY3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9aedcd1c21a5fe11',t:'MTc2NTg4NDEyOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

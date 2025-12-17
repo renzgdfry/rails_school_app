@@ -45,29 +45,40 @@ document.addEventListener("turbo:load", () => {
 });
 
 function initOverviewAnimation() {
-  const overviewSection = document.getElementById('overview');
+  const overviewSection = document.getElementById("overview");
   if (!overviewSection) return;
 
-  const elements = overviewSection.querySelectorAll('.fade-left, .fade-right');
-  if (elements.length === 0) return;
+  const elements = overviewSection.querySelectorAll(".fade-left, .fade-right");
+  if (!elements.length) return;
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('show'); // trigger animation
-      } else {
-        entry.target.classList.remove('show'); // reset when leaving viewport
-      }
-    });
-  }, { threshold: 0.2 });
+  // Reset classes so animation can replay after Turbo visit
+  elements.forEach(el => {
+    el.classList.remove("show");
+    el.classList.add("hidden");
+  });
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+          entry.target.classList.remove("hidden");
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
 
   elements.forEach(el => observer.observe(el));
+
+  // Disconnect observer before Turbo caches the page
+  document.addEventListener("turbo:before-cache", () => observer.disconnect());
 }
 
-
-
+// Initialize on first load and after every Turbo visit
 document.addEventListener("DOMContentLoaded", initOverviewAnimation);
 document.addEventListener("turbo:load", initOverviewAnimation);
+
 
 function initCampusTourLightbox() {
   const lightbox = document.getElementById('lightbox');
@@ -281,3 +292,152 @@ function initHeadBottomStripes() {
 
 document.addEventListener("turbo:load", initHeadBottomStripes);
 document.addEventListener("DOMContentLoaded", initHeadBottomStripes);
+
+function initFloatingCalendar() {
+  const calendarContainer = document.querySelector(".floating-calendar");
+  if (!calendarContainer) return;
+
+  // Only show and enable calendar on index
+  if (window.location.pathname !== "/") {
+    calendarContainer.style.display = "none"; // hide if not on index
+    return;
+  } else {
+    calendarContainer.style.display = "block"; // show on index
+  }
+
+  if (calendarContainer.dataset.initialized) return;
+
+  const panel  = calendarContainer.querySelector("#calendarPanel");
+  const grid   = calendarContainer.querySelector(".calendar-grid");
+  const label  = calendarContainer.querySelector("#monthLabel");
+  const prev   = calendarContainer.querySelector("#prevMonth");
+  const next   = calendarContainer.querySelector("#nextMonth");
+  const toggle = calendarContainer.querySelector("#calendarToggle"); // click to open panel
+
+  if (!panel || !grid || !label || !prev || !next || !toggle) return;
+
+  calendarContainer.dataset.initialized = "true"; // Prevent re-initialization
+
+  let current = new Date();
+
+  const events = {
+  "2025-12-05": [{ title: "Departmental Quiz Week", type: "exam" }],
+  "2025-12-08": [{ title: "University Research Seminar", type: "activity" }],
+  "2025-12-12": [{ title: "Founders Day Celebration", type: "activity" }],
+  "2025-12-15": [{ title: "Final Examination Week (1st Term)", type: "exam" }],
+  "2025-12-19": [{ title: "Submission of Final Projects", type: "activity" }],
+  "2025-12-20": [{ title: "Start of Christmas Break", type: "activity" }],
+  "2025-12-25": [{ title: "Christmas Day", type: "activity" }],
+  "2025-12-31": [{ title: "New Year's Eve", type: "activity" }],
+
+  // ===== JANUARY 2026 =====
+  "2026-01-01": [{ title: "New Year's Day", type: "activity" }],
+  "2026-01-05": [{ title: "End of Christmas Break", type: "activity" }],
+  "2026-01-06": [{ title: "Start of 2nd Term Classes", type: "activity" }],
+  "2026-01-08": [{ title: "Student Orientation & Campus Tour", type: "activity" }],
+  "2026-01-15": [{ title: "Academic Advising Week", type: "activity" }],
+  "2026-01-20": [{ title: "Technology & Innovation Seminar", type: "activity" }],
+  "2026-01-24": [{ title: "University Sports Fest", type: "activity" }],
+  "2026-01-30": [{ title: "Quiz Week (2nd Term)", type: "exam" }],
+
+  // ===== FEBRUARY 2026 =====
+  "2026-02-02": [{ title: "Examination Week", type: "exam" }],
+  "2026-02-07": [{ title: "Grade Consultation Week", type: "activity" }],
+  "2026-02-10": [{ title: "Career Talk & Industry Panel", type: "activity" }],
+  "2026-02-14": [{ title: "University Foundation Day", type: "activity" }],
+  "2026-02-18": [{ title: "Student Research Presentation", type: "activity" }],
+  "2026-02-25": [{ title: "Community Outreach Program", type: "activity" }]
+  };
+
+  function renderCalendar() {
+    grid.querySelectorAll(".day").forEach(d => d.remove());
+    const year = current.getFullYear();
+    const month = current.getMonth();
+    label.textContent = current.toLocaleString("default", { month: "long", year: "numeric" });
+
+    const firstDay = new Date(year, month, 1);
+    const startDay = (firstDay.getDay() + 6) % 7;
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    for (let i = 0; i < startDay; i++) {
+      const empty = document.createElement("div");
+      empty.className = "day inactive";
+      grid.appendChild(empty);
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+      const cell = document.createElement("div");
+      cell.className = "day";
+      const key = `${year}-${String(month + 1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
+      cell.innerHTML = `<span class="date">${day}</span><div class="events-container"></div>`;
+      const container = cell.querySelector(".events-container");
+      if (events[key]) {
+        events[key].forEach(e => {
+          const ev = document.createElement("div");
+          ev.className = `event ${e.type}`;
+          ev.textContent = e.title;
+          container.appendChild(ev);
+        });
+      }
+      grid.appendChild(cell);
+    }
+  }
+
+  prev.addEventListener("click", () => { current.setMonth(current.getMonth() - 1); renderCalendar(); });
+  next.addEventListener("click", () => { current.setMonth(current.getMonth() + 1); renderCalendar(); });
+
+  toggle.addEventListener("click", () => panel.classList.toggle("active"));
+
+  document.addEventListener("click", e => {
+    if (!e.target.closest(".floating-calendar")) panel.classList.remove("active");
+  });
+
+  renderCalendar();
+
+  // ---------------------------
+  // Show calendar only after a target section is visible
+  // ---------------------------
+// ---------------------------
+// Show calendar only after scrolling past hero
+// ---------------------------
+function handleCalendarVisibility() {
+  const hero = document.querySelector(".hero-section");
+  if (!hero) return;
+
+  const rect = hero.getBoundingClientRect();
+  if (rect.bottom <= 0) {
+    // Hero scrolled past top → show calendar
+    calendarContainer.classList.add("show");
+  } else {
+    // Scroll back to hero → hide calendar
+    calendarContainer.classList.remove("show");
+  }
+}
+
+window.addEventListener("scroll", handleCalendarVisibility);
+window.addEventListener("resize", handleCalendarVisibility);
+handleCalendarVisibility(); // initial check
+
+
+}
+
+// ---------------------------
+// Observe for new calendar nodes (Turbo-friendly)
+// ---------------------------
+const observer = new MutationObserver((mutations) => {
+  mutations.forEach(mutation => {
+    mutation.addedNodes.forEach(node => {
+      if (node.nodeType === 1 && node.querySelector && node.querySelector(".floating-calendar")) {
+        initFloatingCalendar();
+      }
+    });
+  });
+});
+
+observer.observe(document.body, { childList: true, subtree: true });
+
+// ---------------------------
+// Init on first page load
+// ---------------------------
+document.addEventListener("turbo:load", initFloatingCalendar);
+document.addEventListener("DOMContentLoaded", initFloatingCalendar);
