@@ -1,1 +1,349 @@
-<h2> This is campus tour. </h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Campus Facilities</title>
+
+  <!-- Bootstrap CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --blue-main: #0d6efd;
+      --blue-dark: #002f6c;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+      font-family: 'Montserrat', sans-serif;
+      background: #f5f9ff;
+    }
+
+    /* ===== HERO (FULLSCREEN) ===== */
+
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+/* ===== HERO (FULLSCREEN CENTERED) ===== */
+.hero {
+  margin: 0;             /* remove all margins */
+  padding: 0;            /* remove all padding */
+  height: 300px;         /* full viewport */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertical center */
+  align-items: center;     /* horizontal center */
+  text-align: center;
+  background: linear-gradient(135deg, #e0f0ff, #f5f9ff);
+}
+  
+.hero h1 {
+  font-size: 4rem;   /* larger now */
+  font-weight: 700;
+  margin-bottom: 20px;
+  margin-top: 0;
+}
+.hero p {
+  font-size: 1.25rem;
+  max-width: 600px;
+  opacity: 0.95;
+  margin-top: 0;
+}
+
+
+    /* ===== FACILITIES SECTION ===== */
+.facilities {
+  padding: 60px 40px 80px; /* only bottom padding, top padding removed */
+  margin: 0;
+}
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title h2 {
+      font-weight: 700;
+      color: var(--blue-dark);
+    }
+
+    .section-title span {
+      color: var(--blue-main);
+    }
+
+    /* ===== CARDS ===== */
+    .facility-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      transition: all 0.5s ease;
+      height: 100%;
+    }
+
+    .facility-card:hover {
+      transform: translateY(-12px) scale(1.03);
+      box-shadow: 0 30px 60px rgba(13,110,253,0.35);
+    }
+
+    .facility-img {
+      height: 220px;
+      overflow: hidden;
+    }
+
+    .facility-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .facility-card:hover img {
+      transform: scale(1.2);
+    }
+
+    .facility-body {
+      padding: 22px;
+    }
+
+    .facility-body h5 {
+      font-weight: 600;
+      color: var(--blue-main);
+    }
+
+    /* ===== SCROLL ANIMATION ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <h1>Campus Facilities</h1>
+    <p>
+      Experience innovative spaces designed for learning, collaboration,
+      creativity, and student life.
+    </p>
+  </div>
+</section>
+
+<!-- FACILITIES -->
+<!-- FACILITIES -->
+<section class="facilities">
+  <div class="section-title">
+    <h2>Our <span>Campus Spaces</span></h2>
+    <p class="text-muted">Designed to support academic excellence</p>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row g-4">
+
+      <!-- Administration Building -->
+      <div class="col-xl-4 col-lg-4 col-md-6 reveal">
+        <div class="facility-card">
+          <div class="facility-img">
+            <img src="/images/facilities/admin building.jpg" alt="Admin Building" class="main-img">
+            <div class="facility-hover-gallery">
+              <div class="hover-left"><img src="/images/facilities/1.jpg" alt="Inside 1"></div>
+              <div class="hover-right"><img src="/images/facilities/2.jpg" alt="Inside 2"></div>
+            </div>
+          </div>
+          <div class="facility-body">
+            <h5>Administration Building</h5>
+            <p>University offices managing academic and student services.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- College of Computer Studies -->
+      <div class="col-xl-4 col-lg-4 col-md-6 reveal">
+        <div class="facility-card">
+          <div class="facility-img">
+            <img src="/images/facilities/cocs building.jpg" alt="College of Computer Studies" class="main-img">
+            <div class="facility-hover-gallery">
+              <div class="hover-left"><img src="/images/facilities/3.jpg" alt="Inside 1"></div>
+              <div class="hover-right"><img src="/images/facilities/4.jpg" alt="Inside 2"></div>
+            </div>
+          </div>
+          <div class="facility-body">
+            <h5>College of Computer Studies</h5>
+            <p>Home to modern classrooms and labs, empowering students to explore computing, programming, AI, and digital innovation.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Engineering Building -->
+      <div class="col-xl-4 col-lg-4 col-md-6 reveal">
+        <div class="facility-card">
+          <div class="facility-img">
+            <img src="/images/facilities/engineeringbuilding.jpg" alt="Engineering Building" class="main-img">
+            <div class="facility-hover-gallery">
+              <div class="hover-left"><img src="/images/facilities/5.jpg" alt="Inside 1"></div>
+              <div class="hover-right"><img src="/images/facilities/6.jpg" alt="Inside 2"></div>
+            </div>
+          </div>
+          <div class="facility-body">
+            <h5>Engineering Building</h5>
+            <p>Provides workshops, labs, and collaborative spaces for students to design, prototype, and innovate engineering solutions.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Science Laboratory Complex -->
+      <div class="col-xl-4 col-lg-4 col-md-6 reveal">
+        <div class="facility-card">
+          <div class="facility-img">
+            <img src="/images/facilities/science lab complex.jpg" alt="Science Laboratory Complex" class="main-img">
+            <div class="facility-hover-gallery">
+              <div class="hover-left"><img src="/images/facilities/7.jpg" alt="Inside 1"></div>
+              <div class="hover-right"><img src="/images/facilities/8.jpg" alt="Inside 2"></div>
+            </div>
+          </div>
+          <div class="facility-body">
+            <h5>Science Laboratory Complex</h5>
+            <p>Fully-equipped laboratories for biology, chemistry, and physics, offering hands-on research and experimentation opportunities.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cafeteria -->
+      <div class="col-xl-4 col-lg-4 col-md-6 reveal">
+        <div class="facility-card">
+          <div class="facility-img">
+            <img src="/images/facilities/cafetteria.jpg" alt="Cafeteria" class="main-img">
+            <div class="facility-hover-gallery">
+              <div class="hover-left"><img src="/images/facilities/9.jpg" alt="Inside 1"></div>
+              <div class="hover-right"><img src="/images/facilities/10.jpg" alt="Inside 2"></div>
+            </div>
+          </div>
+          <div class="facility-body">
+            <h5>Cafeteria</h5>
+            <p>A welcoming space offering a variety of meals and snacks, perfect for students to relax and socialize between classes.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Yard A -->
+      <div class="col-xl-4 col-lg-4 col-md-6 reveal">
+        <div class="facility-card">
+          <div class="facility-img">
+            <img src="/images/facilities/courtyRD.jpg" alt="Yard A" class="main-img">
+            <div class="facility-hover-gallery">
+              <div class="hover-left"><img src="/images/facilities/11.jpg" alt="Inside 1"></div>
+              <div class="hover-right"><img src="/images/facilities/12.jpg" alt="Inside 2"></div>
+            </div>
+          </div>
+          <div class="facility-body">
+            <h5>Yard A</h5>
+            <p>An open green space for student activities, outdoor events, and relaxation in a vibrant campus environment.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Yard B -->
+      <div class="col-xl-4 col-lg-4 col-md-6 reveal">
+        <div class="facility-card">
+          <div class="facility-img">
+            <img src="/images/facilities/courtyard2.jpg" alt="Yard B" class="main-img">
+            <div class="facility-hover-gallery">
+              <div class="hover-left"><img src="/images/facilities/13.jpg" alt="Inside 1"></div>
+              <div class="hover-right"><img src="/images/facilities/14.jpg" alt="Inside 2"></div>
+            </div>
+          </div>
+          <div class="facility-body">
+            <h5>Yard B</h5>
+            <p>A secondary open area for student gatherings, sports, and campus events, encouraging community engagement.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Library -->
+      <div class="col-xl-4 col-lg-4 col-md-6 reveal">
+        <div class="facility-card">
+          <div class="facility-img">
+            <img src="/images/facilities/libraray.jpg" alt="Library" class="main-img">
+            <div class="facility-hover-gallery">
+              <div class="hover-left"><img src="/images/facilities/15.jpg" alt="Inside 1"></div>
+              <div class="hover-right"><img src="/images/facilities/16.jpg" alt="Inside 2"></div>
+            </div>
+          </div>
+          <div class="facility-body">
+            <h5>Library</h5>
+            <p>A comprehensive knowledge hub offering books, digital resources, and study areas for research and learning.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gymnasium -->
+      <div class="col-xl-4 col-lg-4 col-md-6 reveal">
+        <div class="facility-card">
+          <div class="facility-img">
+            <img src="/images/facilities/gym.jpg" alt="Gymnasium" class="main-img">
+            <div class="facility-hover-gallery">
+              <div class="hover-left"><img src="/images/facilities/17.jpg" alt="Inside 1"></div>
+              <div class="hover-right"><img src="/images/facilities/18.jpg" alt="Inside 2"></div>
+            </div>
+          </div>
+          <div class="facility-body">
+            <h5>Gymnasium</h5>
+            <p>A fully-equipped fitness and sports facility, promoting student wellness and healthy lifestyle activities.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Scroll Reveal (Updated) -->
+<script>
+  function initReveal() {
+    const reveals = document.querySelectorAll(".reveal");
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+        }
+      });
+    }, { threshold: 0.15 });
+
+    reveals.forEach(r => observer.observe(r));
+  }
+
+  // For normal page load
+  document.addEventListener("DOMContentLoaded", initReveal);
+
+  // For Turbo/Hotwire page visits
+  document.addEventListener("turbo:load", initReveal);
+</script>
+
